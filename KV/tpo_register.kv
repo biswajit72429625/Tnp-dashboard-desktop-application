@@ -1,0 +1,44 @@
+#:kivy 2.0.0
+<TpoRegister>
+    MDCard:
+        size_hint: (0.5,0.9)
+        pos_hint: {'center_x': .5, 'center_y': .5}
+        elevation: 10
+        orientation: 'vertical'
+        padding: 25
+        spacing: 25
+        MDLabel:
+            halign: 'center'
+            text: "Register Yourself"
+            font_style: 'H4'
+            padding: (10,10)
+            size_hint_y: None
+            height: self.texture_size[1]
+        MDTextField:
+            id: name
+            pos_hint: {'center_x':0.5}
+            hint_text:"Name"
+            size_hint_x:0.7
+        MDTextField:
+            pos_hint: {'center_x':0.5}
+            id: department
+            hint_text:"Department"
+            size_hint_x:0.7
+        MDTextField:
+            id: email
+            pos_hint: {'center_x':0.5}
+            hint_text:"Email"
+            size_hint_x:0.7
+        MDTextField:
+            id: set_password
+            pos_hint: {'center_x':0.5}
+            hint_text:"Set Password"
+            size_hint_x:0.7
+        MDTextField:
+            id: confirm_password
+            pos_hint: {'center_x':0.5}
+            hint_text:"Confirm Password"
+            size_hint_x:0.7
+        MDRectangleFlatButton:
+            text:"Register"
+            pos_hint: {'center_x':0.5}

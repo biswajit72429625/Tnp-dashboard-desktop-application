@@ -11,6 +11,8 @@ from kivy.uix.screenmanager import CardTransition
 
 ############ screens ############################
 from login import Login
+from tpo_register import TpoRegister
+from home_page import HomePage
 #################################################
 
 class Manager(ScreenManager):
@@ -19,6 +21,8 @@ class Manager(ScreenManager):
         self.transition = CardTransition()
         # add all screens from here
         self.add_widget(Login(name='login'))
+        self.add_widget(TpoRegister(name='tpo_register'))
+        self.add_widget(HomePage(name='home_page'))
 
 
 class TnpApp(MDApp):
