@@ -1,0 +1,43 @@
+#:kivy 2.0.0
+<Login>
+    MDCard:
+        size_hint: (0.5,0.8)
+        pos_hint: {'center_x': .5, 'center_y': .5}
+        elevation: 10
+        orientation: 'vertical'
+        padding: 25
+        spacing: 25
+        Widget:
+        MDLabel:
+            halign: 'center'
+            text: "Training&Placement"
+            font_style: 'H4'
+            padding: (10,10)
+            size_hint_y: None
+            height: self.texture_size[1]
+        MDTextFieldRound:
+            size_hint_x: None
+            width: 200
+            pos_hint: {'center_x':0.5}
+            icon_left: "email"
+            hint_text: "Email"
+        MDTextFieldRound:
+            size_hint_x: None
+            width: 200
+            pos_hint: {'center_x':0.5}
+            icon_left: "key"
+            hint_text: "Email"
+            password: True
+        MDRoundFlatIconButton:
+            text: "Login"
+            font_size: 15
+            icon: "login"
+            pos_hint: {'center_x':0.5}
+        MDRoundFlatButton:
+            text: "Register"
+            font_size: 15
+            pos_hint: {'center_x':0.5}
+        Widget:
+                
+
+
