@@ -3,41 +3,48 @@
     MDCard:
         size_hint: (0.5,0.8)
         pos_hint: {'center_x': .5, 'center_y': .5}
-        elevation: 10
+        elevation: 20
         orientation: 'vertical'
         padding: 25
-        spacing: 25
+        spacing: 40
         Widget:
         MDLabel:
             halign: 'center'
             text: "Training&Placement"
-            font_style: 'H4'
-            padding: (10,10)
+            font_style: 'H2'
+            padding: (10,15)
             size_hint_y: None
             height: self.texture_size[1]
         MDTextFieldRound:
-            size_hint_x: None
-            width: 200
+            size_hint_x: 0.7
+            size_hint_y: 0.3
             pos_hint: {'center_x':0.5}
             icon_left: "email"
             hint_text: "Email"
+            font_size: 20
         MDTextFieldRound:
-            size_hint_x: None
-            width: 200
+            size_hint_x: 0.7
+            size_hint_y: 0.3
             pos_hint: {'center_x':0.5}
             icon_left: "key"
-            hint_text: "Email"
+            hint_text: "Password"
             password: True
-        MDRoundFlatIconButton:
+            font_size: 20
+        MDRoundFlatButton:
             text: "Login"
-            font_size: 15
-            icon: "login"
+            size_hint_x: 0.4
+            font_size: 20
             pos_hint: {'center_x':0.5}
         MDRoundFlatButton:
+            size_hint_x: 0.4
             text: "Register"
-            font_size: 15
+            font_size: 20
             pos_hint: {'center_x':0.5}
         Widget:
                 
-
+    MDRoundFlatButton:
+        text: "E-resources"
+        font_size: 15
+        pos_hint: {'x':0.8,'y':0.1}
+        on_press: root.manager.current = 'view_eresources'
 

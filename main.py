@@ -1,8 +1,15 @@
 ########## inbuilt libraries ##################
 from os import listdir
+from pyautogui import size
 ################################################
 
+width, height = size()
+
 ########## kivy modules #########################
+from kivy.config import Config
+Config.set('graphics', 'fullscreen', '1')
+Config.set('graphics', 'width', width)
+Config.set('graphics', 'height', height)
 from kivymd.app import MDApp
 from kivy.lang.builder import Builder
 from kivy.uix.screenmanager import ScreenManager
@@ -11,7 +18,9 @@ from kivy.uix.screenmanager import CardTransition
 
 ############ screens ############################
 from login import Login
+from view_eresources import ViewEresources
 #################################################
+
 
 class Manager(ScreenManager):
      def __init__(self, *args):
@@ -19,10 +28,15 @@ class Manager(ScreenManager):
         self.transition = CardTransition()
         # add all screens from here
         self.add_widget(Login(name='login'))
+        self.add_widget(ViewEresources(name='view_eresources'))
 
 
 class TnpApp(MDApp):
     def build(self):
+        self.theme_cls.primary_palette = 'Blue'
+        self.theme_cls.primary_hue = '600'
+        self.theme_cls.accent_palette = 'DeepPurple'
+        self.theme_cls.accent_hue = 'A700'
         kv_path = 'KV/'
         for i in listdir(kv_path):
             Builder.load_file(kv_path+i)
