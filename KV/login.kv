@@ -7,7 +7,7 @@
         orientation: 'vertical'
         padding: 25
         spacing: 40
-        Widget:
+        # Widget:
         MDLabel:
             halign: 'center'
             text: "Training&Placement"
@@ -43,11 +43,10 @@
             font_size: 20
             pos_hint: {'center_x':0.5}
             on_press:root.manager.current="tpo_register"
-        Widget:
+        # Widget:
                 
     MDRoundFlatButton:
         text: "E-resources"
         font_size: 15
         pos_hint: {'x':0.8,'y':0.1}
         on_press: root.manager.current = 'view_eresources'
-

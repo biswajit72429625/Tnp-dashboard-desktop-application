@@ -2,3 +2,207 @@
 <ViewEresources>
     Navbar:
     
+    FloatLayout:
+        size: root.width, root.height
+        MDLabel:
+            text: "E-Resources"
+            pos_hint: {'center_x':0.5,'center_y':0.9}
+            font_style: 'H4'
+            halign: 'center'
+        MDCard:
+            size_hint : (0.9,0.7)
+            pos_hint: {'center_x': .5, 'center_y': .5}
+            elevation: 20
+            orientation: 'vertical'
+            spacing: 2
+            MDGridLayout:
+                size: (self.parent.width,60)
+                height: self.minimum_height
+                size_hint_x: None
+                size_hint_y: None
+                cols: 4
+                row_default_height: 60
+                row_force_default: True
+                adaptive_width: True
+                MDLabel:
+                    text: ""
+                    size_hint: (0.1,0.1)
+                    md_bg_color: app.theme_cls.primary_color
+                MDLabel:
+                    text: "Title"
+                    font_size: 20
+                    halign: 'center'
+                    size_hint_x: 0.3
+                    md_bg_color: app.theme_cls.primary_color
+                MDLabel:
+                    text: "Date"
+                    font_size: 20
+                    size_hint_x: 0.3
+                    halign: 'center'
+                    md_bg_color: app.theme_cls.primary_color
+                MDLabel:
+                    text: "Batch"
+                    font_size: 20
+                    size_hint_x: 0.3
+                    halign: 'center'
+                    md_bg_color: app.theme_cls.primary_color
+            
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True
+                size: (self.parent.width,self.parent.height-60)
+                GridLayout:
+                    size_hint_y: None
+                    height: self.minimum_height
+                    cols: 4
+                    row_default_height: 60
+                    adaptive_width: True
+                    MDCheckbox:
+                        size_hint: (0.1,0.1)
+                    MDLabel:
+                        text: "1"
+                        font_size: 20
+                        halign: 'center'
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text: "E-Resources"
+                        font_size: 20
+                        size_hint_x: 0.3
+                        halign: 'center'
+                    MDLabel:
+                        text: "E-Resources"
+                        font_size: 20
+                        size_hint_x: 0.3
+                        halign: 'center'
+                    
+                    MDCheckbox:
+                        size_hint: (0.1,0.1)
+                    MDLabel:
+                        text: "2"
+                        font_size: 20
+                        halign: 'center'
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text: "E-Resources"
+                        font_size: 20
+                        size_hint_x: 0.3
+                        halign: 'center'
+                    MDLabel:
+                        text: "E-Resources"
+                        font_size: 20
+                        size_hint_x: 0.3
+                        halign: 'center'
+                    
+                    MDCheckbox:
+                        size_hint: (0.1,0.1)
+                    MDLabel:
+                        text: "3"
+                        font_size: 20
+                        halign: 'center'
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text: "E-Resources"
+                        font_size: 20
+                        size_hint_x: 0.3
+                        halign: 'center'
+                    MDLabel:
+                        text: "E-Resources"
+                        font_size: 20
+                        size_hint_x: 0.3
+                        halign: 'center'
+                    
+                    MDCheckbox:
+                        size_hint: (0.1,0.1)
+                    MDLabel:
+                        text: "4"
+                        font_size: 20
+                        halign: 'center'
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text: "E-Resources"
+                        font_size: 20
+                        size_hint_x: 0.3
+                        halign: 'center'
+                    MDLabel:
+                        text: "E-Resources"
+                        font_size: 20
+                        size_hint_x: 0.3
+                        halign: 'center'
+                    
+                    MDCheckbox:
+                        size_hint: (0.1,0.1)
+                    MDLabel:
+                        text: "5"
+                        font_size: 20
+                        halign: 'center'
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text: "E-Resources"
+                        font_size: 20
+                        size_hint_x: 0.3
+                        halign: 'center'
+                    MDLabel:
+                        text: "E-Resources"
+                        font_size: 20
+                        size_hint_x: 0.3
+                        halign: 'center'
+                    
+                    MDCheckbox:
+                        size_hint: (0.1,0.1)
+                    MDLabel:
+                        text: "6"
+                        font_size: 20
+                        halign: 'center'
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text: "E-Resources"
+                        font_size: 20
+                        size_hint_x: 0.3
+                        halign: 'center'
+                    MDLabel:
+                        text: "E-Resources"
+                        font_size: 20
+                        size_hint_x: 0.3
+                        halign: 'center'
+                    
+                    MDCheckbox:
+                        size_hint: (0.1,0.1)
+                    MDLabel:
+                        text: "7"
+                        font_size: 20
+                        halign: 'center'
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text: "E-Resources"
+                        font_size: 20
+                        size_hint_x: 0.3
+                        halign: 'center'
+                    MDLabel:
+                        text: "E-Resources"
+                        font_size: 20
+                        size_hint_x: 0.3
+                        halign: 'center'
+                    
+                    MDCheckbox:
+                        size_hint: (0.1,0.1)
+                    MDLabel:
+                        text: "8"
+                        font_size: 20
+                        halign: 'center'
+                        size_hint_x: 0.3
+                    MDLabel:
+                        text: "E-Resources"
+                        font_size: 20
+                        size_hint_x: 0.3
+                        halign: 'center'
+                    MDLabel:
+                        text: "E-Resources"
+                        font_size: 20
+                        size_hint_x: 0.3
+                        halign: 'center'
+                
+    
+    MDFloatingActionButtonSpeedDial:
+        data: {'add':'notebook-plus-outline','edit':'file-edit-outline', 'delete':'delete'}
+        root_button_anim: True
+        label_text_color: (1,1,1,1)
