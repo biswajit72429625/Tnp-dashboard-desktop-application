@@ -1,15 +1,9 @@
 ########## inbuilt libraries ##################
 from os import listdir
-from pyautogui import size
 ################################################
-
-width, height = size()
 
 ########## kivy modules #########################
 from kivy.config import Config
-Config.set('graphics', 'fullscreen', '1')
-Config.set('graphics', 'width', width)
-Config.set('graphics', 'height', height)
 from kivymd.app import MDApp
 from kivy.lang.builder import Builder
 from kivy.uix.screenmanager import ScreenManager
