@@ -8,6 +8,6 @@ class ViewEresources(Screen):
         self.table = MDDataTable(size_hint= (0.9,0.6),
         elevation = 20,
         pos_hint= {'center_x':0.5, 'center_y':0.5},
-        column_data= [("Name",dp(110)),("Date",dp(110)),("Year",dp(110))],
-        row_data= [("[size=30]1[/size]","19-11-2000","3rd"),("","","")])
+        column_data= [("Name",dp(20)),("Date",dp(20)),("Year",dp(20))],
+        row_data= [("[size=15]1[/size]","19-11-2000","3rd"),("","","")])
         self.add_widget(self.table)

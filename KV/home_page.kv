@@ -1,10 +1,33 @@
 #:kivy 2.0.0
 <HomePage>
-    GridLayout:
-        cols:2
-        MDToolbar:
-            title: "MDToolbar"
-        MDToolbar:
-            title: "MDTool"
+    Navbar:
 
+    MDLabel:
+        text: "Content"
+        halign: "center"
+    MDCard:
+        size_hint: (0.8,0.5)
+        pos_hint: {'center_x': .5, 'center_y': .45}
+        elevation: 10
+        orientation: 'horizontal'
+        padding: 20
+        spacing: 20
+        MDRectangleFlatButton:
+            text:"E-Resources"
+            size_hint_y: .5
+            pos_hint:{"center_y":.5}
+            font_size:30
+            on_press:root.manager.current="e_resource"
+        MDRectangleFlatButton:
+            text:"Assesments"
+            size_hint_y: .5
+            pos_hint:{"center_y":.5}
+            font_size:30
+        MDRectangleFlatButton:
+            text:"Placements"
+            size_hint_y: .5
+            pos_hint:{"center_y":.5}
+            font_size:30
+
+            
     

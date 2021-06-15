@@ -1,0 +1,19 @@
+<Navbar@MDFloatLayout>
+    MDBoxLayout:
+        orientation: "vertical"
+        MDToolbar:
+            md_bg_color: app.theme_cls.accent_color
+            elevation: 10
+            title: "Anil Naik"
+            left_action_items: [["keyboard-backspace", lambda x: app.callback()]]
+        MDLabel:
+            text:""
+    MDLabel:
+        text:"Branch : Civil"
+        font_style: 'H6'
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+        font_size:20
+        size_hint:(0.3,.1)
+        pos_hint:{"x":.75,"y":0.9}
+    
