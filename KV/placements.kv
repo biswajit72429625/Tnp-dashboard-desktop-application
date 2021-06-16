@@ -17,6 +17,8 @@
             #size_hint_y: .3
             pos_hint:{"x":.3,"y":.7}
             font_size:20
+            on_press:root.manager.current="manage_students"
+            on_press: root.manager.stack.append(root.name)
         MDRectangleFlatButton:
             text:"View Offer Letters"
             #size_hint_y: .3

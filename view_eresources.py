@@ -29,7 +29,7 @@ class ViewEresources(Screen):
 
     def add_delete(self,instance):
         if instance.icon == 'notebook-plus-outline':
-            self.manager.current = 'e_resource'
+            self.manager.current = 'add_eresources'
             self.manager.stack.append(self.name)
         else:
             pass
