@@ -1,52 +1,59 @@
 #:kivy 2.0.0
 <Login>
+    Image:
+        source: 'login.jpeg'
+        size: self.size
+        allow_stretch: True
+    
     MDCard:
         size_hint: (0.5,0.8)
         pos_hint: {'center_x': .5, 'center_y': .5}
-        elevation: 20
+        elevation: 30
         orientation: 'vertical'
         padding: 25
         spacing: 40
         # Widget:
+        
         MDLabel:
             halign: 'center'
-            text: "Training&Placement"
-            font_style: 'H4'
+            theme_text_color: "Custom"
+            text_color: 0, 150/255, 136/255, 1
+            text: "Training & Placement"
+            font_style: 'H6'
             padding: (10,15)
             size_hint_y: None
             height: self.texture_size[1]
+            font_size:30
         MDTextField:
             id:email
             size_hint_x: None
-            width: 200
+            width: 300
             pos_hint: {'center_x':0.5}
             icon_right: "email"
             hint_text: "Email"
+            color_mode: 'accent'
+            icon_right_color:app.theme_cls.accent_color
         MDTextField:
             size_hint_x: None
             id:password
-            width: 200
+            width: 300
             pos_hint: {'center_x':0.5}
             icon_right: "key"
             hint_text: "Password"
             password: True
             font_size: 20
-        MDRoundFlatButton:
+            color_mode: 'accent'
+            icon_right_color:app.theme_cls.accent_color
+        MDRaisedButton:
             text: "Login"
             size_hint_x: 0.4
             font_size: 20
             pos_hint: {'center_x':0.5}
             on_press:root.manager.current="home_page"
-        MDRoundFlatButton:
+        MDRaisedButton:
             size_hint_x: 0.4
             text: "Register"
             font_size: 20
             pos_hint: {'center_x':0.5}
             on_press:root.manager.current="tpo_register"
-        # Widget:
-                
-    MDRoundFlatButton:
-        text: "E-resources"
-        font_size: 15
-        pos_hint: {'x':0.8,'y':0.1}
-        on_press: root.manager.current = 'view_eresources'
+        

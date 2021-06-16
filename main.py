@@ -14,7 +14,8 @@ from login import Login
 from view_eresources import ViewEresources
 from tpo_register import TpoRegister
 from home_page import HomePage
-from e_resource import EResource
+from add_eresources import AddEresources
+from placements import Placements
 #################################################
 
 
@@ -27,7 +28,8 @@ class Manager(ScreenManager):
         self.add_widget(ViewEresources(name='view_eresources'))
         self.add_widget(TpoRegister(name='tpo_register'))
         self.add_widget(HomePage(name='home_page'))
-        self.add_widget(EResource(name='e_resource'))
+        self.add_widget(AddEresources(name='add_eresources'))
+        self.add_widget(Placements(name='placements'))
 
 
 class TnpApp(MDApp):
