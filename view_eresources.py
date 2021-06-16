@@ -1,13 +1,35 @@
 from kivy.uix.screenmanager import Screen
-from kivymd.uix.datatables import MDDataTable
-from kivymd.app import MDApp
-from kivy.metrics import dp
+from kivy.uix.boxlayout import BoxLayout
+from kivymd.uix.button import MDRoundFlatButton
+from kivymd.uix.dialog import MDDialog
+
+class EResourceDialog(BoxLayout):
+    pass
 
 class ViewEresources(Screen):
+    dialog = None
     def __init__(self, **kw):
         super(ViewEresources, self).__init__(**kw)
-        # self.table = MDDataTable(size_hint= (0.8,0.7),
-        # pos_hint= {'center_x':0.425, 'center_y':0.4},
-        # column_data= [("Name",dp(40)),("Date",dp(40)),("Year",dp(40))],
-        # row_data= [("[size=30]1[/size]","19-11-2000","3rd"),("","","")])
-        # self.add_widget(self.table)
+    
+    def full_details(self,row_id):
+        # shows all details of e_resource in a dialog box
+        self.dialog = MDDialog(
+            title=str(self.ids[f'{str(row_id)}'].text),
+            type="custom",
+            content_cls=EResourceDialog(),
+            buttons=[
+                    MDRoundFlatButton(text="CANCEL",on_press=self.dismiss_dialog),
+                    MDRoundFlatButton(text="SAVE"),
+                ]
+        )
+        self.dialog.open()
+
+    def dismiss_dialog(self,instance):
+        self.dialog.dismiss()
+
+    def add_delete(self,instance):
+        if instance.icon == 'notebook-plus-outline':
+            self.manager.current = 'e_resource'
+            self.manager.stack.append(self.name)
+        else:
+            pass

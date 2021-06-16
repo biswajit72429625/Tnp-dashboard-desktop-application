@@ -1,5 +1,5 @@
 #:kivy 2.0.0
-<ViewEresources>
+<ManageStudents>
     Navbar:
     
     FloatLayout:
@@ -20,28 +20,24 @@
                 height: self.minimum_height
                 size_hint_x: None
                 size_hint_y: None
-                cols: 4
+                cols: 3
                 row_default_height: 60
                 row_force_default: True
                 adaptive_width: True
                 MDLabel:
-                    text: ""
-                    size_hint: (0.1,0.1)
-                    md_bg_color: app.theme_cls.primary_color
-                MDLabel:
-                    text: "Title"
+                    text: "EnrollmentID"
                     font_size: 20
                     halign: 'center'
                     size_hint_x: 0.3
                     md_bg_color: app.theme_cls.primary_color
                 MDLabel:
-                    text: "Date"
+                    text: "Name"
                     font_size: 20
                     size_hint_x: 0.3
                     halign: 'center'
                     md_bg_color: app.theme_cls.primary_color
                 MDLabel:
-                    text: "Batch"
+                    text: "email"
                     font_size: 20
                     size_hint_x: 0.3
                     halign: 'center'
@@ -54,11 +50,9 @@
                 GridLayout:
                     size_hint_y: None
                     height: self.minimum_height
-                    cols: 4
+                    cols: 3
                     row_default_height: 60
                     adaptive_width: True
-                    MDCheckbox:
-                        size_hint: (0.1,0.1)
                     MDLabel:
                         id: 1
                         text: "[u][ref=world]1[/ref][/u]"
@@ -68,7 +62,7 @@
                         font_size: 20
                         halign: 'center'
                         size_hint_x: 0.3
-                        on_ref_press: root.full_details(1)
+                        on_ref_press: root.student_details(1)
                     MDLabel:
                         text: "E-Resources"
                         font_size: 20
@@ -80,8 +74,6 @@
                         size_hint_x: 0.3
                         halign: 'center'
                     
-                    MDCheckbox:
-                        size_hint: (0.1,0.1)
                     MDLabel:
                         id: 2
                         text: "[u][ref=world]2[/ref][/u]"
@@ -91,7 +83,7 @@
                         font_size: 20
                         halign: 'center'
                         size_hint_x: 0.3
-                        on_ref_press: root.full_details(2)
+                        on_ref_press: root.student_details(2)
                     MDLabel:
                         text: "E-Resources"
                         font_size: 20
@@ -103,8 +95,6 @@
                         size_hint_x: 0.3
                         halign: 'center'
                     
-                    MDCheckbox:
-                        size_hint: (0.1,0.1)
                     MDLabel:
                         id: 3
                         text: "[u][ref=world]3[/ref][/u]"
@@ -114,7 +104,7 @@
                         font_size: 20
                         halign: 'center'
                         size_hint_x: 0.3
-                        on_ref_press: root.full_details(3)
+                        on_ref_press: root.student_details(3)
                     MDLabel:
                         text: "E-Resources"
                         font_size: 20
@@ -126,8 +116,6 @@
                         size_hint_x: 0.3
                         halign: 'center'
                     
-                    MDCheckbox:
-                        size_hint: (0.1,0.1)
                     MDLabel:
                         id: 4
                         text: "[u][ref=world]4[/ref][/u]"
@@ -137,7 +125,7 @@
                         font_size: 20
                         halign: 'center'
                         size_hint_x: 0.3
-                        on_ref_press: root.full_details(4)
+                        on_ref_press: root.student_details(4)
                     MDLabel:
                         text: "E-Resources"
                         font_size: 20
@@ -149,8 +137,6 @@
                         size_hint_x: 0.3
                         halign: 'center'
                     
-                    MDCheckbox:
-                        size_hint: (0.1,0.1)
                     MDLabel:
                         id: 5
                         text: "[u][ref=world]5[/ref][/u]"
@@ -160,7 +146,7 @@
                         font_size: 20
                         halign: 'center'
                         size_hint_x: 0.3
-                        on_ref_press: root.full_details(5)
+                        on_ref_press: root.student_details(5)
                     MDLabel:
                         text: "E-Resources"
                         font_size: 20
@@ -172,8 +158,6 @@
                         size_hint_x: 0.3
                         halign: 'center'
                     
-                    MDCheckbox:
-                        size_hint: (0.1,0.1)
                     MDLabel:
                         id: 6
                         text: "[u][ref=world]6[/ref][/u]"
@@ -183,7 +167,7 @@
                         font_size: 20
                         halign: 'center'
                         size_hint_x: 0.3
-                        on_ref_press: root.full_details(6)
+                        on_ref_press: root.student_details(6)
                     MDLabel:
                         text: "E-Resources"
                         font_size: 20
@@ -195,8 +179,6 @@
                         size_hint_x: 0.3
                         halign: 'center'
                     
-                    MDCheckbox:
-                        size_hint: (0.1,0.1)
                     MDLabel:
                         id: 7
                         text: "[u][ref=world]7[/ref][/u]"
@@ -206,7 +188,7 @@
                         font_size: 20
                         halign: 'center'
                         size_hint_x: 0.3
-                        on_ref_press: root.full_details(7)
+                        on_ref_press: root.student_details(7)
                     MDLabel:
                         text: "E-Resources"
                         font_size: 20
@@ -217,33 +199,30 @@
                         font_size: 20
                         size_hint_x: 0.3
                         halign: 'center'
-                    
-                    
-                
+                               
     
     MDFloatingActionButtonSpeedDial:
-        data: {'add':'notebook-plus-outline', 'delete':'delete'}
+        data: {'First Year':'numeric-1','Second Year':'numeric-2', 'Third Year':'numeric-3', 'Fourth Year':'numeric-4'}
         root_button_anim: True
         label_text_color: (1,1,1,1)
-        callback: self.parent.add_delete
 
 
-<EResourceDialog>:
+<Content>:
     orientation: "vertical"
     spacing: "8dp"
     size_hint_y: None
     height: 370
     MDTextField:
+        text: "Name"
+    MDTextField:
+        text: "PhoneNo"
+    MDTextField:
+        text: "Email"
+    MDTextField:
         text: "PassYear"
     MDTextField:
         text: "Branch"
     MDTextField:
-        text: "Organizer"
-    MDTextField:
-        text: "Link"
-    MDTextField:
-        text: "Visible on"
-    MDTextField:
-        text: "Description"
+        text: "VerifyStatus"
     MDRoundFlatButton:
         text: "Edit"

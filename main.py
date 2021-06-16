@@ -1,7 +1,3 @@
-########## inbuilt libraries ##################
-from os import listdir
-################################################
-
 ########## kivy modules #########################
 from kivymd.app import MDApp
 from kivy.lang.builder import Builder
@@ -15,10 +11,16 @@ from view_eresources import ViewEresources
 from tpo_register import TpoRegister
 from home_page import HomePage
 from e_resource import EResource
+from manage_students import ManageStudents
 #################################################
 
+########## other packages ##################
+from os import listdir
+import flags
+################################################
 
 class Manager(ScreenManager):
+    stack = []
     def __init__(self, *args):
         super(Manager, self).__init__(*args)
         self.transition = CardTransition()
@@ -28,10 +30,17 @@ class Manager(ScreenManager):
         self.add_widget(TpoRegister(name='tpo_register'))
         self.add_widget(HomePage(name='home_page'))
         self.add_widget(EResource(name='e_resource'))
+        self.add_widget(ManageStudents(name='manage_students'))
+    
+    def callback(self):
+        if self.stack:
+            screen = self.stack.pop()
+            self.current = screen
 
 
 class TnpApp(MDApp):
     def build(self):
+        flags.app=self
         self.theme_cls.primary_palette = 'Blue'
         self.theme_cls.primary_hue = '600'
         self.theme_cls.accent_palette = 'DeepPurple'

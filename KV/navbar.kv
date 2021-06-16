@@ -1,3 +1,4 @@
+#:kivy 2.0.0
 <Navbar@MDFloatLayout>
     MDBoxLayout:
         orientation: "vertical"
@@ -5,7 +6,7 @@
             md_bg_color: app.theme_cls.accent_color
             elevation: 10
             title: "Anil Naik"
-            left_action_items: [["keyboard-backspace", lambda x: app.callback()]]
+            left_action_items: [["keyboard-backspace", lambda x: root.parent.manager.callback()]]
         MDLabel:
             text:""
     MDLabel:

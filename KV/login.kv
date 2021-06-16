@@ -37,16 +37,19 @@
             font_size: 20
             pos_hint: {'center_x':0.5}
             on_press:root.manager.current="home_page"
+            on_press: root.manager.stack.append(root.name)
         MDRoundFlatButton:
             size_hint_x: 0.4
             text: "Register"
             font_size: 20
             pos_hint: {'center_x':0.5}
             on_press:root.manager.current="tpo_register"
+            on_press: root.manager.stack.append(root.name)
         # Widget:
                 
     MDRoundFlatButton:
-        text: "E-resources"
+        text: "Manage_Students"
         font_size: 15
-        pos_hint: {'x':0.8,'y':0.1}
-        on_press: root.manager.current = 'view_eresources'
+        pos_hint: {'x':0.8,'y':0.3}
+        on_press: root.manager.current = 'manage_students'
+        on_press: root.manager.stack.append(root.name)
