@@ -1,5 +1,5 @@
 #:kivy 2.0.0
-<EResource>
+<AddEresources>
     Navbar:
     MDCard:
         size_hint: (0.4,0.7)
@@ -64,6 +64,7 @@
             size_hint_y: None
             height: self.texture_size[1]
         MDRaisedButton:
+            pos_hint: {'center_x': .6}
             text:"Select Date"
             id : date_label
             on_release: root.show_date_picker()
@@ -76,13 +77,16 @@
             height: self.texture_size[1]
         MDRaisedButton:
             text: "Open time picker"
+            pos_hint: {'center_x': .6}
             id: time_label
             on_release: root.show_time_picker()
         MDRoundFlatButton:
             text: "Clear"
+            pos_hint: {'center_x': .6}
             font_size: 20
         MDRoundFlatButton:
             text: "Save"
+            pos_hint: {'center_x': .6}
             font_size: 20
             
     

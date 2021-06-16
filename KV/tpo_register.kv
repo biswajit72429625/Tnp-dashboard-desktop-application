@@ -1,5 +1,12 @@
 #:kivy 2.0.0
 <TpoRegister>
+    Image:
+        source: 'login.jpeg'
+        size: self.size
+        allow_stretch: True
+    MDFlatButton:
+        text:"back"
+        pos_hint:{"x":.05,"y":.9}
     MDCard:
         size_hint: (0.5,0.9)
         pos_hint: {'center_x': .5, 'center_y': .5}
@@ -8,37 +15,53 @@
         padding: 25
         spacing: 25
         MDLabel:
+            theme_text_color: "Custom"
+            text_color: 233/255, 30/255, 99/255, 1
             halign: 'center'
             text: "Register Yourself"
-            font_style: 'H4'
+            font_style: 'H6'
             padding: (10,10)
             size_hint_y: None
             height: self.texture_size[1]
+            font_size:30
         MDTextField:
             id: name
+            color_mode: 'accent'
+            icon_right_color:app.theme_cls.accent_color
+            icon_right:'account'
             pos_hint: {'center_x':0.5}
             hint_text:"Name"
             size_hint_x:0.7
         MDTextField:
-            pos_hint: {'center_x':0.5}
             id: department
+            color_mode: 'accent'
+            icon_right_color:app.theme_cls.accent_color
+            pos_hint: {'center_x':0.5}
+            icon_right:'book'
             hint_text:"Department"
             size_hint_x:0.7
         MDTextField:
             id: email
+            color_mode: 'accent'
+            icon_right_color:app.theme_cls.accent_color
+            icon_right:'email'
             pos_hint: {'center_x':0.5}
             hint_text:"Email"
             size_hint_x:0.7
-        MDTextField:
-            id: set_password
-            pos_hint: {'center_x':0.5}
-            hint_text:"Set Password"
-            size_hint_x:0.7
+        
         MDTextField:
             id: confirm_password
+            color_mode: 'accent'
+            icon_right_color:app.theme_cls.accent_color                                                                                                     
+            icon_right:'key'
             pos_hint: {'center_x':0.5}
             hint_text:"Confirm Password"
             size_hint_x:0.7
-        MDRectangleFlatButton:
+        MDDropDownItem:
+            id: dropdown_item
+            text: 'Department'
+            current_item:'CSE'
+            on_release: root.menu.open()
+        MDRaisedButton:
             text:"Register"
             pos_hint: {'center_x':0.5}
