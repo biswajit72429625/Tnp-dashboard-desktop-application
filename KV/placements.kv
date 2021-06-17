@@ -33,6 +33,8 @@
             #size_hint_y: .3
             pos_hint:{"x":.7,"y":.7}
             font_size:20
+            on_press:root.manager.current="finalize_offer"
+            on_press: root.manager.stack.append(root.name)
         MDRectangleFlatButton:
             text:"Analyse data"
             #size_hint_y: .3
