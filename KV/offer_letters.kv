@@ -31,24 +31,30 @@
                         row_default_height: 60
                         row_force_default: True
                         adaptive_width: True
-                        MDLabel:
-                            text: "EnrollmentID"
-                            font_size: 20
-                            halign: 'center'
-                            size_hint_x: 0.3
-                            md_bg_color: app.theme_cls.primary_color
-                        MDLabel:
+                        Button:
                             text: "Name"
                             font_size: 20
+                            # halign: 'center'
                             size_hint_x: 0.3
-                            halign: 'center'
-                            md_bg_color: app.theme_cls.primary_color
-                        MDLabel:
-                            text: "email"
+                            background_normal: ''
+                            background_color: app.theme_cls.primary_color
+                            
+                        Button:
+                            text: "Company"
                             font_size: 20
+                            # halign: 'center'
                             size_hint_x: 0.3
-                            halign: 'center'
-                            md_bg_color: app.theme_cls.primary_color
+                            background_normal: ''
+                            background_color: app.theme_cls.primary_color
+                            
+                        Button:
+                            text: "Role"
+                            font_size: 20
+                            # halign: 'center'
+                            size_hint_x: 0.3
+                            background_normal: ''
+                            background_color: app.theme_cls.primary_color
+                            
                     
                     ScrollView:
                         do_scroll_x: False
@@ -69,7 +75,7 @@
                                 font_size: 20
                                 halign: 'center'
                                 size_hint_x: 0.3
-                                on_ref_press: root.student_details(1)
+                                on_ref_press: root.full_details(1)
                             MDLabel:
                                 text: "E-Resources"
                                 font_size: 20
@@ -90,7 +96,7 @@
                                 font_size: 20
                                 halign: 'center'
                                 size_hint_x: 0.3
-                                on_ref_press: root.student_details(2)
+                                on_ref_press: root.full_details(2)
                             MDLabel:
                                 text: "E-Resources"
                                 font_size: 20
@@ -111,7 +117,7 @@
                                 font_size: 20
                                 halign: 'center'
                                 size_hint_x: 0.3
-                                on_ref_press: root.student_details(3)
+                                on_ref_press: root.full_details(3)
                             MDLabel:
                                 text: "E-Resources"
                                 font_size: 20
@@ -132,7 +138,7 @@
                                 font_size: 20
                                 halign: 'center'
                                 size_hint_x: 0.3
-                                on_ref_press: root.student_details(4)
+                                on_ref_press: root.full_details(4)
                             MDLabel:
                                 text: "E-Resources"
                                 font_size: 20
@@ -153,7 +159,7 @@
                                 font_size: 20
                                 halign: 'center'
                                 size_hint_x: 0.3
-                                on_ref_press: root.student_details(5)
+                                on_ref_press: root.full_details(5)
                             MDLabel:
                                 text: "E-Resources"
                                 font_size: 20
@@ -174,7 +180,7 @@
                                 font_size: 20
                                 halign: 'center'
                                 size_hint_x: 0.3
-                                on_ref_press: root.student_details(6)
+                                on_ref_press: root.full_details(6)
                             MDLabel:
                                 text: "E-Resources"
                                 font_size: 20
@@ -195,7 +201,7 @@
                                 font_size: 20
                                 halign: 'center'
                                 size_hint_x: 0.3
-                                on_ref_press: root.student_details(7)
+                                on_ref_press: root.full_details(7)
                             MDLabel:
                                 text: "E-Resources"
                                 font_size: 20
@@ -212,29 +218,50 @@
                     pos_hint: {'center_x': .84, 'center_y': .4}
                     elevation: 20
                     orientation: 'vertical'
-                    spacing: 2
-                    MDLabel:
-                        text: "Search By: "
-                        pos_hint: {'center_x':0.5,'center_y':0.85}
-                        # font_style: 'H4'
-                        halign: 'center'
+                    padding: (20,40)
+                    spacing: 10
+                    Widget:
+                    MDRectangleFlatButton:
+                        id: dropdown_item
+                        text: "Search by"
+                        on_release: root.menu.open()
+                        width: self.parent.width-30
+                        line_color: app.theme_cls.accent_color
+                        text_color: app.theme_cls.accent_color
+                    MDTextField:
+                        id:email
+                        size_hint_x: None
+                        width: self.parent.width-30
+                        icon_right: "email"
+                        hint_text: "Text"
+                        color_mode: 'accent'
+                        icon_right_color:app.theme_cls.accent_color
+                    MDRectangleFlatButton:
+                        id: search
+                        text: "Search"
+                        width: self.parent.width-30
+                        md_bg_color: app.theme_cls.accent_color
+                        line_color: app.theme_cls.accent_color
+                        text_color: app.theme_cls.accent_color
+                        # on_release: root.menu.open()
+                    Widget:
                                
         MDBottomNavigationItem:
             name: 'screen 3'
             text: '3rd year'
             icon: 'numeric-3-box'
-            on_tab_press: print(self.name)
+            # on_tab_press: root.manager.current = 'login'
             Navbar2:
             FloatLayout:
                 size: root.width, root.height
                 MDLabel:
-                    text: "E-Resources"
-                    pos_hint: {'center_x':0.5,'center_y':0.9}
+                    text: "Offer Letters"
+                    pos_hint: {'center_x':0.5,'center_y':0.85}
                     font_style: 'H4'
                     halign: 'center'
                 MDCard:
-                    size_hint : (0.9,0.7)
-                    pos_hint: {'center_x': .5, 'center_y': .5}
+                    size_hint : (0.65,0.75)
+                    pos_hint: {'center_x': .35, 'center_y': .4}
                     elevation: 20
                     orientation: 'vertical'
                     spacing: 2
@@ -247,24 +274,30 @@
                         row_default_height: 60
                         row_force_default: True
                         adaptive_width: True
-                        MDLabel:
-                            text: "EnrollmentID"
-                            font_size: 20
-                            halign: 'center'
-                            size_hint_x: 0.3
-                            md_bg_color: app.theme_cls.primary_color
-                        MDLabel:
+                        Button:
                             text: "Name"
                             font_size: 20
+                            # halign: 'center'
                             size_hint_x: 0.3
-                            halign: 'center'
-                            md_bg_color: app.theme_cls.primary_color
-                        MDLabel:
-                            text: "email"
+                            background_normal: ''
+                            background_color: app.theme_cls.primary_color
+                            
+                        Button:
+                            text: "Company"
                             font_size: 20
+                            # halign: 'center'
                             size_hint_x: 0.3
-                            halign: 'center'
-                            md_bg_color: app.theme_cls.primary_color
+                            background_normal: ''
+                            background_color: app.theme_cls.primary_color
+                            
+                        Button:
+                            text: "Role"
+                            font_size: 20
+                            # halign: 'center'
+                            size_hint_x: 0.3
+                            background_normal: ''
+                            background_color: app.theme_cls.primary_color
+                            
                     
                     ScrollView:
                         do_scroll_x: False
@@ -285,7 +318,7 @@
                                 font_size: 20
                                 halign: 'center'
                                 size_hint_x: 0.3
-                                on_ref_press: root.student_details(1)
+                                on_ref_press: root.full_details(1)
                             MDLabel:
                                 text: "E-Resources"
                                 font_size: 20
@@ -297,3 +330,179 @@
                                 size_hint_x: 0.3
                                 halign: 'center'
                             
+                            MDLabel:
+                                id: 2
+                                text: "[u][ref=world]2[/ref][/u]"
+                                markup : True
+                                theme_text_color: 'Custom'
+                                text_color: app.theme_cls.primary_color
+                                font_size: 20
+                                halign: 'center'
+                                size_hint_x: 0.3
+                                on_ref_press: root.full_details(2)
+                            MDLabel:
+                                text: "E-Resources"
+                                font_size: 20
+                                size_hint_x: 0.3
+                                halign: 'center'
+                            MDLabel:
+                                text: "E-Resources"
+                                font_size: 20
+                                size_hint_x: 0.3
+                                halign: 'center'
+                            
+                            MDLabel:
+                                id: 3
+                                text: "[u][ref=world]3[/ref][/u]"
+                                markup : True
+                                theme_text_color: 'Custom'
+                                text_color: app.theme_cls.primary_color
+                                font_size: 20
+                                halign: 'center'
+                                size_hint_x: 0.3
+                                on_ref_press: root.full_details(3)
+                            MDLabel:
+                                text: "E-Resources"
+                                font_size: 20
+                                size_hint_x: 0.3
+                                halign: 'center'
+                            MDLabel:
+                                text: "E-Resources"
+                                font_size: 20
+                                size_hint_x: 0.3
+                                halign: 'center'
+                            
+                            MDLabel:
+                                id: 4
+                                text: "[u][ref=world]4[/ref][/u]"
+                                markup : True
+                                theme_text_color: 'Custom'
+                                text_color: app.theme_cls.primary_color
+                                font_size: 20
+                                halign: 'center'
+                                size_hint_x: 0.3
+                                on_ref_press: root.full_details(4)
+                            MDLabel:
+                                text: "E-Resources"
+                                font_size: 20
+                                size_hint_x: 0.3
+                                halign: 'center'
+                            MDLabel:
+                                text: "E-Resources"
+                                font_size: 20
+                                size_hint_x: 0.3
+                                halign: 'center'
+                            
+                            MDLabel:
+                                id: 5
+                                text: "[u][ref=world]5[/ref][/u]"
+                                markup : True
+                                theme_text_color: 'Custom'
+                                text_color: app.theme_cls.primary_color
+                                font_size: 20
+                                halign: 'center'
+                                size_hint_x: 0.3
+                                on_ref_press: root.full_details(5)
+                            MDLabel:
+                                text: "E-Resources"
+                                font_size: 20
+                                size_hint_x: 0.3
+                                halign: 'center'
+                            MDLabel:
+                                text: "E-Resources"
+                                font_size: 20
+                                size_hint_x: 0.3
+                                halign: 'center'
+                            
+                            MDLabel:
+                                id: 6
+                                text: "[u][ref=world]6[/ref][/u]"
+                                markup : True
+                                theme_text_color: 'Custom'
+                                text_color: app.theme_cls.primary_color
+                                font_size: 20
+                                halign: 'center'
+                                size_hint_x: 0.3
+                                on_ref_press: root.full_details(6)
+                            MDLabel:
+                                text: "E-Resources"
+                                font_size: 20
+                                size_hint_x: 0.3
+                                halign: 'center'
+                            MDLabel:
+                                text: "E-Resources"
+                                font_size: 20
+                                size_hint_x: 0.3
+                                halign: 'center'
+                            
+                            MDLabel:
+                                id: 7
+                                text: "[u][ref=world]7[/ref][/u]"
+                                markup : True
+                                theme_text_color: 'Custom'
+                                text_color: app.theme_cls.primary_color
+                                font_size: 20
+                                halign: 'center'
+                                size_hint_x: 0.3
+                                on_ref_press: root.full_details(7)
+                            MDLabel:
+                                text: "E-Resources"
+                                font_size: 20
+                                size_hint_x: 0.3
+                                halign: 'center'
+                            MDLabel:
+                                text: "E-Resources"
+                                font_size: 20
+                                size_hint_x: 0.3
+                                halign: 'center'
+
+                MDCard:
+                    size_hint : (0.3,0.5)
+                    pos_hint: {'center_x': .84, 'center_y': .4}
+                    elevation: 20
+                    orientation: 'vertical'
+                    padding: (20,40)
+                    spacing: 10
+                    Widget:
+                    MDRectangleFlatButton:
+                        id: dropdown_item
+                        text: "Search by"
+                        width: self.parent.width-30
+                        on_release: root.menu.open()
+                        line_color: app.theme_cls.accent_color
+                        text_color: app.theme_cls.accent_color
+                    MDTextField:
+                        id:email
+                        size_hint_x: None
+                        width: self.parent.width-30
+                        icon_right: "email"
+                        hint_text: "Text"
+                        color_mode: 'accent'
+                        icon_right_color:app.theme_cls.accent_color
+                    MDRectangleFlatButton:
+                        id: search
+                        text: "Search"
+                        width: self.parent.width-30
+                        line_color: app.theme_cls.accent_color
+                        text_color: app.theme_cls.accent_color
+                        # on_release: root.menu.open()
+                    Widget:
+                               
+
+<OfferDialog>:
+    orientation: "vertical"
+    spacing: "8dp"
+    size_hint_y: None
+    height: 370
+    MDTextField:
+        text: "Company Name"
+    MDTextField:
+        text: "Link"
+    MDTextField:
+        text: "Date of Interview"
+    MDTextField:
+        text: "Date of Offer Letter"
+    MDTextField:
+        text: "Finalised"
+    MDRoundFlatButton:
+        text: "Edit"        
