@@ -17,6 +17,8 @@ from view_assessments import ViewAssessments
 from add_assessments import AddAssessments
 from view_companies import ViewCompanies
 from add_companies import AddCompanies
+from offer_letters import OfferLetters
+from finalize_offer import FinalizeOffer
 #################################################
 
 ########## other packages ##################
@@ -41,6 +43,8 @@ class Manager(ScreenManager):
         self.add_widget(ViewCompanies(name='view_companies'))
         self.add_widget(AddAssessments(name='add_assessments'))
         self.add_widget(AddCompanies(name='add_companies'))
+        self.add_widget(OfferLetters(name='offer_letters'))
+        self.add_widget(FinalizeOffer(name='finalize_offer'))
     
     def callback(self):
         # stack for back button

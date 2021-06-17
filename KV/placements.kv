@@ -70,14 +70,14 @@
             user_font_size:"70sp"
             md_bg_color: app.theme_cls.primary_light
             pos_hint:{"x":.2}
-            on_press:root.manager.current=""
+            on_press:root.manager.current="offer_letters"
             on_press: root.manager.stack.append(root.name)
         MDRectangleFlatButton:
             halign:"center"
-            text:"View-offer-letter"
+            text:"View offer letter"
             font_size:15
             pos_hint:{"x":.07}
-            on_press:root.manager.current=""
+            on_press:root.manager.current="offer_letters"
             on_press: root.manager.stack.append(root.name)
     MDCard:
         size_hint: (0.22,0.32)
@@ -92,14 +92,14 @@
             user_font_size:"70sp"
             md_bg_color: app.theme_cls.primary_light
             pos_hint:{"x":.2}
-            on_press:root.manager.current=""
+            on_press:root.manager.current="finalize_offer"
             on_press: root.manager.stack.append(root.name)
         MDRectangleFlatButton:
             halign:"center"
             text:"Finalize offer"
             font_size:15
             pos_hint:{"x":.14}
-            on_press:root.manager.current=""
+            on_press:root.manager.current="finalize_offer"
             on_press: root.manager.stack.append(root.name)
     MDCard:
         size_hint: (0.22,0.32)

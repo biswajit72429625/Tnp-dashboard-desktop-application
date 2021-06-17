@@ -1,0 +1,39 @@
+#:kivy 2.0.0
+<FinalizeOffer>
+    Background:
+    Navbar:
+    MDCard:
+        size_hint: (0.5,0.8)
+        pos_hint: {'center_x': .5, 'center_y': .45}
+        elevation: 30
+        orientation: 'vertical'
+        padding: 25
+        spacing: 40
+        
+        MDLabel:
+            halign: 'center'
+            theme_text_color: "Custom"
+            text_color: 0, 150/255, 136/255, 1
+            text: "Finalize offers"
+            font_style: 'H6'
+            padding: (10,15)
+            size_hint_y: None
+            height: self.texture_size[1]
+            font_size:30
+        MDRoundFlatIconButton:
+            text: "Open manager"
+            icon: "folder"
+            pos_hint: {'center_x': .5, 'center_y': .6}
+            on_release: root.file_manager_open()
+        MDLabel:
+            halign: 'center'
+            theme_text_color: "Custom"
+            text_color: 0, 150/255, 136/255, 1
+            text: "* excel file should have enrollment id, company name, package/role"
+            font_style: 'H6'
+            padding: (10,15)
+            size_hint_y: None
+            height: self.texture_size[1]
+        Widget:
+
+        
