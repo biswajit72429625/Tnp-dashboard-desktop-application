@@ -13,6 +13,10 @@ from home_page import HomePage
 from manage_students import ManageStudents
 from add_eresources import AddEresources
 from placements import Placements
+from view_assessments import ViewAssessments
+from add_assessments import AddAssessments
+from view_companies import ViewCompanies
+from add_companies import AddCompanies
 #################################################
 
 ########## other packages ##################
@@ -33,8 +37,13 @@ class Manager(ScreenManager):
         self.add_widget(ManageStudents(name='manage_students'))
         self.add_widget(AddEresources(name='add_eresources'))
         self.add_widget(Placements(name='placements'))
+        self.add_widget(ViewAssessments(name='view_assessments'))
+        self.add_widget(ViewCompanies(name='view_companies'))
+        self.add_widget(AddAssessments(name='add_assessments'))
+        self.add_widget(AddCompanies(name='add_companies'))
     
     def callback(self):
+        # stack for back button
         if self.stack:
             screen = self.stack.pop()
             self.current = screen

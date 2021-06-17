@@ -1,0 +1,93 @@
+#:kivy 2.0.0
+<AddCompanies>
+    Navbar:
+    MDCard:
+        size_hint: (0.4,0.7)
+        pos_hint: {'center_x': .27, 'center_y': .4}
+        elevation: 10
+        orientation: 'vertical'
+        padding: 25
+        spacing: 20
+        Widget:
+        Widget:
+        MDTextField:
+            id:e_name
+            size_hint_x: None
+            width: 250
+            pos_hint: {'center_x':0.45}
+            icon_right: ""
+            hint_text: "Name"
+            text: "Companies"
+        MDTextField:
+            id:e_year
+            size_hint_x: None
+            width: 250
+            pos_hint: {'center_x':0.45}
+            icon_right: ""
+            hint_text: "Year"
+        MDTextField:
+            id:e_dept
+            size_hint_x: None
+            width: 250
+            pos_hint: {'center_x':0.45}
+            icon_right: ""
+            hint_text: "dept"
+        MDTextField:
+            id:e_organiser
+            size_hint_x: None
+            width: 250
+            pos_hint: {'center_x':0.45}
+            icon_right: ""
+            hint_text: "Organiser Name"
+        MDTextField:
+            id:e_link
+            size_hint_x: None
+            width: 250
+            pos_hint: {'center_x':0.45}
+            icon_right: ""
+            hint_text: "Link"
+        Widget:
+
+    MDCard:
+        size_hint: (0.4,0.7)
+        pos_hint: {'center_x': .74, 'center_y': .4}
+        elevation: 10
+        orientation: 'vertical'
+        padding: 25
+        spacing: 20
+        Widget:
+        Widget:
+        MDLabel:
+            halign: 'center'
+            text: "Schedule on"
+            font_style: 'H6'
+            padding: (10,15)
+            size_hint_y: None
+            height: self.texture_size[1]
+        MDRaisedButton:
+            pos_hint: {'center_x': .6}
+            text:"Select Date"
+            id : date_label
+            on_release: root.show_date_picker()
+        MDLabel:
+            halign: 'center'
+            text: "Schedule At"
+            font_style: 'H6'
+            padding: (10,15)
+            size_hint_y: None
+            height: self.texture_size[1]
+        MDRaisedButton:
+            text: "Open time picker"
+            pos_hint: {'center_x': .6}
+            id: time_label
+            on_release: root.show_time_picker()
+        MDRoundFlatButton:
+            text: "Clear"
+            pos_hint: {'center_x': .6}
+            font_size: 20
+        MDRoundFlatButton:
+            text: "Save"
+            pos_hint: {'center_x': .6}
+            font_size: 20
+            
+    
