@@ -26,6 +26,8 @@
             #size_hint_y: .3
             pos_hint:{"x":.3,"y":.3}
             font_size:20
+            on_press:root.manager.current="offer_letters"
+            on_press: root.manager.stack.append(root.name)
         MDRectangleFlatButton:
             text:"Finalise offers"
             #size_hint_y: .3
