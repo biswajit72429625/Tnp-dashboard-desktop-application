@@ -1,38 +1,66 @@
 #:kivy 2.0.0
 <HomePage>
+    Background:
     Navbar:
-
-    MDLabel:
-        text: "Content"
-        halign: "center"
     MDCard:
-        size_hint: (0.8,0.5)
-        pos_hint: {'center_x': .5, 'center_y': .45}
-        elevation: 10
-        orientation: 'horizontal'
-        padding: 20
-        spacing: 20
+        size_hint: (0.25,0.4)
+        pos_hint: {'center_x': .2, 'center_y': .5}
+        elevation: 20
+        orientation: 'vertical'
+        padding: 25
+        spacing: 30
+        MDIconButton:
+            icon:"book-open-page-variant"
+            user_font_size:"100sp"
+            md_bg_color: app.theme_cls.primary_light
+            pos_hint:{"x":.075}
+            on_press:root.manager.current="view_eresources"
+            on_press: root.manager.stack.append(root.name)
         MDRectangleFlatButton:
             text:"E-Resources"
-            size_hint_y: .5
-            pos_hint:{"center_y":.5}
-            font_size:30
+            font_size:20
+            pos_hint:{"x":.075}
             on_press:root.manager.current="view_eresources"
-            on_press:root.manager.stack.append(root.name)
+            on_press: root.manager.stack.append(root.name)
+
+    MDCard:
+        size_hint: (0.25,0.4)
+        pos_hint: {'center_x': .5, 'center_y': .5}
+        elevation: 20
+        orientation: 'vertical'
+        padding: 25
+        spacing: 30
+        MDIconButton:
+            icon:"pen"
+            user_font_size:"100sp"
+            md_bg_color: app.theme_cls.primary_light
+            pos_hint:{"x":.075}
+            on_press:root.manager.current="view_assessments"
+            on_press: root.manager.stack.append(root.name)
         MDRectangleFlatButton:
             text:"Assesments"
-            size_hint_y: .5
-            pos_hint:{"center_y":.5}
-            font_size:30
+            font_size:20
+            pos_hint:{"x":.075}
             on_press:root.manager.current="view_assessments"
-            on_press:root.manager.stack.append(root.name)
+            on_press: root.manager.stack.append(root.name)
+    MDCard:
+        size_hint: (0.25,0.4)
+        pos_hint: {'center_x': .8, 'center_y': .5}
+        elevation: 20
+        orientation: 'vertical'
+        padding: 25
+        spacing: 30
+        MDIconButton:
+            icon:"office-building-marker"
+            user_font_size:"100sp"
+            md_bg_color: app.theme_cls.primary_light
+            pos_hint:{"x":.075}
+            on_press:root.manager.current="placements"
+            on_press: root.manager.stack.append(root.name)
         MDRectangleFlatButton:
             text:"Placements"
-            size_hint_y: .5
-            pos_hint:{"center_y":.5}
-            font_size:30
+            font_size:20
+            pos_hint:{"x":.075}
             on_press:root.manager.current="placements"
-            on_press:root.manager.stack.append(root.name)
-
-            
+            on_press: root.manager.stack.append(root.name)
     

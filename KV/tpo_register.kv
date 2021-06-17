@@ -1,12 +1,12 @@
 #:kivy 2.0.0
 <TpoRegister>
-    Image:
-        source: 'login.jpeg'
-        size: self.size
-        allow_stretch: True
-    MDFlatButton:
-        text:"back"
+    Background:
+    MDIconButton:
+        icon:"keyboard-backspace"
+        md_bg_color: app.theme_cls.primary_light
         pos_hint:{"x":.05,"y":.9}
+        on_press:root.manager.current="login"
+        on_press: root.manager.stack.append(root.name)
     MDCard:
         size_hint: (0.5,0.9)
         pos_hint: {'center_x': .5, 'center_y': .5}
@@ -33,14 +33,6 @@
             hint_text:"Name"
             size_hint_x:0.7
         MDTextField:
-            id: department
-            color_mode: 'accent'
-            icon_right_color:app.theme_cls.accent_color
-            pos_hint: {'center_x':0.5}
-            icon_right:'book'
-            hint_text:"Department"
-            size_hint_x:0.7
-        MDTextField:
             id: email
             color_mode: 'accent'
             icon_right_color:app.theme_cls.accent_color
@@ -48,7 +40,14 @@
             pos_hint: {'center_x':0.5}
             hint_text:"Email"
             size_hint_x:0.7
-        
+        MDTextField:
+            id:password
+            color_mode: 'accent'
+            icon_right_color:app.theme_cls.accent_color
+            pos_hint: {'center_x':0.5}
+            icon_right:'key'
+            hint_text:"Password"
+            size_hint_x:0.7
         MDTextField:
             id: confirm_password
             color_mode: 'accent'
@@ -57,10 +56,15 @@
             pos_hint: {'center_x':0.5}
             hint_text:"Confirm Password"
             size_hint_x:0.7
-        MDDropDownItem:
+        #MDDropDownItem:
+            #id: dropdown_item
+            #text: 'CSE'
+            #current_item:'CSE'
+            #on_release: root.menu.open()
+        MDRectangleFlatButton:
             id: dropdown_item
-            text: 'Department'
-            current_item:'CSE'
+            text: "Choose Department"
+            pos_hint: {"center_x": .5, "center_y": .5}
             on_release: root.menu.open()
         MDRaisedButton:
             text:"Register"
