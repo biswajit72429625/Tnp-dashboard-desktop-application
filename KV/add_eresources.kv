@@ -1,5 +1,6 @@
 #:kivy 2.0.0
 <AddEresources>
+    Background:
     Navbar:
     MDCard:
         size_hint: (0.4,0.7)
@@ -7,9 +8,11 @@
         elevation: 10
         orientation: 'vertical'
         padding: 25
-        spacing: 20
-        Widget:
-        Widget:
+        spacing: 25
+        MDLabel:
+            text:"star marked are compulsory"
+            theme_text_color:"Secondary"
+            halign:"center"
         MDTextField:
             id:e_name
             color_mode: 'accent'
@@ -17,8 +20,8 @@
             icon_right:'account'
             size_hint_x: None
             width: 200
-            pos_hint: {'center_x':0.45}
-            hint_text: "Name"
+            pos_hint: {'center_x':0.48}
+            hint_text: "Name *"
         MDTextField:
             id:e_organiser
             color_mode: 'accent'
@@ -26,8 +29,8 @@
             icon_right:'account-group'
             size_hint_x: None
             width: 200
-            pos_hint: {'center_x':0.45}
-            hint_text: "Organiser Name"
+            pos_hint: {'center_x':0.48}
+            hint_text: "Organiser Name *"
         MDTextField:
             id:e_link
             color_mode: 'accent'
@@ -35,55 +38,84 @@
             icon_right:'link'
             size_hint_x: None
             width: 200
-            pos_hint: {'center_x':0.45}
-            hint_text: "Link"
-        MDRectangleFlatButton:
-            id: dropdown_item
-            text: "Choose Department"
-            pos_hint: {"center_x": .5, "center_y": .5}
-            on_release: root.menu.open()
-        Widget:
+            pos_hint: {'center_x':0.48}
+            hint_text: "Link *"
+        MDTextField:
+            id:e_description
+            color_mode: 'accent'
+            icon_right_color:app.theme_cls.accent_color
+            icon_right:'grease-pencil'
+            size_hint_x: None
+            width: 200
+            pos_hint: {'center_x':0.48}
+            hint_text: "Description"
+        
 
     MDCard:
         size_hint: (0.4,0.7)
         pos_hint: {'center_x': .74, 'center_y': .4}
         elevation: 10
         orientation: 'vertical'
-        padding: 25
+        padding: 30
         spacing: 20
-        Widget:
-        Widget:
-        MDLabel:
-            halign: 'center'
-            text: "Schedule on"
-            font_style: 'H6'
-            padding: (10,15)
-            size_hint_y: None
-            height: self.texture_size[1]
-        MDRaisedButton:
-            pos_hint: {'center_x': .6}
-            text:"Select Date"
-            id : date_label
-            on_release: root.show_date_picker()
-        MDLabel:
-            halign: 'center'
-            text: "Schedule At"
-            font_style: 'H6'
-            padding: (10,15)
-            size_hint_y: None
-            height: self.texture_size[1]
-        MDRaisedButton:
-            text: "Open time picker"
-            pos_hint: {'center_x': .6}
-            id: time_label
-            on_release: root.show_time_picker()
-        MDRoundFlatButton:
+        MDRectangleFlatButton:
+            id: dropdown_item
+            text: "Choose Year"
+            pos_hint: {"center_x": .5, "center_y": .5}
+            on_release: root.menu.open()
+        
+        GridLayout:
+            cols:2
+            MDCheckbox:
+                size_hint: (0.1,0.1)
+                on_active: root.checkbox(self,self.active)
+                pos_hint:{"x":.23,"y":.2}
+            MDLabel:
+                halign: 'center'
+                text: "use current date and time?"
+                #font_style: 'H5'
+                #size_hint_y: None
+                #height: self.texture_size[1]
+        GridLayout:
+            cols:2
+            MDLabel:
+                halign: 'center'
+                text: "Schedule on :  "
+                #font_style: 'H5'
+                #padding: (10,15)
+                size_hint_y: None
+                height: self.texture_size[1]
+            MDRaisedButton:
+                pos_hint: {'center_x': .6}
+                text:"Select Date"
+                id : date_label
+                #width: self.parent.width-30
+                on_release: root.show_date_picker()
+        GridLayout:
+            cols:2
+            MDLabel:
+                halign: 'center'
+                text: "Schedule At :  "
+                #font_style: 'H5'
+                #padding: (10,15)
+                size_hint_y: None
+                height: self.texture_size[1]
+            MDRaisedButton:
+                text: "Select Time"
+                width: self.parent.width-1000
+                pos_hint: {'center_x': .6}
+                id: time_label
+                on_release: root.show_time_picker()
+       
+        MDRectangleFlatButton:
             text: "Clear"
-            pos_hint: {'center_x': .6}
-            font_size: 20
-        MDRoundFlatButton:
+            pos_hint: {'center_x': .5}
+            font_size: 15
+        MDRectangleFlatButton:
             text: "Save"
-            pos_hint: {'center_x': .6}
-            font_size: 20
+            pos_hint: {'center_x': .5}
+            font_size: 15
             
-    
+    Label:
+        text:"hi"
+        id:hi
