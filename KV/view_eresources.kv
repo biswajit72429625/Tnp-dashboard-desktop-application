@@ -40,7 +40,7 @@
                     theme_text_color: "Custom"
                     md_bg_color: app.theme_cls.accent_color
                 MDLabel:
-                    text: "Date"
+                    text: "Visible DateTime"
                     text_color: 1, 1, 1, 1
                     font_size: 25
                     font_style:"H6"
@@ -78,25 +78,33 @@
 
 
 <EResourceDialog>:
+    id: xnxx
     orientation: "vertical"
     spacing: "8dp"
     size_hint_y: None
     height: 370
     MDTextField:
+        id: dialog_passyear
         text: "PassYear"
     MDTextField:
+        id: dialog_branch
         text: "Branch"
     MDTextField:
+        id: dialog_organizer
         text: "Organizer"
     MDTextField:
+        id: dialog_link
         text: "Link"
     MDTextField:
+        id: dialog_visible
         text: "Visible on"
     MDTextField:
+        id: dialog_description
         text: "Description"
     MDRoundFlatButton:
+        id: dialog_edit
         text: "Edit"
-
+        
 <EResourceTitle>
     text: "[u][ref=world]7[/ref][/u]"
     markup : True
