@@ -61,9 +61,9 @@
             size_hint_y: None
             height: self.texture_size[1]
         MDRaisedButton:
+            id : date_label
             pos_hint: {'center_x': .6}
             text:"Select Date"
-            id : date_label
             on_release: root.show_date_picker()
         MDLabel:
             halign: 'center'
@@ -73,9 +73,9 @@
             size_hint_y: None
             height: self.texture_size[1]
         MDRaisedButton:
+            id: time_label
             text: "Open time picker"
             pos_hint: {'center_x': .6}
-            id: time_label
             on_release: root.show_time_picker()
         MDRoundFlatButton:
             text: "Clear"
