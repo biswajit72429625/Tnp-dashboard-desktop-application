@@ -2,6 +2,8 @@ from kivy.uix.screenmanager import Screen
 from kivymd.uix.picker import MDDatePicker
 from kivymd.uix.picker import MDTimePicker
 from kivymd.uix.menu import MDDropdownMenu
+from database import show_alert_dialog
+from datetime import datetime
 
 
 class AddEresources(Screen):
@@ -77,8 +79,15 @@ class AddEresources(Screen):
 
     def submit(self):
         self.ename=self.ids.e_name.text
-        self.eorganizer=self.ids.e_organizer.text
+        self.eorganizer=self.ids.e_organiser.text
         self.elink=self.ids.e_link.text
-        self.date=self.ids.date_label.text
-        self.time=self.ids.time_label.text
+        date=self.ids.date_label.text
+        time=self.ids.time_label.text
+        date_time = date+" "+time
+        self.date = datetime.strptime(date_time,'%Y-%m-%d %H:%M:%S')
+        if len(self.name) > 20:
+            show_alert_dialog(self,"Title should be less than 20 characters")
+        elif len(self.eorganizer) > 60:
+            show_alert_dialog(self,"Organiser should be less than 60 characters")
+        
         

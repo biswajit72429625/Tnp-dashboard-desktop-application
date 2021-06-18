@@ -2,6 +2,7 @@ from kivy.uix.screenmanager import Screen
 from kivy.uix.boxlayout import BoxLayout
 from kivymd.uix.button import MDRoundFlatButton
 from kivymd.uix.dialog import MDDialog
+import flags
 
 class EResourceDialog(BoxLayout):
     pass
@@ -10,6 +11,7 @@ class ViewEresources(Screen):
     dialog = None
     def __init__(self, **kw):
         super(ViewEresources, self).__init__(**kw)
+        flags.view_eresources_screen = self
     
     def full_details(self,row_id):
         # shows all details of e_resource in a dialog box

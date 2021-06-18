@@ -1,5 +1,6 @@
 from kivy.uix.screenmanager import Screen
 from kivymd.app import MDApp
+from kivy.properties import ObjectProperty
 from database import db_connector, show_alert_dialog
 import flags
 import bcrypt

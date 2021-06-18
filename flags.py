@@ -7,3 +7,4 @@ branch = {
     5 : "Electronics",
     6 : "Information Technology"
 }
+view_eresources_screen = None

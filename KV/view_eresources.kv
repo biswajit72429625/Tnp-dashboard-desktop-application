@@ -63,175 +63,13 @@
                 do_scroll_y: True
                 size: (self.parent.width,self.parent.height-60)
                 GridLayout:
+                    id: grid
                     size_hint_y: None
                     height: self.minimum_height
                     cols: 4
                     row_default_height: 60
                     adaptive_width: True
-                    MDCheckbox:
-                        size_hint: (0.1,0.1)
-                    MDLabel:
-                        id: 1
-                        text: "[u][ref=world]1[/ref][/u]"
-                        markup : True
-                        theme_text_color: 'Custom'
-                        text_color: app.theme_cls.primary_color
-                        font_size: 20
-                        halign: 'center'
-                        size_hint_x: 0.3
-                        on_ref_press: root.full_details(1)
-                    MDLabel:
-                        text: "E-Resources"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    MDLabel:
-                        text: "E-Resources"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    
-                    MDCheckbox:
-                        size_hint: (0.1,0.1)
-                    MDLabel:
-                        id: 2
-                        text: "[u][ref=world]2[/ref][/u]"
-                        markup : True
-                        theme_text_color: 'Custom'
-                        text_color: app.theme_cls.primary_color
-                        font_size: 20
-                        halign: 'center'
-                        size_hint_x: 0.3
-                        on_ref_press: root.full_details(2)
-                    MDLabel:
-                        text: "E-Resources"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    MDLabel:
-                        text: "E-Resources"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    
-                    MDCheckbox:
-                        size_hint: (0.1,0.1)
-                    MDLabel:
-                        id: 3
-                        text: "[u][ref=world]3[/ref][/u]"
-                        markup : True
-                        theme_text_color: 'Custom'
-                        text_color: app.theme_cls.primary_color
-                        font_size: 20
-                        halign: 'center'
-                        size_hint_x: 0.3
-                        on_ref_press: root.full_details(3)
-                    MDLabel:
-                        text: "E-Resources"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    MDLabel:
-                        text: "E-Resources"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    
-                    MDCheckbox:
-                        size_hint: (0.1,0.1)
-                    MDLabel:
-                        id: 4
-                        text: "[u][ref=world]4[/ref][/u]"
-                        markup : True
-                        theme_text_color: 'Custom'
-                        text_color: app.theme_cls.primary_color
-                        font_size: 20
-                        halign: 'center'
-                        size_hint_x: 0.3
-                        on_ref_press: root.full_details(4)
-                    MDLabel:
-                        text: "E-Resources"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    MDLabel:
-                        text: "E-Resources"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    
-                    MDCheckbox:
-                        size_hint: (0.1,0.1)
-                    MDLabel:
-                        id: 5
-                        text: "[u][ref=world]5[/ref][/u]"
-                        markup : True
-                        theme_text_color: 'Custom'
-                        text_color: app.theme_cls.primary_color
-                        font_size: 20
-                        halign: 'center'
-                        size_hint_x: 0.3
-                        on_ref_press: root.full_details(5)
-                    MDLabel:
-                        text: "E-Resources"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    MDLabel:
-                        text: "E-Resources"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    
-                    MDCheckbox:
-                        size_hint: (0.1,0.1)
-                    MDLabel:
-                        id: 6
-                        text: "[u][ref=world]6[/ref][/u]"
-                        markup : True
-                        theme_text_color: 'Custom'
-                        text_color: app.theme_cls.primary_color
-                        font_size: 20
-                        halign: 'center'
-                        size_hint_x: 0.3
-                        on_ref_press: root.full_details(6)
-                    MDLabel:
-                        text: "E-Resources"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    MDLabel:
-                        text: "E-Resources"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    
-                    MDCheckbox:
-                        size_hint: (0.1,0.1)
-                    MDLabel:
-                        id: 7
-                        text: "[u][ref=world]7[/ref][/u]"
-                        markup : True
-                        theme_text_color: 'Custom'
-                        text_color: app.theme_cls.primary_color
-                        font_size: 20
-                        halign: 'center'
-                        size_hint_x: 0.3
-                        on_ref_press: root.full_details(7)
-                    MDLabel:
-                        text: "E-Resources"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    MDLabel:
-                        text: "E-Resources"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    
-                    
-                
-    
+
     MDFloatingActionButtonSpeedDial:
         data: {'add':'notebook-plus-outline', 'delete':'delete'}
         root_button_anim: True
@@ -258,3 +96,22 @@
         text: "Description"
     MDRoundFlatButton:
         text: "Edit"
+
+<EResourceTitle>
+    text: "[u][ref=world]7[/ref][/u]"
+    markup : True
+    theme_text_color: 'Custom'
+    text_color: app.theme_cls.primary_color
+    font_size: 20
+    halign: 'center'
+    size_hint_x: 0.3
+    on_ref_press: app.root.get_screen('view_eresources').full_details(self.id)
+
+<EResourceLabel>
+    text: "E-Resources"
+    font_size: 20
+    size_hint_x: 0.3
+    halign: 'center'
+
+<EResourceCheckbox>
+    size_hint: (0.1,0.1)
