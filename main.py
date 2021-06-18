@@ -20,6 +20,7 @@ from view_companies import ViewCompanies
 from add_companies import AddCompanies
 from offer_letters import OfferLetters
 from finalize_offer import FinalizeOffer
+from analysis import Analysis
 #################################################
 
 ########## other packages ##################
@@ -46,6 +47,7 @@ class Manager(ScreenManager):
         self.add_widget(AddCompanies(name='add_companies'))
         self.add_widget(OfferLetters(name='offer_letters'))
         self.add_widget(FinalizeOffer(name='finalize_offer'))
+        self.add_widget(Analysis(name='analysis'))
     
     def callback(self):
         # stack for back button
