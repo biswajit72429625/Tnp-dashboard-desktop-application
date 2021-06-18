@@ -2,48 +2,39 @@ from kivy.uix.screenmanager import Screen
 from kivymd.uix.picker import MDDatePicker
 from kivymd.uix.picker import MDTimePicker
 from kivymd.uix.menu import MDDropdownMenu
-import datetime 
+from datetime import date 
 
 class AddEresources(Screen):
     def __init__(self, **kw):
         super(AddEresources,self).__init__(**kw)
+        today = date.today()
         menu_items = [
-            {
-                "text": "CSE",
+            {   
+                "text": str(today.year),
                 "viewclass": "OneLineListItem",
-                "on_release": lambda x="CSE": self.menu_callback(x),
+                "on_release": lambda x=str(today.year): self.menu_callback(x),
             },
             {
-                "text": "IT",
+                "text": str(today.year+1),
                 "viewclass": "OneLineListItem",
-                "on_release": lambda x="IT": self.menu_callback(x),
+                "on_release": lambda x=str(today.year+1): self.menu_callback(x),
             },
             {
-                "text": "ENTC",
+                "text": str(today.year+2),
                 "viewclass": "OneLineListItem",
-                "on_release": lambda x="ENTC": self.menu_callback(x),
+                "on_release": lambda x=str(today.year+2): self.menu_callback(x),
             },
             {
-                "text": "Civil",
+                "text": str(today.year+3),
                 "viewclass": "OneLineListItem",
-                "on_release": lambda x="Civil": self.menu_callback(x),
-            },
-            {
-                "text": "Mech",
-                "viewclass": "OneLineListItem",
-                "on_release": lambda x="Mech": self.menu_callback(x),
-            },
-            {
-                "text": "ELN",
-                "viewclass": "OneLineListItem",
-                "on_release": lambda x="ELN": self.menu_callback(x),
+                "on_release": lambda x=str(today.year+3): self.menu_callback(x),
             },
         ]
         self.menu = MDDropdownMenu(
             caller = self.ids.dropdown_item,
             items=menu_items,
             width_mult=4,
-            max_height = 300
+            max_height = 200
         )
 
     def menu_callback(self, text_item):
@@ -52,17 +43,13 @@ class AddEresources(Screen):
         self.menu.dismiss()
 
     def checkbox(self,instance,value):
-        if value == True:
-            current_time = datetime.datetime.now() 
+        if value == True: 
             self.ids.date_label.disabled = True
             self.ids.time_label.disabled = True
-            self.ids.date_label.text = str(" "+str(current_time.day)+"-"+str(current_time.month)+"-"+str(current_time.year)+" ")
-            self.ids.time_label.text = str(" "+" "+" "+str(current_time.hour)+" "+" : "+" "+str(current_time.minute)+" "+"  "+" "+" ")
         if value == False:
             self.ids.date_label.disabled = False
             self.ids.time_label.disabled = False
-            self.ids.date_label.text = "Select Date"
-            self.ids.time_label.text = "Select Time"
+        
     def show_date_picker(self):
         # picks date
         date_dialog = MDDatePicker(year=2021,month=2,day=14)
