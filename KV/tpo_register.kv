@@ -45,11 +45,13 @@
             color_mode: 'accent'
             icon_right_color:app.theme_cls.accent_color
             pos_hint: {'center_x':0.5}
+            password:True
             icon_right:'key'
             hint_text:"Password"
             size_hint_x:0.7
         MDTextField:
             id: confirm_password
+            password:True
             color_mode: 'accent'
             icon_right_color:app.theme_cls.accent_color                                                                                                     
             icon_right:'key'
@@ -69,3 +71,4 @@
         MDRaisedButton:
             text:"Register"
             pos_hint: {'center_x':0.5}
+            on_press:root.verify()
