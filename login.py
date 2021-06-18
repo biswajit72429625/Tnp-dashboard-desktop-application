@@ -39,3 +39,7 @@ class Login(Screen):
         else:
             # else show message
             show_alert_dialog(self,"Invalid password")
+
+        # query = "insert into e_resources (title,pass_year,branch,organizer,link,description) values (%s,%s,%s,%s,%s,%s);"
+        # values = ("apti","2022",6,"apttech","https://www.google.co.in/","very useful")
+        # my_cursor.execute(query,values)
