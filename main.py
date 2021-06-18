@@ -1,6 +1,7 @@
 ########## kivy modules #########################
 from kivymd.app import MDApp
 from kivy.lang.builder import Builder
+from kivy.properties import StringProperty
 from kivy.uix.screenmanager import ScreenManager
 from kivy.uix.screenmanager import CardTransition
 ###################################################
@@ -54,6 +55,8 @@ class Manager(ScreenManager):
 
 
 class TnpApp(MDApp):
+    officer_name = StringProperty()
+    officer_branch = StringProperty()
     def build(self):
         flags.app=self
         self.theme_cls.primary_palette = 'Blue'

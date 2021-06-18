@@ -3,14 +3,16 @@
     MDBoxLayout:
         orientation: "vertical"
         MDToolbar:
+            id: officer_name
             md_bg_color: app.theme_cls.accent_color
             elevation: 20
-            title: "Anil Naik"
+            title: app.officer_name
             left_action_items: [["keyboard-backspace", lambda x: root.parent.manager.callback()]]
         MDLabel:
             text:""
     MDLabel:
-        text:"Branch : Civil"
+        id: officer_branch
+        text:"Branch : "+app.officer_branch
         font_style: 'H6'
         theme_text_color: "Custom"
         text_color: 1, 1, 1, 1

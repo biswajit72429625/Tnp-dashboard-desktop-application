@@ -43,6 +43,7 @@
             size_hint_x: 0.4
             font_size: 20
             pos_hint: {'center_x':0.5}
+            on_press: root.name_setter()
             on_press:root.manager.current="home_page"
             on_press: root.manager.stack.append(root.name)
         MDRaisedButton:
