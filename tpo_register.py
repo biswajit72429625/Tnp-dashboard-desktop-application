@@ -44,7 +44,15 @@ class TpoRegister(Screen):
             max_height = 300
         )
         # self.menu.bind(on_release=self.set_item)
+    def verify(self):
+        nam=self.ids.name.text
+        email=self.ids.email.text
+        pwdconf=self.ids.password.text
+        if (nam.split()[0].isalpha() and nam.split()[1].isalpha()):
+            if 
+        
 
+#
     def menu_callback(self, text_item):
         self.ids.dropdown_item.text = text_item
         self.menu.dismiss()
