@@ -9,7 +9,7 @@ class AddEresources(Screen):
     def __init__(self, **kw):
         super(AddEresources,self).__init__(**kw)
         today = date.today()
-        menu_items = [
+        self.menu_items = [
             {   
                 "text": str(today.year),
                 "viewclass": "OneLineListItem",
@@ -33,7 +33,7 @@ class AddEresources(Screen):
         ]
         self.menu = MDDropdownMenu(
             caller = self.ids.dropdown_item,
-            items=menu_items,
+            items=self.menu_items,
             width_mult=4,
             max_height = 200
         )

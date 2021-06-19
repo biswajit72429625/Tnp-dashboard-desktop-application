@@ -16,6 +16,7 @@ class EResourceTitle(MDLabel):
 class EResourceLabel(MDLabel):
     text = StringProperty()
     id = StringProperty()
+
 class EResourceCheckbox(MDCheckbox):
     id = StringProperty()
 
@@ -39,8 +40,10 @@ class HomePage(Screen):
         self.eresources_records = my_cursor.fetchall()
         # creating reference for view_eresource screen to put dynamic data in table
         view_eresources_screen = self.manager.get_screen('view_eresources')
+        view_eresources_screen.ids.grid.clear_widgets()
         # adding dynamic data to screen
         for i in range(len(self.eresources_records)):
+            # checkbox, title, date, branch
             view_eresources_screen.ids.grid.add_widget(EResourceCheckbox(id=f'{i}'))
             view_eresources_screen.ids.grid.add_widget(EResourceTitle(id=f'{i}',text=f"[u][ref=world]{self.eresources_records[i][1]}[/ref][/u]"))
             view_eresources_screen.ids.grid.add_widget(EResourceLabel(id=f'{i}',text=f"{str(self.eresources_records[i][6])}"))
