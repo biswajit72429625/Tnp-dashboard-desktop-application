@@ -67,6 +67,7 @@
         GridLayout:
             cols:2
             MDCheckbox:
+                id:checkbox_id
                 size_hint: (0.1,0.1)
                 on_active: root.checkbox(self,self.active)
                 pos_hint:{"x":.23,"y":.2}
@@ -111,6 +112,7 @@
             text: "Clear"
             pos_hint: {'center_x': .5}
             font_size: 15
+            on_release: root.clear()
         MDRectangleFlatButton:
             text: "Save"
             pos_hint: {'center_x': .5}

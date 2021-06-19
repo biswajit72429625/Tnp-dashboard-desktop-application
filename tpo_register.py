@@ -65,7 +65,7 @@ class TpoRegister(Screen):
         if len(nam.split())>0: # name type
             l=nam.split()
             for i in l:
-                if i.isalpha():
+                if re.match(r"([a-zA-Z.]+)",i):
                     continue
                 else:
                     show_alert_dialog(self,"Please enter valid name!!!")
@@ -76,7 +76,7 @@ class TpoRegister(Screen):
             show_alert_dialog(self,"Please enter an email")
             return 
         
-        if  not re.match(r"([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)",email): # email validation
+        if  not re.match(r"([a-zA-Z0-9_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)",email): # email validation
             show_alert_dialog(self,"Please enter valid email!!")
             return
         if len(pwd)==0: # password length
@@ -92,14 +92,20 @@ class TpoRegister(Screen):
         if (self.ids.dropdown_item.text=="Choose Department"):#check dpartment
             show_alert_dialog(self,"Please Select Department")
             return
-       
+        my_db, my_cursor = db_connector()
+        qur='select name,email from officer'
+        my_cursor.execute(qur)
+        for i in my_cursor:
+            if email==i[1]:
+                show_alert_dialog(self,f"User already registered with username {i[0]}. Please return to Login page!!!")
+                return
+
         # matching dept name with db number
         for k,v in flags.branch.items():
             if v==branch:
                 branch=k
                 break
         # connecting to database
-        my_db, my_cursor = db_connector()
         query="insert into officer (name,email,password,branch) values (%s , %s ,%s,%s);"
         # hashing password
         hashed = bcrypt.hashpw(pwd.encode('ascii'), bcrypt.gensalt())
