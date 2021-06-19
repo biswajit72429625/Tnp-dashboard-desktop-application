@@ -15,6 +15,7 @@
             user_font_size:"100sp"
             md_bg_color: app.theme_cls.primary_light
             pos_hint:{"x":.075}
+            on_press:root.load_eresource()
             on_press:root.manager.current="view_eresources"
             on_press: root.manager.stack.append(root.name)
         MDRectangleFlatButton:
@@ -22,6 +23,7 @@
             text:"E-Resources"
             font_size:20
             pos_hint:{"x":.06}
+            on_press:root.load_eresource()
             on_press:root.manager.current="view_eresources"
             on_press: root.manager.stack.append(root.name)
 
