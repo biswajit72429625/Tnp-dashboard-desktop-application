@@ -2,12 +2,8 @@ from kivy.uix.screenmanager import Screen
 from kivy.properties import StringProperty
 from kivymd.uix.label import MDLabel
 from kivymd.uix.selectioncontrol import MDCheckbox
-from kivy.uix.boxlayout import BoxLayout
 from database import db_connector
 import flags
-
-class EResourceDialog(BoxLayout):
-    pass
 
 class EResourceTitle(MDLabel):
     text = StringProperty()

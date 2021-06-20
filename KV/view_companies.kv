@@ -58,175 +58,13 @@
                 do_scroll_y: True
                 size: (self.parent.width,self.parent.height-60)
                 GridLayout:
+                    id: grid
                     size_hint_y: None
                     height: self.minimum_height
                     cols: 4
                     row_default_height: 60
                     adaptive_width: True
-                    MDCheckbox:
-                        size_hint: (0.1,0.1)
-                    MDLabel:
-                        id: 1
-                        text: "[u][ref=world]1[/ref][/u]"
-                        markup : True
-                        theme_text_color: 'Custom'
-                        text_color: app.theme_cls.primary_color
-                        font_size: 20
-                        halign: 'center'
-                        size_hint_x: 0.3
-                        on_ref_press: root.full_details(1)
-                    MDLabel:
-                        text: "Company"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    MDLabel:
-                        text: "Company"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    
-                    MDCheckbox:
-                        size_hint: (0.1,0.1)
-                    MDLabel:
-                        id: 2
-                        text: "[u][ref=world]2[/ref][/u]"
-                        markup : True
-                        theme_text_color: 'Custom'
-                        text_color: app.theme_cls.primary_color
-                        font_size: 20
-                        halign: 'center'
-                        size_hint_x: 0.3
-                        on_ref_press: root.full_details(2)
-                    MDLabel:
-                        text: "Company"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    MDLabel:
-                        text: "Company"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    
-                    MDCheckbox:
-                        size_hint: (0.1,0.1)
-                    MDLabel:
-                        id: 3
-                        text: "[u][ref=world]3[/ref][/u]"
-                        markup : True
-                        theme_text_color: 'Custom'
-                        text_color: app.theme_cls.primary_color
-                        font_size: 20
-                        halign: 'center'
-                        size_hint_x: 0.3
-                        on_ref_press: root.full_details(3)
-                    MDLabel:
-                        text: "Company"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    MDLabel:
-                        text: "Company"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    
-                    MDCheckbox:
-                        size_hint: (0.1,0.1)
-                    MDLabel:
-                        id: 4
-                        text: "[u][ref=world]4[/ref][/u]"
-                        markup : True
-                        theme_text_color: 'Custom'
-                        text_color: app.theme_cls.primary_color
-                        font_size: 20
-                        halign: 'center'
-                        size_hint_x: 0.3
-                        on_ref_press: root.full_details(4)
-                    MDLabel:
-                        text: "Company"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    MDLabel:
-                        text: "Company"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    
-                    MDCheckbox:
-                        size_hint: (0.1,0.1)
-                    MDLabel:
-                        id: 5
-                        text: "[u][ref=world]5[/ref][/u]"
-                        markup : True
-                        theme_text_color: 'Custom'
-                        text_color: app.theme_cls.primary_color
-                        font_size: 20
-                        halign: 'center'
-                        size_hint_x: 0.3
-                        on_ref_press: root.full_details(5)
-                    MDLabel:
-                        text: "Company"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    MDLabel:
-                        text: "Company"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    
-                    MDCheckbox:
-                        size_hint: (0.1,0.1)
-                    MDLabel:
-                        id: 6
-                        text: "[u][ref=world]6[/ref][/u]"
-                        markup : True
-                        theme_text_color: 'Custom'
-                        text_color: app.theme_cls.primary_color
-                        font_size: 20
-                        halign: 'center'
-                        size_hint_x: 0.3
-                        on_ref_press: root.full_details(6)
-                    MDLabel:
-                        text: "Company"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    MDLabel:
-                        text: "Company"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    
-                    MDCheckbox:
-                        size_hint: (0.1,0.1)
-                    MDLabel:
-                        id: 7
-                        text: "[u][ref=world]7[/ref][/u]"
-                        markup : True
-                        theme_text_color: 'Custom'
-                        text_color: app.theme_cls.primary_color
-                        font_size: 20
-                        halign: 'center'
-                        size_hint_x: 0.3
-                        on_ref_press: root.full_details(7)
-                    MDLabel:
-                        text: "Company"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    MDLabel:
-                        text: "Company"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    
-                    
-                
-    
+            
     MDFloatingActionButtonSpeedDial:
         data: {'add':'notebook-plus-outline', 'delete':'delete'}
         root_button_anim: True
@@ -240,14 +78,68 @@
     size_hint_y: None
     height: 350
     MDTextField:
-        text: "Package"
+        id: dialog_package
+        hint_text: "Package"
+    GridLayout:
+        cols: 2
+        MDLabel:
+            text: "Platform"
+        Spinner:
+            id: dialog_platform
+            pos_hint:{"x":0.08}
+            values:('On-campus','Off-campus')
+            size:300,44
+            size_hint:None,None
+            color_mode: 'accent'
+            background_normal:""
+            background_color:(98/255,0/255,234/255,1)
     MDTextField:
-        text: "Platform"
+        id: dialog_website
+        hint_text: "Website"
+    MDGridLayout:
+        cols: 3
+        width: self.parent.width
+        adaptive_width: True
+        # row_default_height: 20
+        spacing: 10
+        MDLabel:
+            text: "Role"
+            size_hint: (0.2,0.1)
+        MDRectangleFlatButton:
+            id: dialog_role_spinner
+            on_release: root.menu.open()
+            size_hint: 0.3, None
+        MDTextField:
+            id: dialog_role_text
+            color_mode: 'accent'
+            icon_right_color:app.theme_cls.accent_color
+            size_hint: 0.3, None
+            icon_right:'shield-account-outline'
+            hint_text: "role"
+            disabled: True
     MDTextField:
-        text: "Website"
-    MDTextField:
-        text: "Role"
-    MDTextField:
-        text: "Branch"
+        id: dialog_branch
+        hint_text: "Branch"
     MDRoundFlatButton:
+        id: edit
         text: "Edit"
+        on_press: app.root.get_screen('view_companies').edit_company()
+
+<CompanyTitle>
+    text: "[u][ref=world]7[/ref][/u]"
+    markup : True
+    theme_text_color: 'Custom'
+    text_color: app.theme_cls.primary_color
+    font_size: 20
+    halign: 'center'
+    size_hint_x: 0.3
+    on_ref_press: app.root.get_screen('view_companies').full_details(self.id)
+
+<CompanyLabel>
+    text: "E-Resources"
+    font_size: 20
+    size_hint_x: 0.3
+    halign: 'center'
+
+<CompanyCheckbox>
+    size_hint: (0.1,0.1)

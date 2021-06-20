@@ -33,14 +33,15 @@
                 text: "Send"
                 font_size: 15
                 pos_hint: {'center_x':0.5}  
+                on_press: root.send_mail()
         GridLayout:
             spacing: 60
             cols:2 
             MDTextField:
+                id:otp
                 mode:"rectangle"
                 size_hint_x:None
                 #size_hint_y: .8
-                id:otp
                 width: 150
                 pos_hint: {'center_x':0.6}
                 hint_text: "OTP"
@@ -52,6 +53,7 @@
                 text: "Verify"
                 font_size: 15
                 pos_hint: {'center_x':0.8}
+                on_press: root.verify()
         Widget:
         MDTextField:
             id:new_pass
@@ -60,7 +62,9 @@
             width: 300
             pos_hint: {'center_x':0.5}
             icon_right: "key"
-            color_mode: 'accent'  
+            color_mode: 'accent' 
+            disabled: True 
+            password: True
         MDTextField:
             id:confirm_pass
             hint_text:"Confirm Password"
@@ -69,11 +73,15 @@
             pos_hint: {'center_x':0.5}
             icon_right: "key"
             color_mode: 'accent'
+            disabled: True
+            password: True
         MDRaisedButton:
             id:change
             #size_hint_x: 0.4
             text: "Change"
             #font_size: 20
             pos_hint: {'center_x':0.5}
+            disabled: True
+            on_press: root.change_password()
 
     
