@@ -24,10 +24,14 @@ class ForgotPass(Screen):
             for _ in range(6):
                 self.otp+=str(r.randint(1,9))
             msg.set_content(f"Your OTP to reset password is {self.otp}. Please use it before switching to another page")
-            with smtplib.SMTP_SSL('smtp.gmail.com',465) as server:
-                server.login(config("email"),config("email_password"))
-                server.send_message(msg)
-                show_alert_dialog(self,'OTP sent to mail id')
+            try:
+                with smtplib.SMTP_SSL('smtp.gmail.com',465) as server:
+                    server.login(config("email"),config("email_password"))
+                    server.send_message(msg)
+                    show_alert_dialog(self,'OTP sent to mail id')
+            except Exception:
+                show_alert_dialog(self,'Couldnt send OTP due to an error')
+
         else:
             show_alert_dialog(self,'No such officer exists')
         
