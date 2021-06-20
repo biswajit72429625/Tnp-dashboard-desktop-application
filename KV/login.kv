@@ -48,6 +48,7 @@
             text: "[u][ref=world]Forgot Password?[/ref][/u]"
             markup : True
             on_ref_press: root.manager.current="forgot_pass"
+            on_press: root.manager.stack.append(root.name)
         MDRaisedButton:
             text: "Login"
             size_hint_x: 0.4
