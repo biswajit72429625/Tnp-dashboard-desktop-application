@@ -1,0 +1,79 @@
+#:kivy 2.0.0
+<ForgotPass>
+    Background:
+    MDIconButton:
+        icon:"keyboard-backspace"
+        md_bg_color: app.theme_cls.primary_light
+        pos_hint:{"x":.05,"y":.9}
+        on_press:root.manager.current="login"
+        on_press: root.manager.stack.append(root.name)
+    MDCard:
+        size_hint: (0.5,0.8)
+        pos_hint: {'center_x': .5, 'center_y': .5}
+        elevation: 30
+        orientation: 'vertical'
+        padding: 25
+        spacing: 30
+        MDLabel:
+            text:"To get an otp on email , type your email and click send"
+            theme_text_color:"Secondary"
+            halign:"center"
+        GridLayout:
+            spacing: 60
+            cols:2 
+            MDTextField:
+                id:email
+                hint_text:"Email"
+                size_hint_x: None
+                width: 150
+                pos_hint: {'center_x':0.5}
+                #icon_right: "key"
+                color_mode: 'accent'
+            MDRaisedButton:
+                text: "Send"
+                font_size: 15
+                pos_hint: {'center_x':0.5}  
+        GridLayout:
+            spacing: 60
+            cols:2 
+            MDTextField:
+                mode:"rectangle"
+                size_hint_x:None
+                #size_hint_y: .8
+                id:otp
+                width: 150
+                pos_hint: {'center_x':0.6}
+                hint_text: "OTP"
+                #font_size: 20
+                color_mode: 'accent'
+                icon_right_color:app.theme_cls.accent_color
+            MDRectangleFlatButton:
+                #size_hint_y: 0.6
+                text: "Verify"
+                font_size: 15
+                pos_hint: {'center_x':0.8}
+        Widget:
+        MDTextField:
+            id:new_pass
+            hint_text:"New Password"
+            size_hint_x: None
+            width: 300
+            pos_hint: {'center_x':0.5}
+            icon_right: "key"
+            color_mode: 'accent'  
+        MDTextField:
+            id:confirm_pass
+            hint_text:"Confirm Password"
+            size_hint_x: None
+            width: 300
+            pos_hint: {'center_x':0.5}
+            icon_right: "key"
+            color_mode: 'accent'
+        MDRaisedButton:
+            id:change
+            #size_hint_x: 0.4
+            text: "Change"
+            #font_size: 20
+            pos_hint: {'center_x':0.5}
+
+    

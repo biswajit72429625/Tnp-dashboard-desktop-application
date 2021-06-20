@@ -8,6 +8,7 @@ from kivymd.uix.menu import MDDropdownMenu
 from datetime import datetime, date
 from database import db_connector, disable_toggler, show_alert_dialog
 import flags
+from functools import partial
 
 class AssessmentDialog(BoxLayout):
     def __init__(self,**kw):
@@ -127,6 +128,8 @@ class ViewAssessments(Screen):
         if instance.icon == 'notebook-plus-outline':
             self.manager.current = 'add_assessments'
             self.manager.stack.append(self.name)
+        else:
+            self.delete_assessment()
     
     def edit_assessments(self):
         # enable all data except branch
@@ -160,3 +163,31 @@ class ViewAssessments(Screen):
     def get_time(self,args,value):
         # sets time value as button text
         self.dialog_data.ids.dialog_visible_time.text = str(value)
+
+    def delete_assessment(self):
+        # asks if confirm delete?
+        checks = self.manager.get_screen('home_page').assessment_checkbox_list # list of checkboxes checked
+        records = self.manager.get_screen('home_page').assessments_records # list of all records
+        self.delete_dialog = MDDialog(
+        text="Sure Delete?",
+        buttons=[
+            MDRoundFlatButton(text="CANCEL",on_press=self.dismiss_delete_dialog),
+            MDRoundFlatButton(text="SURE",on_press=partial(self.confirm_delete_dialog,checks,records)),
+        ],
+        )
+        self.delete_dialog.open()
+
+    def dismiss_delete_dialog(self,instance):
+        # dismiss delete dialog box
+        self.delete_dialog.dismiss()
+
+    def confirm_delete_dialog(self,checks,records,instance):
+        # confirm delete from database
+        self.dismiss_delete_dialog(self.delete_dialog)
+        my_db, my_cursor = db_connector()
+        for i in checks: 
+            if i.active:
+                my_cursor.execute(f'DELETE FROM assessment WHERE id={records[int(i.id)][0]};')
+        my_db.commit()
+        show_alert_dialog(self,"Assessment deleted")
+        self.manager.callback()

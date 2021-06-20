@@ -52,17 +52,16 @@ class HomePage(Screen):
         # creating reference for view_eresource screen to put dynamic data in table
         view_eresources_screen = self.manager.get_screen('view_eresources')
         view_eresources_screen.ids.grid.clear_widgets()
+        self.checkbox_list = []
         # adding dynamic data to screen
         for i in range(len(self.eresources_records)):
             # checkbox, title, date, branch
-            view_eresources_screen.ids.grid.add_widget(EResourceCheckbox(id=f'{i}'))
+            check = EResourceCheckbox(id=f'{i}')
+            self.checkbox_list.append(check)
+            view_eresources_screen.ids.grid.add_widget(check)
             view_eresources_screen.ids.grid.add_widget(EResourceTitle(id=f'{i}',text=f"[u][ref=world]{self.eresources_records[i][1]}[/ref][/u]"))
             view_eresources_screen.ids.grid.add_widget(EResourceLabel(id=f'{i}',text=f"{str(self.eresources_records[i][6])}"))
             view_eresources_screen.ids.grid.add_widget(EResourceLabel(id=f'{i}',text=f"{self.eresources_records[i][2]}"))
-        # query = "insert into e_resources (title,pass_year,branch,organizer,link,description) values (%s,%s,%s,%s,%s,%s);"
-        # values = ("apti","2022",6,"apttech","https://www.google.co.in/","very useful")
-        # my_cursor.execute(query,values)
-        # my_db.commit()
 
     def load_assessment(self):
         # loads assessments screen
@@ -78,10 +77,12 @@ class HomePage(Screen):
         # creating reference for view_assessments screen to put dynamic data in table
         view_assessments_screen = self.manager.get_screen('view_assessments')
         view_assessments_screen.ids.grid.clear_widgets()
+        self.assessment_checkbox_list = []
         # adding dynamic data to screen
         for i in range(len(self.assessments_records)):
-            view_assessments_screen.ids.grid.add_widget(AssessmentCheckbox(id=f'{i}'))
+            check = AssessmentCheckbox(id=f'{i}')
+            self.assessment_checkbox_list.append(check)
+            view_assessments_screen.ids.grid.add_widget(check)
             view_assessments_screen.ids.grid.add_widget(AssessmentTitle(id=f'{i}',text=f"[u][ref=world]{self.assessments_records[i][1]}[/ref][/u]"))
             view_assessments_screen.ids.grid.add_widget(AssessmentLabel(id=f'{i}',text=f"{str(self.assessments_records[i][7])}"))
             view_assessments_screen.ids.grid.add_widget(AssessmentLabel(id=f'{i}',text=f"{self.assessments_records[i][2]}"))
-            print(self.assessments_records[i])

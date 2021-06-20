@@ -4,7 +4,7 @@ from kivymd.uix.picker import MDTimePicker
 
 
 class AddCompanies(Screen):
-    def _init_(self, **kw):
+    def __init__(self, **kw):
         super(AddCompanies, self).__init__(**kw)
     def show_date_picker(self):
         date_dialog = MDDatePicker(year=2021,month=2,day=14)

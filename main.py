@@ -21,6 +21,7 @@ from add_companies import AddCompanies
 from offer_letters import OfferLetters
 from finalize_offer import FinalizeOffer
 from analysis import Analysis
+from forgot_pass import ForgotPass
 #################################################
 
 ########## other packages ##################
@@ -48,6 +49,7 @@ class Manager(ScreenManager):
         self.add_widget(OfferLetters(name='offer_letters'))
         self.add_widget(FinalizeOffer(name='finalize_offer'))
         self.add_widget(Analysis(name='analysis'))
+        self.add_widget(ForgotPass(name='forgot_pass'))
     
     def callback(self):
         # stack for back button
