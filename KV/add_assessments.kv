@@ -37,7 +37,7 @@
             pos_hint: {'center_x':0.48}
             hint_text: "Link *"
         MDRectangleFlatButton:
-            id: dropdown_item
+            id:dropdown_item
             text: "Passing Year"
             pos_hint: {"center_x": .5, "center_y": .5}
             on_release: root.menu.open()
@@ -52,6 +52,7 @@
         GridLayout:
             cols:2
             MDCheckbox:
+                id:checkbox_id
                 size_hint: (0.1,0.1)
                 on_active: root.checkbox(self,self.active)
                 pos_hint:{"x":.25,"y":.2}
@@ -95,9 +96,11 @@
             text: "Clear"
             pos_hint: {'center_x': .6}
             font_size: 20
+            on_release: root.clear()
         MDRectangleFlatButton:
             text: "Save"
             pos_hint: {'center_x': .6}
             font_size: 20
+            on_release: root.save()
             
     
