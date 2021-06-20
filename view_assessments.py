@@ -76,13 +76,49 @@ class ViewAssessments(Screen):
         self.dialog = MDDialog(
             title=self.records[1],
             type="custom",
-            content_cls=AssessmentDialog(),
+            content_cls=self.dialog_data,
             buttons=[
                     MDRoundFlatButton(text="CANCEL",on_press=self.dismiss_dialog),
-                    MDRoundFlatButton(text="SAVE"),
+                    MDRoundFlatButton(text="SAVE", on_press= self.save_dialog),
                 ]
         )
         self.dialog.open()
+
+    def save_dialog(self,instance):
+        # if widgets are not disabled, modify the database
+        if not self.dialog_data.ids.dialog_passyear.disabled:
+            self.passyear = self.dialog_data.ids.dialog_passyear.text
+            self.organizer = self.dialog_data.ids.dialog_organizer.text
+            # checking organizer constraint
+            if len(self.organizer)==0 or len(self.organizer) > 60:
+                show_alert_dialog(self.dialog_data,"enter name in length range 1 to 60")
+                return
+            self.link = self.dialog_data.ids.dialog_link.text
+            # checking link constraint
+            if len(self.link)==0:
+                show_alert_dialog(self.dialog_data,"enter link")
+                return
+            # creating datetime module
+            self.date = self.dialog_data.ids.dialog_visible_date.text
+            self.time = self.dialog_data.ids.dialog_visible_time.text
+            date_time = self.date+" "+self.time
+            self.visible = datetime.strptime(date_time,'%Y-%m-%d %H:%M:%S')
+            self.resultlink=self.dialog_data.ids.dialog_resultlink.text
+            # connecting to database
+            my_db, my_cursor = db_connector()
+            query = f"UPDATE assessment SET pass_year = %s, organizer = %s, link = %s,visible = %s, result_link = %s WHERE id = {self.records[0]}"
+            values = (self.passyear, self.organizer, self.link, self.visible, self.resultlink)
+            my_cursor.execute(query,values)
+            my_db.commit()
+            # closing dialog
+            self.dismiss_dialog(self.dialog)
+            # showing message as modified successfully
+            show_alert_dialog(self,"Modified Assessment")
+            # going to home_screen
+            self.manager.callback()
+        else:
+            # else close dialog
+            self.dismiss_dialog(self.dialog)
 
     def dismiss_dialog(self,instance):
         self.dialog.dismiss()
@@ -91,3 +127,36 @@ class ViewAssessments(Screen):
         if instance.icon == 'notebook-plus-outline':
             self.manager.current = 'add_assessments'
             self.manager.stack.append(self.name)
+    
+    def edit_assessments(self):
+        # enable all data except branch
+        abc = self.all_id
+        del abc[1]
+        disable_toggler(self.dialog_data,abc,False)
+
+    def show_date_picker(self):
+        # picks date
+        year,month,day=self.dialog_date.split('-')
+        date_dialog = MDDatePicker(year=int(year),month=int(month),day=int(day))
+        date_dialog.bind(on_save=self.on_save, on_cancel=self.on_cancel)
+        date_dialog.open()
+
+    def on_save(self,instance,value,range):
+        # saves date value on button text
+        self.dialog_data.ids.dialog_visible_date.text = str(value)
+
+    def on_cancel(self,*args):
+        # pass on pressing cancel for date picker
+        pass
+
+    def show_time_picker(self):
+        # picks time
+        previous_time = datetime.strptime(self.dialog_time, '%H:%M:%S').time()
+        time_dialog = MDTimePicker()
+        time_dialog.set_time(previous_time)
+        time_dialog.bind(time=self.get_time)
+        time_dialog.open()
+
+    def get_time(self,args,value):
+        # sets time value as button text
+        self.dialog_data.ids.dialog_visible_time.text = str(value)
