@@ -1,23 +1,71 @@
 from kivy.uix.screenmanager import Screen
-from kivymd.uix.picker import MDDatePicker
-from kivymd.uix.picker import MDTimePicker
-
+from database import db_connector, show_alert_dialog
+import re
+import flags
 
 class AddCompanies(Screen):
     def __init__(self, **kw):
         super(AddCompanies, self).__init__(**kw)
-    def show_date_picker(self):
-        date_dialog = MDDatePicker(year=2021,month=2,day=14)
-        date_dialog.bind(on_save=self.on_save, on_cancel=self.on_cancel)
-        date_dialog.open()
-    def on_save(self,instance,value,range):
-        self.ids.date_label.text = str(value)
-    def on_cancel(self,*args):
-        pass
-    def show_time_picker(self):
-        time_dialog = MDTimePicker()
-        time_dialog.bind(time=self.get_time)
-        time_dialog.open()
-    def get_time(self,args,value):
-        self.ids.time_label.text = str(value)
+    
+    # checking all the constraints
+    def verify(self):
+        nam=self.ids.name.text
+        website=self.ids.link.text
+        package=self.ids.package.text
+        type=self.ids.type.text
+        role=self.ids.role.text
 
+        if (len(nam )==0 or len(nam)>60): # name length
+            show_alert_dialog(self,"Enter name in range 1-60!!!")
+            return
+        if len(nam.split())>0: # name type
+            l=nam.split()
+            for i in l:
+                if not re.match(r"([a-zA-Z.])",i):
+                    show_alert_dialog(self,"Please enter valid name!!!")
+                    return
+                    
+
+        if len(website)==0:
+            show_alert_dialog(self,"Please Provide the Website!!!")
+            return
+        try:
+            package=float(package)
+        except ValueError:
+            show_alert_dialog(self,"Please enter valid package")
+            return    
+        if type=="Placement Type":#check dpartment
+            show_alert_dialog(self,"Please Select Placement Type")
+            return 
+        
+        if self.ids.dropdown_item.text=="other":
+            if role=="":
+                show_alert_dialog(self,"Please Type Role")
+                return
+        if self.ids.dropdown_item.text=="Choose Role" :#check dpartment
+            show_alert_dialog(self,"Please Select Role")
+            return
+        
+        if type == "On-campus":
+            type = ''
+        else:
+            type = None
+        my_db, my_cursor = db_connector()
+        for k,v in flags.branch.items():
+            if v==flags.app.officer_branch:
+                branch=k
+                break
+        quer="SELECt company_id from company where name = %s and package = %s and role = %s and platform = %s and branch = %s"
+        my_cursor.execute(quer,(nam,package,role,type,branch))
+        if my_cursor.fetchall():
+            show_alert_dialog(self,"company already exists")
+        else:
+            query="insert into company (name,package,platform,website,role,branch) values (%s ,%s, %s ,%s,%s,%s);"
+            values = (nam,package,type,website,role,branch)
+            my_cursor.execute(query,values)
+            my_db.commit()
+            show_alert_dialog(self,"Data Sucessfully Saved!!!")
+            self.manager.callback()
+            self.manager.callback()
+
+        

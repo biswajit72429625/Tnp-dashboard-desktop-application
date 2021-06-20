@@ -1,24 +1,29 @@
 #:kivy 2.0.0
 <ManageStudents>
-    
     MDBottomNavigation:
-
         MDBottomNavigationItem:
             name: 'screen 4'
             text: '4th year'
             icon: 'numeric-4-box'
             # on_tab_press: root.manager.current = 'login'
+            Background:
             Navbar2:
             FloatLayout:
                 size: root.width, root.height
                 MDLabel:
-                    text: "E-Resources"
-                    pos_hint: {'center_x':0.5,'center_y':0.9}
-                    font_style: 'H4'
+                    pos_hint: {'center_x': .5, 'y': .77}
                     halign: 'center'
+                    theme_text_color: "Custom"
+                    text_color: 0, 150/255, 136/255, 1
+                    text: "Students"
+                    font_style: 'H6'
+                    padding: (10,15)
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    font_size:30
                 MDCard:
                     size_hint : (0.9,0.7)
-                    pos_hint: {'center_x': .5, 'center_y': .5}
+                    pos_hint: {'center_x': .5, 'center_y': .4}
                     elevation: 20
                     orientation: 'vertical'
                     spacing: 2
@@ -212,17 +217,24 @@
             text: '3rd year'
             icon: 'numeric-3-box'
             on_tab_press: print(self.name)
+            Background:
             Navbar2:
             FloatLayout:
                 size: root.width, root.height
                 MDLabel:
-                    text: "E-Resources"
-                    pos_hint: {'center_x':0.5,'center_y':0.9}
-                    font_style: 'H4'
+                    pos_hint: {'center_x': .5, 'y': .77}
                     halign: 'center'
+                    theme_text_color: "Custom"
+                    text_color: 0, 150/255, 136/255, 1
+                    text: "Students"
+                    font_style: 'H6'
+                    padding: (10,15)
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    font_size:30
                 MDCard:
                     size_hint : (0.9,0.7)
-                    pos_hint: {'center_x': .5, 'center_y': .5}
+                    pos_hint: {'center_x': .5, 'center_y': .4}
                     elevation: 20
                     orientation: 'vertical'
                     spacing: 2
@@ -290,17 +302,24 @@
             text: '2nd year'
             icon: 'numeric-2-box'
             on_tab_press: print(self.name)
+            Background:
             Navbar2:
             FloatLayout:
                 size: root.width, root.height
                 MDLabel:
-                    text: "E-Resources"
-                    pos_hint: {'center_x':0.5,'center_y':0.9}
-                    font_style: 'H4'
+                    pos_hint: {'center_x': .5, 'y': .77}
                     halign: 'center'
+                    theme_text_color: "Custom"
+                    text_color: 0, 150/255, 136/255, 1
+                    text: "Students"
+                    font_style: 'H6'
+                    padding: (10,15)
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    font_size:30
                 MDCard:
                     size_hint : (0.9,0.7)
-                    pos_hint: {'center_x': .5, 'center_y': .5}
+                    pos_hint: {'center_x': .5, 'center_y': .4}
                     elevation: 20
                     orientation: 'vertical'
                     spacing: 2
@@ -369,17 +388,24 @@
             text: '1st year'
             icon: 'numeric-1-box'
             on_tab_press: print(self.name)
+            Background:
             Navbar2:
             FloatLayout:
                 size: root.width, root.height
                 MDLabel:
-                    text: "E-Resources"
-                    pos_hint: {'center_x':0.5,'center_y':0.9}
-                    font_style: 'H4'
+                    pos_hint: {'center_x': .5, 'y': .77}
                     halign: 'center'
+                    theme_text_color: "Custom"
+                    text_color: 0, 150/255, 136/255, 1
+                    text: "Students"
+                    font_style: 'H6'
+                    padding: (10,15)
+                    size_hint_y: None
+                    height: self.texture_size[1]
+                    font_size:30
                 MDCard:
                     size_hint : (0.9,0.7)
-                    pos_hint: {'center_x': .5, 'center_y': .5}
+                    pos_hint: {'center_x': .5, 'center_y': .4}
                     elevation: 20
                     orientation: 'vertical'
                     spacing: 2
