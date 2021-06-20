@@ -5,15 +5,15 @@ from kivymd.uix.selectioncontrol import MDCheckbox
 from database import db_connector
 import flags
 
-class EResourceTitle(MDLabel):
+class CompanyTitle(MDLabel):
     text = StringProperty()
     id = StringProperty()
 
-class EResourceLabel(MDLabel):
+class CompanyLabel(MDLabel):
     text = StringProperty()
     id = StringProperty()
 
-class EResourceCheckbox(MDCheckbox):
+class CompanyCheckbox(MDCheckbox):
     id = StringProperty()
 
 class Placements(Screen):
@@ -39,12 +39,12 @@ class Placements(Screen):
         self.company_checkbox_list = []
         # adding dynamic data to screen
         for i in range(len(self.company_records)):
-            # checkbox, title, date, branch
-            check = EResourceCheckbox(id=f'{i}')
+            # checkbox, company name, role, package
+            check = CompanyCheckbox(id=f'{i}')
             self.company_checkbox_list.append(check)
             view_companies_screen.ids.grid.add_widget(check)
-            view_companies_screen.ids.grid.add_widget(EResourceTitle(id=f'{i}',text=f"[u][ref=world]{self.company_records[i][1]}[/ref][/u]"))
-            view_companies_screen.ids.grid.add_widget(EResourceLabel(id=f'{i}',text=f"{str(self.company_records[i][6])}"))
-            view_companies_screen.ids.grid.add_widget(EResourceLabel(id=f'{i}',text=f"{self.company_records[i][2]}"))
+            view_companies_screen.ids.grid.add_widget(CompanyTitle(id=f'{i}',text=f"[u][ref=world]{self.company_records[i][1]}[/ref][/u]"))
+            view_companies_screen.ids.grid.add_widget(CompanyLabel(id=f'{i}',text=f"{str(self.company_records[i][5])}"))
+            view_companies_screen.ids.grid.add_widget(CompanyLabel(id=f'{i}',text=f"{self.company_records[i][2]}"))
 
 
