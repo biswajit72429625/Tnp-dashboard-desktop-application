@@ -7,7 +7,7 @@
         elevation: 30
         orientation: 'vertical'
         padding: 25
-        spacing: 40
+        spacing: 30
         MDLabel:
             halign: 'center'
             theme_text_color: "Custom"
@@ -40,6 +40,14 @@
             font_size: 20
             color_mode: 'accent'
             icon_right_color:app.theme_cls.accent_color
+        MDLabel:
+            text:"[u][ref=world]Forgot Password?1[/ref][/u]"
+            theme_text_color:"Secondary"
+            halign:"left"
+            pos_hint: {'center_x':0.57}
+            text: "[u][ref=world]Forgot Password?[/ref][/u]"
+            markup : True
+            on_ref_press: root.manager.current="forgot_pass"
         MDRaisedButton:
             text: "Login"
             size_hint_x: 0.4
@@ -54,4 +62,3 @@
             on_press:root.manager.current="tpo_register"
             on_press: root.manager.stack.append(root.name)
 
-        
