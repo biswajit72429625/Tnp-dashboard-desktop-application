@@ -82,6 +82,6 @@ class HomePage(Screen):
         for i in range(len(self.assessments_records)):
             view_assessments_screen.ids.grid.add_widget(AssessmentCheckbox(id=f'{i}'))
             view_assessments_screen.ids.grid.add_widget(AssessmentTitle(id=f'{i}',text=f"[u][ref=world]{self.assessments_records[i][1]}[/ref][/u]"))
-            view_assessments_screen.ids.grid.add_widget(AssessmentLabel(id=f'{i}',text=f"{str(self.assessments_records[i][6])}"))
+            view_assessments_screen.ids.grid.add_widget(AssessmentLabel(id=f'{i}',text=f"{str(self.assessments_records[i][7])}"))
             view_assessments_screen.ids.grid.add_widget(AssessmentLabel(id=f'{i}',text=f"{self.assessments_records[i][2]}"))
             print(self.assessments_records[i])
