@@ -25,3 +25,8 @@ def show_alert_dialog(self,message):
 def dismiss_dialog(self,instance):
     # dismiss the dialog
     self.dialog.dismiss()
+
+def disable_toggler(screen,list,value):
+    # gets a screen, a list of ids and boolean value and sets diabled value
+    for i in list:
+        screen.ids[i].disabled = value

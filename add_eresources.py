@@ -1,15 +1,14 @@
 from kivy.uix.screenmanager import Screen
-from kivymd.uix.picker import MDDatePicker
-from kivymd.uix.picker import MDTimePicker
+from kivymd.uix.picker import MDDatePicker,MDTimePicker 
 from kivymd.uix.menu import MDDropdownMenu
-from database import show_alert_dialog
+from database import show_alert_dialog,db_connector
 from datetime import datetime, date
-
+import flags
 class AddEresources(Screen):
     def __init__(self, **kw):
         super(AddEresources,self).__init__(**kw)
         today = date.today()
-        menu_items = [
+        self.menu_items = [
             {   
                 "text": str(today.year),
                 "viewclass": "OneLineListItem",
@@ -33,7 +32,7 @@ class AddEresources(Screen):
         ]
         self.menu = MDDropdownMenu(
             caller = self.ids.dropdown_item,
-            items=menu_items,
+            items=self.menu_items,
             width_mult=4,
             max_height = 200
         )
@@ -44,10 +43,11 @@ class AddEresources(Screen):
         self.menu.dismiss()
 
     def checkbox(self,instance,value):
+        
         if value == True: 
             self.ids.date_label.disabled = True
             self.ids.time_label.disabled = True
-        if value == False:
+        else:
             self.ids.date_label.disabled = False
             self.ids.time_label.disabled = False
         
@@ -77,15 +77,74 @@ class AddEresources(Screen):
 
     def submit(self):
         self.ename=self.ids.e_name.text
+        self.year=self.ids.dropdown_item.text
         self.eorganizer=self.ids.e_organiser.text
         self.elink=self.ids.e_link.text
         date=self.ids.date_label.text
         time=self.ids.time_label.text
-        date_time = date+" "+time
-        self.date = datetime.strptime(date_time,'%Y-%m-%d %H:%M:%S')
-        if len(self.name) > 20:
-            show_alert_dialog(self,"Title should be less than 20 characters")
-        elif len(self.eorganizer) > 60:
-            show_alert_dialog(self,"Organiser should be less than 60 characters")
+        date_time = date+' '+time                                
+#to check the constraints
+        if len(self.ename) > 20 or len(self.ename)==0:
+            show_alert_dialog(self,"Title should be in range 0-20!!")
+        elif len(self.eorganizer) > 60 or len(self.eorganizer)==0:
+            show_alert_dialog(self,"Organiser should be in range 0-60")
+        elif len(self.elink)==0:
+            show_alert_dialog(self,"Please Provide the link!!!")
+        elif self.ids.dropdown_item.text=='Passing Year':
+            show_alert_dialog(self,"Please Provide passing year!!!")
+        elif (self.ids.checkbox_id.active==False) and (date=='Select Date' or time=='Select Time') :
+            show_alert_dialog(self,"Please Select the date and time!!!")
+        if date_time!='Select Date Select Time':
+            self.date= datetime.strptime(date_time,"%Y-%m-%d %H:%M:%S")
+       #connecting to database
+        my_db, my_cursor = db_connector()
+        for k,v in flags.branch.items():
+            if v==flags.app.officer_branch:
+                branch=k
+                break
+        #checking description and checkbox 
+        if (self.ids.checkbox_id.active==True) and len(self.ids.e_description.text)!=0:
+            qur='insert into e_resources (title , pass_year , branch ,organizer, link , description) values (%s,%s,%s,%s,%s,%s)'
+        
+            val=(self.ename,self.year,branch,self.eorganizer,self.elink,str(self.ids.e_description.text))
+            my_cursor.execute(qur,val)
+            my_db.commit()
+            show_alert_dialog(self,"Data Sucessfully Saved!!!")
+        elif (self.ids.checkbox_id.active==False) and len(self.ids.e_description.text)!=0:
+            qur='insert into e_resources (title , pass_year , branch ,organizer, link , visible,description) values (%s,%s,%s,%s,%s,%s,%s)'
+        
+            val=(self.ename,self.year,branch,self.eorganizer,self.elink,self.date,self.ids.e_description.text)
+            my_cursor.execute(qur,val)
+            my_db.commit()
+            show_alert_dialog(self,"Data Sucessfully Saved!!!")
+        
+        elif (self.ids.checkbox_id.active==False) and len(self.ids.e_description.text)==0:
+            qur='insert into e_resources (title , pass_year , branch ,organizer, link,visible ) values (%s,%s,%s,%s,%s,%s)'
+        
+            val=(self.ename,self.year,branch,self.eorganizer,self.elink,self.date)
+            my_cursor.execute(qur,val)
+            my_db.commit()
+            show_alert_dialog(self,"Data Sucessfully Saved!!!")
+        
+        elif (self.ids.checkbox_id.active==True) and len(self.ids.e_description.text)==0:
+            qur='insert into e_resources (title , pass_year , branch ,organizer, link  ) values (%s,%s,%s,%s,%s)'
+        
+            val=(self.ename,self.year,branch,self.eorganizer,self.elink)
+            my_cursor.execute(qur,val)
+            my_db.commit()
+            show_alert_dialog(self,"Data Sucessfully Saved!!!")
+                
+    def clear(self):#to clear all fields
+        self.ids.e_name.text=''
+        self.ids.e_organiser.text=''
+        self.ids.e_link.text=''
+        self.ids.e_description.text=''
+        self.ids.dropdown_item.text='Passing Year'
+        self.ids.checkbox_id.active=False
+        self.ids.date_label.text='Select Date'
+        self.ids.time_label.text='Select Time'
+        
+        
+
         
         

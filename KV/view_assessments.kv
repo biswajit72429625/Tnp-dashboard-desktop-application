@@ -29,200 +29,47 @@
                 MDLabel:
                     text: ""
                     size_hint: (0.1,0.1)
-                    md_bg_color: app.theme_cls.primary_color
+                    md_bg_color: app.theme_cls.accent_color
                 MDLabel:
                     text: "Title"
-                    font_size: 20
+                    text_color: 1, 1, 1, 1
+                    font_size: 25
+                    font_style:"H6"
                     halign: 'center'
                     size_hint_x: 0.3
-                    md_bg_color: app.theme_cls.primary_color
+                    theme_text_color: "Custom"
+                    md_bg_color: app.theme_cls.accent_color
                 MDLabel:
-                    text: "Date"
-                    font_size: 20
+                    text: "Visible DateTime"
+                    text_color: 1, 1, 1, 1
+                    font_size: 25
+                    font_style:"H6"
                     size_hint_x: 0.3
                     halign: 'center'
-                    md_bg_color: app.theme_cls.primary_color
+                    theme_text_color: "Custom"
+                    md_bg_color: app.theme_cls.accent_color
                 MDLabel:
                     text: "Batch"
-                    font_size: 20
+                    text_color: 1, 1, 1, 1
+                    font_size: 25
+                    font_style:"H6"
                     size_hint_x: 0.3
+                    theme_text_color: "Custom"
                     halign: 'center'
-                    md_bg_color: app.theme_cls.primary_color
+                    md_bg_color: app.theme_cls.accent_color
             
             ScrollView:
                 do_scroll_x: False
                 do_scroll_y: True
                 size: (self.parent.width,self.parent.height-60)
                 GridLayout:
+                    id: grid
                     size_hint_y: None
                     height: self.minimum_height
                     cols: 4
                     row_default_height: 60
                     adaptive_width: True
-                    MDCheckbox:
-                        size_hint: (0.1,0.1)
-                    MDLabel:
-                        id: 1
-                        text: "[u][ref=world]1[/ref][/u]"
-                        markup : True
-                        theme_text_color: 'Custom'
-                        text_color: app.theme_cls.primary_color
-                        font_size: 20
-                        halign: 'center'
-                        size_hint_x: 0.3
-                        on_ref_press: root.full_details(1)
-                    MDLabel:
-                        text: "Assessment"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    MDLabel:
-                        text: "Assessment"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
                     
-                    MDCheckbox:
-                        size_hint: (0.1,0.1)
-                    MDLabel:
-                        id: 2
-                        text: "[u][ref=world]2[/ref][/u]"
-                        markup : True
-                        theme_text_color: 'Custom'
-                        text_color: app.theme_cls.primary_color
-                        font_size: 20
-                        halign: 'center'
-                        size_hint_x: 0.3
-                        on_ref_press: root.full_details(2)
-                    MDLabel:
-                        text: "Assessment"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    MDLabel:
-                        text: "Assessment"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    
-                    MDCheckbox:
-                        size_hint: (0.1,0.1)
-                    MDLabel:
-                        id: 3
-                        text: "[u][ref=world]3[/ref][/u]"
-                        markup : True
-                        theme_text_color: 'Custom'
-                        text_color: app.theme_cls.primary_color
-                        font_size: 20
-                        halign: 'center'
-                        size_hint_x: 0.3
-                        on_ref_press: root.full_details(3)
-                    MDLabel:
-                        text: "Assessment"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    MDLabel:
-                        text: "Assessment"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    
-                    MDCheckbox:
-                        size_hint: (0.1,0.1)
-                    MDLabel:
-                        id: 4
-                        text: "[u][ref=world]4[/ref][/u]"
-                        markup : True
-                        theme_text_color: 'Custom'
-                        text_color: app.theme_cls.primary_color
-                        font_size: 20
-                        halign: 'center'
-                        size_hint_x: 0.3
-                        on_ref_press: root.full_details(4)
-                    MDLabel:
-                        text: "Assessment"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    MDLabel:
-                        text: "Assessment"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    
-                    MDCheckbox:
-                        size_hint: (0.1,0.1)
-                    MDLabel:
-                        id: 5
-                        text: "[u][ref=world]5[/ref][/u]"
-                        markup : True
-                        theme_text_color: 'Custom'
-                        text_color: app.theme_cls.primary_color
-                        font_size: 20
-                        halign: 'center'
-                        size_hint_x: 0.3
-                        on_ref_press: root.full_details(5)
-                    MDLabel:
-                        text: "Assessment"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    MDLabel:
-                        text: "Assessment"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    
-                    MDCheckbox:
-                        size_hint: (0.1,0.1)
-                    MDLabel:
-                        id: 6
-                        text: "[u][ref=world]6[/ref][/u]"
-                        markup : True
-                        theme_text_color: 'Custom'
-                        text_color: app.theme_cls.primary_color
-                        font_size: 20
-                        halign: 'center'
-                        size_hint_x: 0.3
-                        on_ref_press: root.full_details(6)
-                    MDLabel:
-                        text: "Assessment"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    MDLabel:
-                        text: "Assessment"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    
-                    MDCheckbox:
-                        size_hint: (0.1,0.1)
-                    MDLabel:
-                        id: 7
-                        text: "[u][ref=world]7[/ref][/u]"
-                        markup : True
-                        theme_text_color: 'Custom'
-                        text_color: app.theme_cls.primary_color
-                        font_size: 20
-                        halign: 'center'
-                        size_hint_x: 0.3
-                        on_ref_press: root.full_details(7)
-                    MDLabel:
-                        text: "Assessment"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    MDLabel:
-                        text: "Assessment"
-                        font_size: 20
-                        size_hint_x: 0.3
-                        halign: 'center'
-                    
-                    
-                
-    
     MDFloatingActionButtonSpeedDial:
         data: {'add':'notebook-plus-outline', 'delete':'delete'}
         root_button_anim: True
@@ -235,19 +82,63 @@
     spacing: "8dp"
     size_hint_y: None
     height: 425
+    MDGridLayout:
+        cols: 2
+        width: self.parent.width
+        spacing: 20
+        MDLabel:
+            text: "Passing Year"
+        MDRectangleFlatButton:
+            id: dialog_passyear
+            on_release: root.menu.open()
     MDTextField:
-        text: "PassYear"
+        id: dialog_branch
+        hint_text: "Branch"
+        line_color_normal: app.theme_cls.primary_color
     MDTextField:
-        text: "Branch"
+        id: dialog_organizer
+        hint_text: "Organizer"
+        line_color_normal: app.theme_cls.primary_color
     MDTextField:
-        text: "Organizer"
+        id: dialog_link
+        hint_text: "Link"
+        line_color_normal: app.theme_cls.primary_color
     MDTextField:
-        text: "Link"
-    MDTextField:
-        text: "Result Link"
-    MDTextField:
-        text: "Date Uploaded"
-    MDTextField:
-        text: "Visible on"
+        id: dialog_resultlink
+        hint_text: "Result Link"
+        line_color_normal: app.theme_cls.primary_color
+    MDGridLayout:
+        cols: 3
+        width: self.parent.width
+        spacing: 20
+        MDLabel:
+            text: "Visible datetime"
+        MDRaisedButton:
+            id: dialog_visible_date
+            on_release: app.root.get_screen('view_assessments').show_date_picker()
+        MDRaisedButton:
+            id: dialog_visible_time
+            on_release: app.root.get_screen('view_assessments').show_time_picker()
     MDRoundFlatButton:
+        id: dialog_edit
         text: "Edit"
+        on_press: app.root.get_screen('view_assessments').edit_assessments()
+
+<AssessmentTitle>
+    text: "[u][ref=world]7[/ref][/u]"
+    markup : True
+    theme_text_color: 'Custom'
+    text_color: app.theme_cls.primary_color
+    font_size: 20
+    halign: 'center'
+    size_hint_x: 0.3
+    on_ref_press: app.root.get_screen('view_assessments').full_details(self.id)
+
+<AssessmentLabel>
+    text: "E-Resources"
+    font_size: 20
+    size_hint_x: 0.3
+    halign: 'center'
+
+<AssessmentCheckbox>
+    size_hint: (0.1,0.1)
