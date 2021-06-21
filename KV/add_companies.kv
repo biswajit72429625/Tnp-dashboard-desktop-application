@@ -1,93 +1,72 @@
 #:kivy 2.0.0
 <AddCompanies>
+    Background:
     Navbar:
     MDCard:
-        size_hint: (0.4,0.7)
-        pos_hint: {'center_x': .27, 'center_y': .4}
-        elevation: 10
+        size_hint: (0.5,0.86)
+        pos_hint: {'center_x': .5, 'center_y': .45}
+        elevation: 30
         orientation: 'vertical'
         padding: 25
-        spacing: 20
-        Widget:
-        Widget:
+        spacing: 22
+        #MDLabel:
+            #text:"star marked are compulsory"
+            #theme_text_color:"Secondary"
+            #halign:"center"
         MDTextField:
-            id:e_name
+            id:name
             size_hint_x: None
-            width: 250
-            pos_hint: {'center_x':0.45}
-            icon_right: ""
-            hint_text: "Name"
-            text: "Companies"
+            width: 300
+            pos_hint: {'center_x':0.5}
+            icon_right: "account"
+            hint_text: "Company Name"
+            color_mode: 'accent'
+            icon_right_color:app.theme_cls.accent_color
         MDTextField:
-            id:e_year
+            id:link
+            color_mode: 'accent'
+            icon_right_color:app.theme_cls.accent_color
+            icon_right:'link'
             size_hint_x: None
-            width: 250
-            pos_hint: {'center_x':0.45}
-            icon_right: ""
-            hint_text: "Year"
+            width: 300
+            pos_hint: {'center_x':0.48}
+            hint_text: "Company's website Link"
         MDTextField:
-            id:e_dept
+            id:package
+            color_mode: 'accent'
+            icon_right_color:app.theme_cls.accent_color
+            icon_right:'cash'
             size_hint_x: None
-            width: 250
-            pos_hint: {'center_x':0.45}
-            icon_right: ""
-            hint_text: "dept"
+            width: 300
+            pos_hint: {'center_x':0.48}
+            hint_text: "Package"
+            helper_text:"only float number (2.4,3.4)"
+        Spinner:
+            id:type
+            pos_hint:{"x":0.08}
+            text : "Placement Type"
+            values:('On-campus','Off-campus')
+            size:300,44
+            size_hint:None,None
+            color_mode: 'accent'
+            background_normal:""
+            background_color:(98/255,0/255,234/255,1)
+        MDRectangleFlatButton:
+            id: dropdown_item
+            text: "Choose Role"
+            pos_hint: {"center_x": .5, "center_y": .5}
+            on_release: root.manager.get_screen("view_companies").menu.open()
         MDTextField:
-            id:e_organiser
+            id:role
+            color_mode: 'accent'
+            icon_right_color:app.theme_cls.accent_color
+            icon_right:'shield-account-outline'
             size_hint_x: None
-            width: 250
-            pos_hint: {'center_x':0.45}
-            icon_right: ""
-            hint_text: "Organiser Name"
-        MDTextField:
-            id:e_link
-            size_hint_x: None
-            width: 250
-            pos_hint: {'center_x':0.45}
-            icon_right: ""
-            hint_text: "Link"
-        Widget:
-
-    MDCard:
-        size_hint: (0.4,0.7)
-        pos_hint: {'center_x': .74, 'center_y': .4}
-        elevation: 10
-        orientation: 'vertical'
-        padding: 25
-        spacing: 20
-        Widget:
-        Widget:
-        MDLabel:
-            halign: 'center'
-            text: "Schedule on"
-            font_style: 'H6'
-            padding: (10,15)
-            size_hint_y: None
-            height: self.texture_size[1]
-        MDRaisedButton:
-            pos_hint: {'center_x': .6}
-            text:"Select Date"
-            id : date_label
-            on_release: root.show_date_picker()
-        MDLabel:
-            halign: 'center'
-            text: "Schedule At"
-            font_style: 'H6'
-            padding: (10,15)
-            size_hint_y: None
-            height: self.texture_size[1]
-        MDRaisedButton:
-            text: "Open time picker"
-            pos_hint: {'center_x': .6}
-            id: time_label
-            on_release: root.show_time_picker()
-        MDRoundFlatButton:
-            text: "Clear"
-            pos_hint: {'center_x': .6}
-            font_size: 20
-        MDRoundFlatButton:
+            width: 300
+            pos_hint: {'center_x':0.48}
+            hint_text: "role"
+            disabled: True
+        MDRectangleFlatButton:
             text: "Save"
-            pos_hint: {'center_x': .6}
-            font_size: 20
-            
-    
+            pos_hint: {'center_x': .5}
+            on_press:root.verify()

@@ -88,9 +88,52 @@ class ViewCompanies(Screen):
         # dismisses full details dialog
         self.dialog.dismiss()
 
+    def menu_for_add_company(self):
+        my_db, my_cursor = db_connector()
+        query = f"select Distinct(role) from company ;"
+        my_cursor.execute(query)
+        self.menu = my_cursor.fetchall()
+        #print(self.menu)
+        self.menu_items = []
+        for i in self.menu:
+            temp = {
+                
+                "text": i[0],
+                "viewclass": "OneLineListItem",
+                "on_release": lambda x=i[0]: self.menu_callback(x),
+            }
+            self.menu_items.append(temp)
+        temp = {
+                
+                "text": "other",
+                "viewclass": "OneLineListItem",
+                "on_release": lambda x="other": self.menu_callback(x),
+            }
+        self.menu_items.append(temp)
+        #print(self.menu_items)
+        # flags.add_company_role_menu_item = self.menu_items
+        #print(flags.add_company_role_menu_item)this is printing correct , flags tak sab theek jara hai
+        self.menu = MDDropdownMenu(
+            caller = self.manager.get_screen('add_companies').ids.dropdown_item,
+            items=self.menu_items,
+            width_mult=4,
+            max_height = 300
+        )
+    def menu_callback(self, text_item):
+        # sets dropdown wale as text of button and closes dropdown menu
+        self.manager.get_screen('add_companies').ids.dropdown_item.text = text_item
+        self.manager.get_screen('add_companies').ids.role.text = text_item
+        self.menu.dismiss()
+        if self.manager.get_screen('add_companies').ids.dropdown_item.text == "other":
+            self.manager.get_screen('add_companies').ids.role.text = ""
+            self.manager.get_screen('add_companies').ids.role.disabled = False
+        else:
+            self.manager.get_screen('add_companies').ids.role.disabled = True
+            self.manager.get_screen('add_companies').ids.role.text = text_item
     def add_delete(self,instance):
         # speeddial options
         if instance.icon == 'notebook-plus-outline':
+            self.menu_for_add_company()
             self.manager.current = 'add_companies'
             self.manager.stack.append(self.name)
         else:

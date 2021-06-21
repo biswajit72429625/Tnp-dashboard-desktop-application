@@ -10,7 +10,7 @@ import re
 class TpoRegister(Screen):
     def __init__(self, **kw):
         super().__init__(**kw)
-        # menu_items = [{"text" : 'CSE'},{"text" : 'IT'},{"text" : 'ENTC'},{"text" : 'CIVIL'},{"text" : 'MECH'},{"text" : 'ELN'}]
+        # menu_items 
         menu_items = [
             {
                 "text": "CSE",
