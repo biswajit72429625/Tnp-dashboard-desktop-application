@@ -26,6 +26,7 @@
             user_font_size:"70sp"
             md_bg_color: app.theme_cls.primary_light
             pos_hint:{"x":.2}
+            on_press:root.load_companies()
             on_press:root.manager.current="view_companies"
             on_press: root.manager.stack.append(root.name)
         MDRectangleFlatButton:
@@ -34,6 +35,7 @@
             font_size:15
             #pos_hint:{}
             #width: self.parent.width-30
+            on_press:root.load_companies()
             on_press:root.manager.current="view_companies"
             on_press: root.manager.stack.append(root.name)
     MDCard:
