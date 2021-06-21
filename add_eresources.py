@@ -146,7 +146,9 @@ class AddEresources(Screen):
         self.ids.date_label.text='Select Date'
         self.ids.time_label.text='Select Time'
         
-        
+    def change_field(self,kivy_id):
+        # changes focus to next text on pressing enter
+        self.ids[kivy_id].focus=True
 
         
         

@@ -7,23 +7,24 @@
         pos_hint:{"x":.05,"y":.9}
         on_press:root.manager.current="login"
         on_press: root.manager.stack.append(root.name)
+    MDLabel:
+        theme_text_color: "Custom"
+        text_color: 0, 150/255, 136/255, 1
+        halign: 'center'
+        text: "Register Yourself"
+        font_style: 'H6'
+        padding: (10,10)
+        size_hint_y: None
+        height: self.texture_size[1]
+        font_size:30
+        pos_hint: {'center_x': .5, 'y': .87}
     MDCard:
-        size_hint: (0.5,0.9)
-        pos_hint: {'center_x': .5, 'center_y': .5}
+        size_hint: (0.5,0.85)
+        pos_hint: {'center_x': .5, 'center_y': .45}
         elevation: 10
         orientation: 'vertical'
         padding: 25
-        spacing: 25
-        MDLabel:
-            theme_text_color: "Custom"
-            text_color: 0, 150/255, 136/255, 1
-            halign: 'center'
-            text: "Register Yourself"
-            font_style: 'H6'
-            padding: (10,10)
-            size_hint_y: None
-            height: self.texture_size[1]
-            font_size:30
+        spacing: 22
         MDTextField:
             id: name
             color_mode: 'accent'
@@ -32,14 +33,43 @@
             pos_hint: {'center_x':0.5}
             hint_text:"Name"
             size_hint_x:0.7
-        MDTextField:
-            id: email
-            color_mode: 'accent'
-            icon_right_color:app.theme_cls.accent_color
-            icon_right:'email'
-            pos_hint: {'center_x':0.5}
-            hint_text:"Email"
-            size_hint_x:0.7
+            on_text_validate: root.change_field('email')
+        GridLayout:
+            spacing: 60
+            cols:2 
+            MDTextField:
+                id:email
+                hint_text:"Email"
+                size_hint_x: None
+                width: 200
+                pos_hint: {'center_x':0.5}
+                #icon_right: "key"
+                color_mode: 'accent'
+            MDRaisedButton:
+                text: "Send"
+                font_size: 15
+                pos_hint: {'center_x':0.5}  
+                on_press: root.send_mail()
+        GridLayout:
+            spacing: 60
+            cols:2 
+            MDTextField:
+                id:otp
+                mode:"rectangle"
+                size_hint_x:None
+                #size_hint_y: .8
+                width: 200
+                pos_hint: {'center_x':0.7}
+                hint_text: "OTP"
+                #font_size: 20
+                color_mode: 'accent'
+                icon_right_color:app.theme_cls.accent_color
+            MDRectangleFlatButton:
+                #size_hint_y: 0.6
+                text: "Verify"
+                font_size: 15
+                pos_hint: {'center_x':0.9}
+                on_press: root.email_verify()
         MDTextField:
             id:password
             color_mode: 'accent'
@@ -50,6 +80,7 @@
             hint_text:"Password"
             size_hint_x:0.7
             password: True
+            on_text_validate: root.change_field('confirm_password')
         MDTextField:
             id: confirm_password
             password:True
@@ -60,17 +91,13 @@
             hint_text:"Confirm Password"
             size_hint_x:0.7
             password: True
-        #MDDropDownItem:
-            #id: dropdown_item
-            #text: 'CSE'
-            #current_item:'CSE'
-            #on_release: root.menu.open()
         MDRectangleFlatButton:
             id: dropdown_item
             text: "Choose Department"
             pos_hint: {"center_x": .5, "center_y": .5}
             on_release: root.menu.open()
         MDRaisedButton:
+            id:register
             text:"Register"
             pos_hint: {'center_x':0.5}
             on_press:root.verify()

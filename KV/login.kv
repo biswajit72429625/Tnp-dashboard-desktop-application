@@ -28,6 +28,7 @@
             hint_text: "Email"
             color_mode: 'accent'
             icon_right_color:app.theme_cls.accent_color
+            on_text_validate: root.change_field('password')
         MDTextField:
             size_hint_x: None
             id:password
