@@ -2,6 +2,17 @@
 <AddAssessments>
     Background:
     Navbar:
+    MDLabel:
+        pos_hint: {'center_x': .5, 'y': .77}
+        halign: 'center'
+        theme_text_color: "Custom"
+        text_color: 0, 150/255, 136/255, 1
+        text: "Add Assessments"
+        font_style: 'H6'
+        padding: (10,15)
+        size_hint_y: None
+        height: self.texture_size[1]
+        font_size:30
     MDCard:
         size_hint: (0.4,0.7)
         pos_hint: {'center_x': .27, 'center_y': .4}
@@ -19,6 +30,7 @@
             width: 200
             pos_hint: {'center_x':0.48}
             hint_text: "Name *" 
+            on_text_validate: root.change_field('e_organiser')
         MDTextField:
             id:e_organiser
             color_mode: 'accent'
@@ -28,6 +40,7 @@
             width: 200
             pos_hint: {'center_x':0.48}
             hint_text: "Organiser Name *"
+            on_text_validate: root.change_field('e_link')
         MDTextField:
             id:e_link
             color_mode: 'accent'

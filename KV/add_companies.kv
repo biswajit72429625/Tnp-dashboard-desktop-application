@@ -22,6 +22,7 @@
             hint_text: "Company Name"
             color_mode: 'accent'
             icon_right_color:app.theme_cls.accent_color
+            on_text_validate: root.change_field('link')
         MDTextField:
             id:link
             color_mode: 'accent'
@@ -31,6 +32,7 @@
             width: 300
             pos_hint: {'center_x':0.48}
             hint_text: "Company's website Link"
+            on_text_validate: root.change_field('package')
         MDTextField:
             id:package
             color_mode: 'accent'

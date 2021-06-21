@@ -68,4 +68,6 @@ class AddCompanies(Screen):
             self.manager.callback()
             self.manager.callback()
 
-        
+    def change_field(self,kivy_id):
+        # changes focus to next text on pressing enter
+        self.ids[kivy_id].focus=True
