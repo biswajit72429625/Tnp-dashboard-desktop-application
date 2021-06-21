@@ -107,32 +107,34 @@ class AddEresources(Screen):
             qur='insert into e_resources (title , pass_year , branch ,organizer, link , description) values (%s,%s,%s,%s,%s,%s)'
         
             val=(self.ename,self.year,branch,self.eorganizer,self.elink,str(self.ids.e_description.text))
-            my_cursor.execute(qur,val)
-            my_db.commit()
-            show_alert_dialog(self,"Data Sucessfully Saved!!!")
+            
+            
+            
         elif (self.ids.checkbox_id.active==False) and len(self.ids.e_description.text)!=0:
             qur='insert into e_resources (title , pass_year , branch ,organizer, link , visible,description) values (%s,%s,%s,%s,%s,%s,%s)'
         
             val=(self.ename,self.year,branch,self.eorganizer,self.elink,self.date,self.ids.e_description.text)
-            my_cursor.execute(qur,val)
-            my_db.commit()
-            show_alert_dialog(self,"Data Sucessfully Saved!!!")
-        
+           
         elif (self.ids.checkbox_id.active==False) and len(self.ids.e_description.text)==0:
             qur='insert into e_resources (title , pass_year , branch ,organizer, link,visible ) values (%s,%s,%s,%s,%s,%s)'
         
             val=(self.ename,self.year,branch,self.eorganizer,self.elink,self.date)
-            my_cursor.execute(qur,val)
-            my_db.commit()
-            show_alert_dialog(self,"Data Sucessfully Saved!!!")
+            
+            
+            
         
         elif (self.ids.checkbox_id.active==True) and len(self.ids.e_description.text)==0:
             qur='insert into e_resources (title , pass_year , branch ,organizer, link  ) values (%s,%s,%s,%s,%s)'
         
             val=(self.ename,self.year,branch,self.eorganizer,self.elink)
-            my_cursor.execute(qur,val)
-            my_db.commit()
-            show_alert_dialog(self,"Data Sucessfully Saved!!!")
+            
+            
+        my_cursor.execute(qur,val)
+        my_db.commit()
+        show_alert_dialog(self,"EResources added  Sucessfully !!!")
+        self.manager.callback()
+        self.manager.callback()
+        
                 
     def clear(self):#to clear all fields
         self.ids.e_name.text=''
