@@ -1,6 +1,17 @@
 #:kivy 2.0.0
 <ForgotPass>
     Background:
+    MDLabel:
+        pos_hint: {'center_x': .5, 'y': .85}
+        halign: 'center'
+        theme_text_color: "Custom"
+        text_color: 0, 150/255, 136/255, 1
+        text: "Forgot Password"
+        font_style: 'H6'
+        padding: (10,15)
+        size_hint_y: None
+        height: self.texture_size[1]
+        font_size:30
     MDIconButton:
         icon:"keyboard-backspace"
         md_bg_color: app.theme_cls.primary_light
@@ -9,7 +20,7 @@
         on_press: root.manager.stack.append(root.name)
     MDCard:
         size_hint: (0.5,0.8)
-        pos_hint: {'center_x': .5, 'center_y': .5}
+        pos_hint: {'center_x': .5, 'center_y': .45}
         elevation: 30
         orientation: 'vertical'
         padding: 25
@@ -25,7 +36,7 @@
                 id:email
                 hint_text:"Email"
                 size_hint_x: None
-                width: 150
+                width: 200
                 pos_hint: {'center_x':0.5}
                 #icon_right: "key"
                 color_mode: 'accent'
@@ -42,7 +53,7 @@
                 mode:"rectangle"
                 size_hint_x:None
                 #size_hint_y: .8
-                width: 150
+                width: 200
                 pos_hint: {'center_x':0.6}
                 hint_text: "OTP"
                 #font_size: 20

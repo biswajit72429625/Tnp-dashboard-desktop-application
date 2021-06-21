@@ -6,10 +6,18 @@ from login import Login
 import flags
 import bcrypt
 import re
+import random as r
+import smtplib
+from email.message import EmailMessage
+from decouple import config
 
 class TpoRegister(Screen):
     def __init__(self, **kw):
         super().__init__(**kw)
+        self.ids.password.disabled = True
+        self.ids.confirm_password.disabled = True
+        self.ids.dropdown_item.disabled = True
+        self.ids.register.disabled = True
         # menu_items 
         menu_items = [
             {
@@ -80,7 +88,7 @@ class TpoRegister(Screen):
             show_alert_dialog(self,"Please enter valid email!!")
             return
         if len(pwd)==0: # password length
-            show_alert_dialog(self,"Please enter a pass!!!")
+            show_alert_dialog(self,"Please enter a password!!!")
             return
         if len(pwdconf)==0: # confirm password
             show_alert_dialog(self,"Please confirm your password!!!")
@@ -112,6 +120,7 @@ class TpoRegister(Screen):
         values=(nam,email,hashed.decode('ascii'),branch)
         my_cursor.execute(query,values)
         my_db.commit()
+        show_alert_dialog(self,'successfully registered !')
         # setting navbar values
         Login.name_setter(self,nam,flags.branch[branch])
         # changing screen
@@ -124,3 +133,42 @@ class TpoRegister(Screen):
         self.menu.dismiss()
 
 
+    def change_field(self,kivy_id):
+        # changes focus to next text on pressing enter
+        self.ids[kivy_id].focus=True
+ 
+    #sending mail to verify
+    def send_mail(self):
+        self.officer_email = self.ids.email.text
+        my_db, my_cursor = db_connector()
+        my_cursor.execute(f"select id from officer where email ='{self.officer_email}';")
+        records = my_cursor.fetchall()
+        if records:
+            show_alert_dialog(self,'Already registered with this email')
+
+        else:
+            msg = EmailMessage()
+            msg['from'] = config("email")
+            msg['to'] = self.officer_email
+            msg['subject'] = "WIT TNP"
+            self.otp=""
+            for _ in range(6):
+                self.otp+=str(r.randint(1,9))
+            msg.set_content(f"Your OTP to register is {self.otp}. Please use it before switching to another page")
+            try:
+                with smtplib.SMTP_SSL('smtp.gmail.com',465) as server:
+                    server.login(config("email"),config("email_password"))
+                    server.send_message(msg)
+                    show_alert_dialog(self,'OTP sent to mail id')
+            except Exception:
+                show_alert_dialog(self,'Couldnt send OTP due to an error')
+
+    def email_verify(self):
+        if self.ids.otp.text == self.otp:
+            self.ids.password.disabled = False
+            self.ids.confirm_password.disabled = False
+            self.ids.register.disabled = False
+            self.ids.dropdown_item.disabled = False
+            show_alert_dialog(self,'Your email has been verified')
+        else:
+            show_alert_dialog(self,'Incorrect OTP')
