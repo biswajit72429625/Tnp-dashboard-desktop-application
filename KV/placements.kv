@@ -51,15 +51,18 @@
             user_font_size:"70sp"
             md_bg_color: app.theme_cls.primary_light
             pos_hint:{"x":.2}
-            on_press:root.manager.current=""
+            on_press:root.load_students()
+            on_press:root.manager.current="manage_students"
             on_press: root.manager.stack.append(root.name)
         MDRectangleFlatButton:
             halign:"center"
             text:"Manage Students"
             font_size:15
             pos_hint:{"x":.05}
-            on_press:root.manager.current="manage_students"
-            on_press: root.manager.stack.append(root.name)
+            on_press:print(root.manager.screen_names)
+            on_press:root.load_students()
+            # on_press:root.manager.current="manage_students"
+            # on_press: root.manager.stack.append(root.name)
     MDCard:
         size_hint: (0.22,0.32)
         pos_hint: {'center_x': .2, 'center_y': .2}

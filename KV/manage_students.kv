@@ -1,492 +1,148 @@
 #:kivy 2.0.0
 <ManageStudents>
-    MDBottomNavigation:
-        MDBottomNavigationItem:
-            name: 'screen 4'
-            text: '4th year'
-            icon: 'numeric-4-box'
-            # on_tab_press: root.manager.current = 'login'
-            Background:
-            Navbar2:
-            FloatLayout:
-                size: root.width, root.height
+    Background:
+    Navbar:
+    FloatLayout:
+        size: root.width, root.height
+        MDLabel:
+            pos_hint: {'center_x': .5, 'y': .77}
+            halign: 'center'
+            theme_text_color: "Custom"
+            text_color: 0, 150/255, 136/255, 1
+            text: "Students"
+            font_style: 'H6'
+            padding: (10,15)
+            size_hint_y: None
+            height: self.texture_size[1]
+            font_size:30
+        MDCard:
+            size_hint : (0.9,0.7)
+            pos_hint: {'center_x': .5, 'center_y': .45}
+            elevation: 20
+            orientation: 'vertical'
+            spacing: 2
+            MDGridLayout:
+                size: (self.parent.width,60)
+                height: self.minimum_height
+                size_hint_x: None
+                size_hint_y: None
+                cols: 3
+                row_default_height: 60
+                row_force_default: True
+                adaptive_width: True
                 MDLabel:
-                    pos_hint: {'center_x': .5, 'y': .77}
+                    text: "Name"
+                    font_size: 20
                     halign: 'center'
-                    theme_text_color: "Custom"
-                    text_color: 0, 150/255, 136/255, 1
-                    text: "Students"
-                    font_style: 'H6'
-                    padding: (10,15)
-                    size_hint_y: None
-                    height: self.texture_size[1]
-                    font_size:30
-                MDCard:
-                    size_hint : (0.9,0.7)
-                    pos_hint: {'center_x': .5, 'center_y': .4}
-                    elevation: 20
-                    orientation: 'vertical'
-                    spacing: 2
-                    MDGridLayout:
-                        size: (self.parent.width,60)
-                        height: self.minimum_height
-                        size_hint_x: None
-                        size_hint_y: None
-                        cols: 3
-                        row_default_height: 60
-                        row_force_default: True
-                        adaptive_width: True
-                        MDLabel:
-                            text: "EnrollmentID"
-                            font_size: 20
-                            halign: 'center'
-                            size_hint_x: 0.3
-                            md_bg_color: app.theme_cls.primary_color
-                        MDLabel:
-                            text: "Name"
-                            font_size: 20
-                            size_hint_x: 0.3
-                            halign: 'center'
-                            md_bg_color: app.theme_cls.primary_color
-                        MDLabel:
-                            text: "email"
-                            font_size: 20
-                            size_hint_x: 0.3
-                            halign: 'center'
-                            md_bg_color: app.theme_cls.primary_color
-                    
-                    ScrollView:
-                        do_scroll_x: False
-                        do_scroll_y: True
-                        size: (self.parent.width,self.parent.height-60)
-                        GridLayout:
-                            size_hint_y: None
-                            height: self.minimum_height
-                            cols: 3
-                            row_default_height: 60
-                            adaptive_width: True
-                            MDLabel:
-                                id: 1
-                                text: "[u][ref=world]1[/ref][/u]"
-                                markup : True
-                                theme_text_color: 'Custom'
-                                text_color: app.theme_cls.primary_color
-                                font_size: 20
-                                halign: 'center'
-                                size_hint_x: 0.3
-                                on_ref_press: root.student_details(1)
-                            MDLabel:
-                                text: "E-Resources"
-                                font_size: 20
-                                size_hint_x: 0.3
-                                halign: 'center'
-                            MDLabel:
-                                text: "E-Resources"
-                                font_size: 20
-                                size_hint_x: 0.3
-                                halign: 'center'
-                            
-                            MDLabel:
-                                id: 2
-                                text: "[u][ref=world]2[/ref][/u]"
-                                markup : True
-                                theme_text_color: 'Custom'
-                                text_color: app.theme_cls.primary_color
-                                font_size: 20
-                                halign: 'center'
-                                size_hint_x: 0.3
-                                on_ref_press: root.student_details(2)
-                            MDLabel:
-                                text: "E-Resources"
-                                font_size: 20
-                                size_hint_x: 0.3
-                                halign: 'center'
-                            MDLabel:
-                                text: "E-Resources"
-                                font_size: 20
-                                size_hint_x: 0.3
-                                halign: 'center'
-                            
-                            MDLabel:
-                                id: 3
-                                text: "[u][ref=world]3[/ref][/u]"
-                                markup : True
-                                theme_text_color: 'Custom'
-                                text_color: app.theme_cls.primary_color
-                                font_size: 20
-                                halign: 'center'
-                                size_hint_x: 0.3
-                                on_ref_press: root.student_details(3)
-                            MDLabel:
-                                text: "E-Resources"
-                                font_size: 20
-                                size_hint_x: 0.3
-                                halign: 'center'
-                            MDLabel:
-                                text: "E-Resources"
-                                font_size: 20
-                                size_hint_x: 0.3
-                                halign: 'center'
-                            
-                            MDLabel:
-                                id: 4
-                                text: "[u][ref=world]4[/ref][/u]"
-                                markup : True
-                                theme_text_color: 'Custom'
-                                text_color: app.theme_cls.primary_color
-                                font_size: 20
-                                halign: 'center'
-                                size_hint_x: 0.3
-                                on_ref_press: root.student_details(4)
-                            MDLabel:
-                                text: "E-Resources"
-                                font_size: 20
-                                size_hint_x: 0.3
-                                halign: 'center'
-                            MDLabel:
-                                text: "E-Resources"
-                                font_size: 20
-                                size_hint_x: 0.3
-                                halign: 'center'
-                            
-                            MDLabel:
-                                id: 5
-                                text: "[u][ref=world]5[/ref][/u]"
-                                markup : True
-                                theme_text_color: 'Custom'
-                                text_color: app.theme_cls.primary_color
-                                font_size: 20
-                                halign: 'center'
-                                size_hint_x: 0.3
-                                on_ref_press: root.student_details(5)
-                            MDLabel:
-                                text: "E-Resources"
-                                font_size: 20
-                                size_hint_x: 0.3
-                                halign: 'center'
-                            MDLabel:
-                                text: "E-Resources"
-                                font_size: 20
-                                size_hint_x: 0.3
-                                halign: 'center'
-                            
-                            MDLabel:
-                                id: 6
-                                text: "[u][ref=world]6[/ref][/u]"
-                                markup : True
-                                theme_text_color: 'Custom'
-                                text_color: app.theme_cls.primary_color
-                                font_size: 20
-                                halign: 'center'
-                                size_hint_x: 0.3
-                                on_ref_press: root.student_details(6)
-                            MDLabel:
-                                text: "E-Resources"
-                                font_size: 20
-                                size_hint_x: 0.3
-                                halign: 'center'
-                            MDLabel:
-                                text: "E-Resources"
-                                font_size: 20
-                                size_hint_x: 0.3
-                                halign: 'center'
-                            
-                            MDLabel:
-                                id: 7
-                                text: "[u][ref=world]7[/ref][/u]"
-                                markup : True
-                                theme_text_color: 'Custom'
-                                text_color: app.theme_cls.primary_color
-                                font_size: 20
-                                halign: 'center'
-                                size_hint_x: 0.3
-                                on_ref_press: root.student_details(7)
-                            MDLabel:
-                                text: "E-Resources"
-                                font_size: 20
-                                size_hint_x: 0.3
-                                halign: 'center'
-                            MDLabel:
-                                text: "E-Resources"
-                                font_size: 20
-                                size_hint_x: 0.3
-                                halign: 'center'
-                               
-        MDBottomNavigationItem:
-            name: 'screen 3'
-            text: '3rd year'
-            icon: 'numeric-3-box'
-            on_tab_press: print(self.name)
-            Background:
-            Navbar2:
-            FloatLayout:
-                size: root.width, root.height
+                    md_bg_color: app.theme_cls.primary_color
                 MDLabel:
-                    pos_hint: {'center_x': .5, 'y': .77}
+                    text: "Role"
+                    font_size: 20
                     halign: 'center'
-                    theme_text_color: "Custom"
-                    text_color: 0, 150/255, 136/255, 1
-                    text: "Students"
-                    font_style: 'H6'
-                    padding: (10,15)
-                    size_hint_y: None
-                    height: self.texture_size[1]
-                    font_size:30
-                MDCard:
-                    size_hint : (0.9,0.7)
-                    pos_hint: {'center_x': .5, 'center_y': .4}
-                    elevation: 20
-                    orientation: 'vertical'
-                    spacing: 2
-                    MDGridLayout:
-                        size: (self.parent.width,60)
-                        height: self.minimum_height
-                        size_hint_x: None
-                        size_hint_y: None
-                        cols: 3
-                        row_default_height: 60
-                        row_force_default: True
-                        adaptive_width: True
-                        MDLabel:
-                            text: "EnrollmentID"
-                            font_size: 20
-                            halign: 'center'
-                            size_hint_x: 0.3
-                            md_bg_color: app.theme_cls.primary_color
-                        MDLabel:
-                            text: "Name"
-                            font_size: 20
-                            size_hint_x: 0.3
-                            halign: 'center'
-                            md_bg_color: app.theme_cls.primary_color
-                        MDLabel:
-                            text: "email"
-                            font_size: 20
-                            size_hint_x: 0.3
-                            halign: 'center'
-                            md_bg_color: app.theme_cls.primary_color
-                    
-                    ScrollView:
-                        do_scroll_x: False
-                        do_scroll_y: True
-                        size: (self.parent.width,self.parent.height-60)
-                        GridLayout:
-                            size_hint_y: None
-                            height: self.minimum_height
-                            cols: 3
-                            row_default_height: 60
-                            adaptive_width: True
-                            MDLabel:
-                                id: 1
-                                text: "[u][ref=world]1[/ref][/u]"
-                                markup : True
-                                theme_text_color: 'Custom'
-                                text_color: app.theme_cls.primary_color
-                                font_size: 20
-                                halign: 'center'
-                                size_hint_x: 0.3
-                                on_ref_press: root.student_details(1)
-                            MDLabel:
-                                text: "E-Resources"
-                                font_size: 20
-                                size_hint_x: 0.3
-                                halign: 'center'
-                            MDLabel:
-                                text: "E-Resources"
-                                font_size: 20
-                                size_hint_x: 0.3
-                                halign: 'center'
-                            
-        MDBottomNavigationItem:
-            name: 'screen 2'
-            text: '2nd year'
-            icon: 'numeric-2-box'
-            on_tab_press: print(self.name)
-            Background:
-            Navbar2:
-            FloatLayout:
-                size: root.width, root.height
+                    md_bg_color: app.theme_cls.primary_color
                 MDLabel:
-                    pos_hint: {'center_x': .5, 'y': .77}
+                    text: "Package"
+                    font_size: 20
                     halign: 'center'
-                    theme_text_color: "Custom"
-                    text_color: 0, 150/255, 136/255, 1
-                    text: "Students"
-                    font_style: 'H6'
-                    padding: (10,15)
+                    md_bg_color: app.theme_cls.primary_color
+            
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True
+                size: (self.parent.width,self.parent.height-60)
+                GridLayout:
+                    id: grid
                     size_hint_y: None
-                    height: self.texture_size[1]
-                    font_size:30
-                MDCard:
-                    size_hint : (0.9,0.7)
-                    pos_hint: {'center_x': .5, 'center_y': .4}
-                    elevation: 20
-                    orientation: 'vertical'
-                    spacing: 2
-                    MDGridLayout:
-                        size: (self.parent.width,60)
-                        height: self.minimum_height
-                        size_hint_x: None
-                        size_hint_y: None
-                        cols: 3
-                        row_default_height: 60
-                        row_force_default: True
-                        adaptive_width: True
-                        MDLabel:
-                            text: "EnrollmentID"
-                            font_size: 20
-                            halign: 'center'
-                            size_hint_x: 0.3
-                            md_bg_color: app.theme_cls.primary_color
-                        MDLabel:
-                            text: "Name"
-                            font_size: 20
-                            size_hint_x: 0.3
-                            halign: 'center'
-                            md_bg_color: app.theme_cls.primary_color
-                        MDLabel:
-                            text: "email"
-                            font_size: 20
-                            size_hint_x: 0.3
-                            halign: 'center'
-                            md_bg_color: app.theme_cls.primary_color
-                    
-                    ScrollView:
-                        do_scroll_x: False
-                        do_scroll_y: True
-                        size: (self.parent.width,self.parent.height-60)
-                        GridLayout:
-                            size_hint_y: None
-                            height: self.minimum_height
-                            cols: 3
-                            row_default_height: 60
-                            adaptive_width: True
-                            MDLabel:
-                                id: 1
-                                text: "[u][ref=world]1[/ref][/u]"
-                                markup : True
-                                theme_text_color: 'Custom'
-                                text_color: app.theme_cls.primary_color
-                                font_size: 20
-                                halign: 'center'
-                                size_hint_x: 0.3
-                                on_ref_press: root.student_details(1)
-                            MDLabel:
-                                text: "E-Resources"
-                                font_size: 20
-                                size_hint_x: 0.3
-                                halign: 'center'
-                            MDLabel:
-                                text: "E-Resources"
-                                font_size: 20
-                                size_hint_x: 0.3
-                                halign: 'center'
-                            
+                    height: self.minimum_height
+                    cols: 3
+                    row_default_height: 60
+                    adaptive_width: True
+
+    MDGridLayout:
+        size_hint: (1,0.07)
+        cols: 4
+        MDRaisedButton:
+            id: 0
+            text: "4th year"
+            font_size: 20
+            md_bg_color: app.theme_cls.accent_color
+            size_hint:None,None
+            size: (self.parent.width/4,self.parent.height)
+            on_press: root.load_students(0)
+        MDRaisedButton:
+            id: 1
+            text: "3rd year"
+            font_size: 20
+            md_bg_color: app.theme_cls.accent_color
+            size_hint:None,None
+            size: (self.parent.width/4,self.parent.height)
+            on_press: root.load_students(1)
+        MDRaisedButton:
+            id: 2
+            text: "2nd year"
+            font_size: 20
+            md_bg_color: app.theme_cls.accent_color
+            size_hint:None,None
+            size: (self.parent.width/4,self.parent.height)
+            on_press: root.load_students(2)
+        MDRaisedButton:
+            id: 3
+            text: "1st year"
+            font_size: 20
+            md_bg_color: app.theme_cls.accent_color
+            size_hint:None,None
+            size: (self.parent.width/4,self.parent.height)
+            on_press: root.load_students(3)
         
-        MDBottomNavigationItem:
-            name: 'screen 1'
-            text: '1st year'
-            icon: 'numeric-1-box'
-            on_tab_press: print(self.name)
-            Background:
-            Navbar2:
-            FloatLayout:
-                size: root.width, root.height
-                MDLabel:
-                    pos_hint: {'center_x': .5, 'y': .77}
-                    halign: 'center'
-                    theme_text_color: "Custom"
-                    text_color: 0, 150/255, 136/255, 1
-                    text: "Students"
-                    font_style: 'H6'
-                    padding: (10,15)
-                    size_hint_y: None
-                    height: self.texture_size[1]
-                    font_size:30
-                MDCard:
-                    size_hint : (0.9,0.7)
-                    pos_hint: {'center_x': .5, 'center_y': .4}
-                    elevation: 20
-                    orientation: 'vertical'
-                    spacing: 2
-                    MDGridLayout:
-                        size: (self.parent.width,60)
-                        height: self.minimum_height
-                        size_hint_x: None
-                        size_hint_y: None
-                        cols: 3
-                        row_default_height: 60
-                        row_force_default: True
-                        adaptive_width: True
-                        MDLabel:
-                            text: "EnrollmentID"
-                            font_size: 20
-                            halign: 'center'
-                            size_hint_x: 0.3
-                            md_bg_color: app.theme_cls.primary_color
-                        MDLabel:
-                            text: "Name"
-                            font_size: 20
-                            size_hint_x: 0.3
-                            halign: 'center'
-                            md_bg_color: app.theme_cls.primary_color
-                        MDLabel:
-                            text: "email"
-                            font_size: 20
-                            size_hint_x: 0.3
-                            halign: 'center'
-                            md_bg_color: app.theme_cls.primary_color
-                    
-                    ScrollView:
-                        do_scroll_x: False
-                        do_scroll_y: True
-                        size: (self.parent.width,self.parent.height-60)
-                        GridLayout:
-                            size_hint_y: None
-                            height: self.minimum_height
-                            cols: 3
-                            row_default_height: 60
-                            adaptive_width: True
-                            MDLabel:
-                                id: 1
-                                text: "[u][ref=world]1[/ref][/u]"
-                                markup : True
-                                theme_text_color: 'Custom'
-                                text_color: app.theme_cls.primary_color
-                                font_size: 20
-                                halign: 'center'
-                                size_hint_x: 0.3
-                                on_ref_press: root.student_details(1)
-                            MDLabel:
-                                text: "E-Resources"
-                                font_size: 20
-                                size_hint_x: 0.3
-                                halign: 'center'
-                            MDLabel:
-                                text: "E-Resources"
-                                font_size: 20
-                                size_hint_x: 0.3
-                                halign: 'center'
-                            
 
-
-
-<Content>:
+<StudentDialog>:
     orientation: "vertical"
     spacing: "8dp"
     size_hint_y: None
     height: 370
     MDTextField:
-        text: "Name"
+        id: dialog_name
+        hint_text: "Name"
     MDTextField:
-        text: "PhoneNo"
+        id: dialog_phone
+        hint_text: "PhoneNo"
     MDTextField:
-        text: "Email"
-    MDTextField:
-        text: "PassYear"
-    MDTextField:
-        text: "Branch"
-    MDTextField:
-        text: "VerifyStatus"
+        id: dialog_email
+        hint_text: "Email"
+    MDGridLayout:
+        cols: 2
+        width: self.parent.width
+        spacing: 20
+        MDLabel:
+            text: "Passing Year"
+        MDRectangleFlatButton:
+            id: dialog_passyear
+            on_release: root.yearmenu.open()
+    MDGridLayout:
+        cols: 2
+        width: self.parent.width
+        spacing: 20
+        MDLabel:
+            text: "Branch"
+        MDRectangleFlatButton:
+            id: dialog_branch
+            on_release: root.branchmenu.open()
     MDRoundFlatButton:
         text: "Edit"
+        on_press: app.root.get_screen('manage_students').edit_student()
+
+<StudentTitle>
+    text: "[u][ref=world]7[/ref][/u]"
+    markup : True
+    theme_text_color: 'Custom'
+    text_color: app.theme_cls.primary_color
+    font_size: 20
+    halign: 'center'
+    size_hint_x: 0.3
+    on_ref_press: app.root.get_screen('manage_students').full_details(self.id)
+
+<StudentLabel>
+    text: "E-Resources"
+    font_size: 20
+    size_hint_x: 0.3
+    halign: 'center'
