@@ -190,7 +190,7 @@ class OfferLetters(Screen):
             self.ids.grid.add_widget(OfferLetterLabel(id=f'{i}',text=f"{str(self.offer_records[i][3])}"))
             self.ids.grid.add_widget(OfferLetterLabel(id=f'{i}',text=f"{self.offer_records[i][4]}"))
         
-    def sort_by_name(self,by):
+    def sort_by(self,by):
         self.offer_records = sorted(self.offer_records,key=lambda x: x[by])
         # adding dynamic data to screen
         self.ids.grid.clear_widgets()
