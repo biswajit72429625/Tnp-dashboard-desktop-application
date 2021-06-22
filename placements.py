@@ -47,4 +47,9 @@ class Placements(Screen):
             view_companies_screen.ids.grid.add_widget(CompanyLabel(id=f'{i}',text=f"{str(self.company_records[i][5])}"))
             view_companies_screen.ids.grid.add_widget(CompanyLabel(id=f'{i}',text=f"{self.company_records[i][2]}"))
 
-
+    def load_students(self):
+        # loads data of 4th year
+        student_screen = self.manager.get_screen("manage_students")
+        student_screen.load_students(0)
+        self.manager.current = 'manage_students'
+        self.manager.stack.append(self.name)

@@ -137,6 +137,8 @@ class ViewEresources(Screen):
         abc = self.all_id
         del abc[1]
         disable_toggler(self.dialog_data,abc,False)
+        for i in abc:
+            self.dialog_data.ids[i].line_color_normal = flags.app.theme_cls.primary_color
 
     def show_date_picker(self):
         # picks date

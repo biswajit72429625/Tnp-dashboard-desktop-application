@@ -28,7 +28,7 @@ class ForgotPass(Screen):
                 with smtplib.SMTP_SSL('smtp.gmail.com',465) as server:
                     server.login(config("email"),config("email_password"))
                     server.send_message(msg)
-                    show_alert_dialog(self,'OTP sent to mail id')
+                    show_alert_dialog(self,'OTP sent to mail id. (Check spam as well!)')
             except Exception:
                 show_alert_dialog(self,'Couldnt send OTP due to an error')
 
@@ -40,6 +40,7 @@ class ForgotPass(Screen):
             self.ids.new_pass.disabled = False
             self.ids.confirm_pass.disabled = False
             self.ids.change.disabled = False
+            show_alert_dialog(self,'Email verified')
         else:
             show_alert_dialog(self,'Incorrect OTP')
 
