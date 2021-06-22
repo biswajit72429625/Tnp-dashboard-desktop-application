@@ -137,8 +137,9 @@ class ManageStudents(Screen):
             self.ids.grid.add_widget(StudentLabel(id=f'{i}',text=f"{self.student_records[i][3]}"))
 
     def full_details(self,id):
-        # shows all details of e_resource in a dialog box
-        self.id = int(id)# create insatance of dialog box,  fill in data and disable everything
+        # shows all details of student in a dialog box
+        self.id = int(id)
+        # create insatance of dialog box,  fill in data and disable everything
         self.dialog_data = StudentDialog()
         self.dialog_data.ids.dialog_name.text = self.student_records[self.id][1]
         self.dialog_data.ids.dialog_phone.text = self.student_records[self.id][2]
@@ -149,19 +150,19 @@ class ManageStudents(Screen):
         # disabling data
         disable_toggler(self.dialog_data,self.all_id,True)
         # shows all details of e_resource in a dialog box
-        self.dialog = MDDialog(
+        self.detail_dialog = MDDialog(
             title=str(self.student_records[self.id][0]),
             type="custom",
             content_cls=self.dialog_data,
             buttons=[
                     MDRoundFlatButton(text="CANCEL",on_press=self.dismiss_dialog),
-                    MDRoundFlatButton(text="SAVE", on_press= self.save_dialog_again),
+                    MDRoundFlatButton(text="SAVE", on_press= self.save_dialog),
                 ]
         )
-        self.dialog.open()
+        self.detail_dialog.open()
 
     def dismiss_dialog(self,instance):
-        self.dialog.dismiss()
+        self.detail_dialog.dismiss()
 
     def edit_student(self):
         # enables all input fields to edit students
@@ -170,9 +171,9 @@ class ManageStudents(Screen):
     def save_dialog(self,instance):
         # if widgets are not disabled, modify the database
         if not self.dialog_data.ids.dialog_name.disabled:
-            self.name = self.dialog_data.ids.dialog_name.text
+            self.stud_name = self.dialog_data.ids.dialog_name.text
             # checking name constraint
-            if len(self.name)==0 or len(self.name) > 60:
+            if len(self.stud_name)==0 or len(self.stud_name) > 60:
                 show_alert_dialog(self.dialog_data,"enter name in length range 1 to 60")
                 return
             self.phone = self.dialog_data.ids.dialog_phone.text
@@ -203,38 +204,15 @@ class ManageStudents(Screen):
             # connecting to database
             my_db, my_cursor = db_connector()
             query = f"UPDATE students SET stud_name = %s, stud_phone_no = %s, stud_email = %s,pass_year = %s, branch = %s WHERE enrollment_id = {self.student_records[self.id][0]}"
-            print(self.name,self.phone, self.email, self.passyear, self.branch, self.student_records[self.id][0])
-            values = (self.name,self.phone, self.email, self.passyear, self.branch)
+            values = (self.stud_name,self.phone, self.email, self.passyear, self.branch)
             my_cursor.execute(query,values)
             my_db.commit()
             # closing dialog
-            self.dismiss_dialog(self.dialog)
+            self.dismiss_dialog(self.detail_dialog)
             # showing message as modified successfully
             show_alert_dialog(self,"Modified Student")
             # going to home_screen
             self.manager.callback()
         else:
             # else close dialog
-            self.dismiss_dialog(self.dialog)
-
-    def save_dialog_again(self,instance):
-        if not self.dialog_data.ids.dialog_name.disabled:
-            self.name = self.dialog_data.ids.dialog_name.text
-            self.phone = self.dialog_data.ids.dialog_phone.text
-            self.email = self.dialog_data.ids.dialog_email.text
-            self.passyear = self.dialog_data.ids.dialog_passyear.text
-            self.branch = self.dialog_data.ids.dialog_branch.text
-            for k,v in flags.branch.items():
-                if v==self.branch:
-                    self.branch = k
-                    break
-            my_db, my_cursor = db_connector()
-            query = f"UPDATE students SET stud_name = %s, stud_phone_no = %s, stud_email = %s, pass_year = %s, branch = %s where enrollment_id = %s;"
-            values = (self.name, self.phone, self.email, self.passyear, self.branch, self.student_records[self.id][0])
-            my_cursor.execute(query,values)
-            my_db.commit()
-            self.dismiss_dialog(self.dialog)
-            show_alert_dialog(self,"Student modified successfully!")
-            self.manager.callback()
-        else:
-            self.dismiss_dialog(self.dialog)
+            self.dismiss_dialog(self.detail_dialog)
