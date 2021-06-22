@@ -51,5 +51,8 @@ class Placements(Screen):
         # loads data of 4th year
         student_screen = self.manager.get_screen("manage_students")
         student_screen.load_students(0)
-        self.manager.current = 'manage_students'
-        self.manager.stack.append(self.name)
+
+    def load_offer(self):
+        # loads offer letter of 4th year
+        offer_letter_screen = self.manager.get_screen("offer_letters")
+        offer_letter_screen.load_offer(0)
