@@ -38,14 +38,14 @@ class ViewCompanies(Screen):
                 
                 "text": i[0],
                 "viewclass": "OneLineListItem",
-                "on_release": lambda x=i[0]: self.menu_callback(x),
+                "on_release": lambda x=i[0]: self.edit_menu_callback(x),
             }
             self.menu_items.append(temp)
         temp = {
                 
                 "text": "other",
                 "viewclass": "OneLineListItem",
-                "on_release": lambda x="other": self.menu_callback(x),
+                "on_release": lambda x="other": self.edit_menu_callback(x),
             }
         self.menu_items.append(temp)
         # creating instance of of dialog box, fill in data and disable everything
@@ -73,7 +73,7 @@ class ViewCompanies(Screen):
         )
         self.dialog.open()
 
-    def menu_callback(self, text_item):
+    def edit_menu_callback(self, text_item):
         # sets dropdown wale as text of button and closes dropdown menu
         self.dialog_data.ids.dialog_role_spinner.text = text_item
         if text_item == 'other':
