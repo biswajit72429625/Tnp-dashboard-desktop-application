@@ -3,7 +3,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivymd.uix.button import MDRoundFlatButton
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.menu import MDDropdownMenu
-from database import db_connector, show_alert_dialog, disable_toggler
+from database import show_alert_dialog, disable_toggler
 from functools import partial
 import flags
 
@@ -27,7 +27,8 @@ class ViewCompanies(Screen):
         self.id = int(row_id)
         self.records = self.manager.get_screen('placements').company_records[self.id]
         # for fetching list of roles form db and giving a dropdown menu
-        my_db, my_cursor = db_connector()
+        # my_db, my_cursor = db_connector()
+        my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         query = f"select Distinct(role) from company ;"
         my_cursor.execute(query)
         self.menu = my_cursor.fetchall()
@@ -89,7 +90,8 @@ class ViewCompanies(Screen):
         self.dialog.dismiss()
 
     def menu_for_add_company(self):
-        my_db, my_cursor = db_connector()
+        # my_db, my_cursor = db_connector()
+        my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         query = f"select Distinct(role) from company ;"
         my_cursor.execute(query)
         self.menu = my_cursor.fetchall()
@@ -168,7 +170,8 @@ class ViewCompanies(Screen):
             else:
                 self.platform = None
             # connecting to database
-            my_db, my_cursor = db_connector()
+            # my_db, my_cursor = db_connector()
+            my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
             query = f"UPDATE company SET package = %s, platform = %s, website = %s, role = %s where company_id = %s"
             values = (self.package, self.platform, self.website, self.role, self.records[0])
             my_cursor.execute(query,values)
@@ -203,7 +206,8 @@ class ViewCompanies(Screen):
     def confirm_delete_dialog(self,checks,records,instance):
         # confirm delete from database
         self.dismiss_delete_dialog(self.delete_dialog)
-        my_db, my_cursor = db_connector()
+        # my_db, my_cursor = db_connector()
+        my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         for i in checks: 
             if i.active:
                 my_cursor.execute(f'DELETE FROM company WHERE company_id={records[int(i.id)][0]};')

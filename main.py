@@ -27,12 +27,14 @@ from forgot_pass import ForgotPass
 ########## other packages ##################
 from os import listdir
 import flags
+from database import db_connector
 ################################################
 
 class Manager(ScreenManager):
     stack = []
     def __init__(self, *args):
         super(Manager, self).__init__(*args)
+        self.my_db, self.my_cursor = db_connector()
         self.transition = CardTransition()
         # add all screens from here
         self.add_widget(Login(name='login'))

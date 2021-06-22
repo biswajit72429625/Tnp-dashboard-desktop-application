@@ -1,9 +1,9 @@
-from functools import partialmethod
+# from functools import partialmethod
 from kivy.uix.screenmanager import Screen
 from kivymd.uix.filemanager import MDFileManager
-from database import db_connector,show_alert_dialog
-from datetime import datetime, date
-import flags
+from database import show_alert_dialog
+# from datetime import datetime, date
+# import flags
 import pandas as pd
 
 
@@ -25,7 +25,8 @@ class FinalizeOffer(Screen):
         self.manager_open = True
 
     def select_path(self, path):
-        my_db, my_cursor = db_connector()
+        # my_db, my_cursor = db_connector()
+        my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         df=pd.read_excel(path)
         enroll=list(df['enrollment id'])
         comp=list(df['company name'])

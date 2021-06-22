@@ -1,7 +1,7 @@
 from kivy.uix.screenmanager import Screen
 from kivymd.uix.picker import MDDatePicker,MDTimePicker 
 from kivymd.uix.menu import MDDropdownMenu
-from database import show_alert_dialog,db_connector
+from database import show_alert_dialog
 from datetime import datetime, date
 import flags
 class AddEresources(Screen):
@@ -97,7 +97,8 @@ class AddEresources(Screen):
         if date_time!='Select Date Select Time':
             self.date= datetime.strptime(date_time,"%Y-%m-%d %H:%M:%S")
        #connecting to database
-        my_db, my_cursor = db_connector()
+        # my_db, my_cursor = db_connector()
+        my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         for k,v in flags.branch.items():
             if v==flags.app.officer_branch:
                 branch=k

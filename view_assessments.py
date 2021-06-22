@@ -6,7 +6,7 @@ from kivymd.uix.picker import MDDatePicker
 from kivymd.uix.picker import MDTimePicker
 from kivymd.uix.menu import MDDropdownMenu
 from datetime import datetime, date
-from database import db_connector, disable_toggler, show_alert_dialog
+from database import disable_toggler, show_alert_dialog
 import flags
 from functools import partial
 
@@ -106,7 +106,8 @@ class ViewAssessments(Screen):
             self.visible = datetime.strptime(date_time,'%Y-%m-%d %H:%M:%S')
             self.resultlink=self.dialog_data.ids.dialog_resultlink.text
             # connecting to database
-            my_db, my_cursor = db_connector()
+            # my_db, my_cursor = db_connector()
+            my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
             query = f"UPDATE assessment SET pass_year = %s, organizer = %s, link = %s,visible = %s, result_link = %s WHERE id = {self.records[0]}"
             values = (self.passyear, self.organizer, self.link, self.visible, self.resultlink)
             my_cursor.execute(query,values)
@@ -184,7 +185,8 @@ class ViewAssessments(Screen):
     def confirm_delete_dialog(self,checks,records,instance):
         # confirm delete from database
         self.dismiss_delete_dialog(self.delete_dialog)
-        my_db, my_cursor = db_connector()
+        # my_db, my_cursor = db_connector()
+        my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         for i in checks: 
             if i.active:
                 my_cursor.execute(f'DELETE FROM assessment WHERE id={records[int(i.id)][0]};')
