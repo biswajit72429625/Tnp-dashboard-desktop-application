@@ -22,6 +22,7 @@ from offer_letters import OfferLetters
 from finalize_offer import FinalizeOffer
 from analysis import Analysis
 from forgot_pass import ForgotPass
+from individual_level import IndividualLevel
 #################################################
 
 ########## other packages ##################
@@ -52,6 +53,7 @@ class Manager(ScreenManager):
         self.add_widget(FinalizeOffer(name='finalize_offer'))
         self.add_widget(Analysis(name='analysis'))
         self.add_widget(ForgotPass(name='forgot_pass'))
+        self.add_widget(IndividualLevel(name='individual_level'))
     
     def callback(self):
         # stack for back button

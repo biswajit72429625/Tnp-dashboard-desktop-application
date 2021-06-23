@@ -64,7 +64,7 @@ class OfferLetters(Screen):
         self.dialog_data.ids.dialog_company_role.text = self.offer_records[self.id][4]
         self.dialog_data.ids.dialog_company_package.text = str(self.offer_records[self.id][5])
         self.dialog_data.ids.dialog_company_platform.text = "On-Campus" if self.offer_records[self.id][6] == '' else "Off-Campus"
-        self.dialog_data.ids.dialog_offer_link.text = self.offer_records[self.id][7]
+        # self.dialog_data.ids.dialog_offer_link.text = self.offer_records[self.id][7]
         self.dialog_data.ids.dialog_date_of_interview.text = str(self.offer_records[self.id][8])
         self.dialog_data.ids.dialog_date_of_offer_letter.text = str(self.offer_records[self.id][9])
         self.dialog_data.ids.dialog_finalised.text = "Confirmed" if self.offer_records[self.id][10] == '' else "Not-Confirmed"
