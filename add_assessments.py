@@ -2,8 +2,8 @@ from kivy.uix.screenmanager import Screen
 from kivymd.uix.picker import MDDatePicker
 from kivymd.uix.picker import MDTimePicker
 from kivymd.uix.menu import MDDropdownMenu
-from datetime import date,datetime
-from database import db_connector,show_alert_dialog
+from datetime import date
+from database import show_alert_dialog
 import flags
 
 
@@ -104,7 +104,8 @@ class AddAssessments(Screen):
             return'''
 
        #connecting to database
-        my_db, my_cursor = db_connector()
+        # my_db, my_cursor = db_connector()
+        my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         for k,v in flags.branch.items():
             if v==flags.app.officer_branch:
                 branch=k

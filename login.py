@@ -1,7 +1,7 @@
 from kivy.uix.screenmanager import Screen
 from kivymd.app import MDApp
 from kivy.properties import ObjectProperty
-from database import db_connector, show_alert_dialog
+from database import show_alert_dialog
 import flags
 import bcrypt
 class Login(Screen):
@@ -19,7 +19,8 @@ class Login(Screen):
         self.email = self.ids.email.text
         self.password = self.ids.password.text
         # connecting to database
-        my_db, my_cursor = db_connector()
+        # my_db, my_cursor = db_connector()
+        my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         my_cursor.execute(f"SELECT name,password,branch from officer where email='{self.email}';")
         try:
             # if email found, continue

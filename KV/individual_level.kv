@@ -1,0 +1,253 @@
+#:kivy 2.0.0
+<IndividualLevel>
+    Background:
+    Navbar:
+    FloatLayout:
+        size: root.width, root.height
+        MDLabel:
+            pos_hint: {'center_x': .5, 'y': .77}
+            halign: 'center'
+            theme_text_color: "Custom"
+            text_color: 0, 150/255, 136/255, 1
+            text: "Individual level analysis"
+            font_style: 'H6'
+            padding: (10,15)
+            size_hint_y: None
+            height: self.texture_size[1]
+            font_size:30
+        MDCard:
+            size_hint : (0.9,0.7)
+            pos_hint: {'center_x': .5, 'center_y': .45}
+            elevation: 20
+            orientation: 'vertical'
+            spacing: 2
+            MDGridLayout:
+                size: (self.parent.width,60)
+                height: self.minimum_height
+                size_hint_x: None
+                size_hint_y: None
+                cols: 5
+                row_default_height: 60
+                row_force_default: True
+                adaptive_width: True
+                MDLabel:
+                    text: "Enrollment ID"
+                    font_size: 20
+                    halign: 'center'
+                    md_bg_color: app.theme_cls.primary_color
+                MDLabel:
+                    text: "Name"
+                    font_size: 20
+                    halign: 'center'
+                    md_bg_color: app.theme_cls.primary_color
+                MDLabel:
+                    text: "Company"
+                    font_size: 20
+                    halign: 'center'
+                    md_bg_color: app.theme_cls.primary_color
+                MDLabel:
+                    text: "Role"
+                    font_size: 20
+                    halign: 'center'
+                    md_bg_color: app.theme_cls.primary_color
+                MDLabel:
+                    text: "Package"
+                    font_size: 20
+                    halign: 'center'
+                    md_bg_color: app.theme_cls.primary_color
+            
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True
+                size: (self.parent.width,self.parent.height-60)
+                GridLayout:
+                    id: grid
+                    size_hint_y: None
+                    height: self.minimum_height
+                    cols: 5
+                    row_default_height: 60
+                    adaptive_width: True
+
+    MDRectangleFlatIconButton:
+        icon: "file-export-outline"
+        text: "Export Excel"
+        font_size: 20
+        md_bg_color: app.theme_cls.accent_color
+        size_hint:None,None
+        pos_hint: {'center_x': .9, 'center_y':.05}
+        on_press: root.export()
+        
+
+<IndividualDialog>:
+    orientation: "vertical"
+    spacing: "8dp"
+    size_hint_y: None
+    height: 370
+    GridLayout:
+        cols: 2
+        spacing : 20
+        MDTextField:
+            id: dialog_student_name
+            hint_text: "Student Name"
+            disabled: True
+        MDTextField:
+            id: dialog_student_email
+            hint_text: "Student Email"
+            disabled: True
+    MDTextField:
+        id: dialog_company_name
+        hint_text: "Company Name"
+        disabled: True
+    GridLayout:
+        cols: 3
+        spacing : 10
+        MDTextField:
+            id: dialog_company_role
+            hint_text: "Role"
+            disabled: True
+        MDTextField:
+            id: dialog_company_package
+            hint_text: "Package"
+            disabled: True
+        MDTextField:
+            id: dialog_company_platform
+            hint_text: "Platform"
+            disabled: True
+    GridLayout:
+        cols: 2
+        spacing : 20
+        MDRectangleFlatIconButton:
+            id: dialog_website_link
+            text: "Company Website"
+            icon: "web"
+            on_press: webbrowser.open(app.root.get_screen('individual_level').finalised_records[app.root.get_screen('individual_level').id][7])
+        MDRectangleFlatIconButton:
+            text: "Offer Letter"
+            id: dialog_offer_link
+            icon: "link-variant"
+            on_press: webbrowser.open(app.root.get_screen('individual_level').finalised_records[app.root.get_screen('individual_level').id][8])
+    GridLayout:
+        cols: 2
+        spacing : 20
+        MDTextField:
+            id: dialog_date_of_interview
+            hint_text: "Date of Interview"
+            disabled: True
+        MDTextField:
+            id: dialog_date_of_offer_letter
+            hint_text: "Date of Offer Letter"
+            disabled: True
+
+<IndividualTitle>
+    text: "[u][ref=world]7[/ref][/u]"
+    markup : True
+    theme_text_color: 'Custom'
+    text_color: app.theme_cls.primary_color
+    font_size: 20
+    halign: 'center'
+    size_hint_x: 0.3
+    on_ref_press: app.root.get_screen('individual_level').full_details(self.id)
+
+<IndividualLabel>
+    text: "E-Resources"
+    font_size: 20
+    size_hint_x: 0.3
+    halign: 'center'
+
+<ExportDialog>:
+    orientation: "vertical"
+    spacing: "8dp"
+    size_hint_y: None
+    halign: 'center'
+    height: 370
+    GridLayout:
+        cols: 2
+        spacing : 20
+        GridLayout:
+            cols: 2
+            spacing : 20
+            MDSwitch:
+                id: st.enrollment_id
+            MDLabel:
+                text: "Enrollment ID"
+        GridLayout:
+            cols: 2
+            spacing : 20
+            MDSwitch:
+                id: st.stud_name
+            MDLabel:
+                text: "Student Name"
+        GridLayout:
+            cols: 2
+            spacing : 20
+            MDSwitch:
+                id: st.stud_phone_no
+            MDLabel:
+                text: "Student Phone No"
+        GridLayout:
+            cols: 2
+            spacing : 20
+            MDSwitch:
+                id: st.stud_email
+            MDLabel:
+                text: "Student Email"
+        GridLayout:
+            cols: 2
+            spacing : 20
+            MDSwitch:
+                id: co.name
+            MDLabel:
+                text: "Company name"
+        GridLayout:
+            cols: 2
+            spacing : 20
+            MDSwitch:
+                id: co.role
+            MDLabel:
+                text: "Company role"
+        GridLayout:
+            cols: 2
+            spacing : 20
+            MDSwitch:
+                id: co.package
+            MDLabel:
+                text: "Company package"
+        GridLayout:
+            cols: 2
+            spacing : 20
+            MDSwitch:
+                id: co.platform
+            MDLabel:
+                text: "Company platform"
+        GridLayout:
+            cols: 2
+            spacing : 20
+            MDSwitch:
+                id: co.website
+            MDLabel:
+                text: "Company Website"
+        GridLayout:
+            cols: 2
+            spacing : 20
+            MDSwitch:
+                id: ol.link
+            MDLabel:
+                text: "Offer Letter Link"
+        GridLayout:
+            cols: 2
+            spacing : 20
+            MDSwitch:
+                id: ol.date_of_interview
+            MDLabel:
+                text: "Date of Interview"
+        GridLayout:
+            cols: 2
+            spacing : 20
+            MDSwitch:
+                id: ol.date_of_offer
+            MDLabel:
+                text: "Date of offer letter"
+    
+    
+    
+            

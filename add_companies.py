@@ -1,5 +1,5 @@
 from kivy.uix.screenmanager import Screen
-from database import db_connector, show_alert_dialog
+from database import show_alert_dialog
 import re
 import flags
 
@@ -50,7 +50,8 @@ class AddCompanies(Screen):
             type = ''
         else:
             type = None
-        my_db, my_cursor = db_connector()
+        # my_db, my_cursor = db_connector()
+        my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         for k,v in flags.branch.items():
             if v==flags.app.officer_branch:
                 branch=k

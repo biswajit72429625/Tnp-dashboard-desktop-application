@@ -2,7 +2,6 @@ from kivy.uix.screenmanager import Screen
 from kivy.properties import StringProperty
 from kivymd.uix.label import MDLabel
 from kivymd.uix.selectioncontrol import MDCheckbox
-from database import db_connector
 import flags
 
 class EResourceTitle(MDLabel):
@@ -34,7 +33,8 @@ class HomePage(Screen):
 
     def load_eresource(self):
         # loads e_resources screen
-        my_db, my_cursor = db_connector()
+        # my_db, my_cursor = db_connector()
+        my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         # select branch by officer_branch
         branch = flags.app.officer_branch
         for key, value in flags.branch.items():
@@ -61,7 +61,8 @@ class HomePage(Screen):
 
     def load_assessment(self):
         # loads assessments screen
-        my_db, my_cursor = db_connector()
+        # my_db, my_cursor = db_connector()
+        my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         branch = flags.app.officer_branch
         for key, value in flags.branch.items():
             if branch == value:

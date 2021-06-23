@@ -5,7 +5,7 @@ from kivymd.uix.dialog import MDDialog
 from kivymd.uix.menu import MDDropdownMenu
 from kivy.properties import StringProperty
 from kivymd.uix.label import MDLabel
-from database import db_connector, disable_toggler, show_alert_dialog
+from database import disable_toggler, show_alert_dialog
 from datetime import date
 import re
 import flags
@@ -117,7 +117,8 @@ class ManageStudents(Screen):
                 self.ids[str(year)].md_bg_color = flags.app.theme_cls.primary_color
             else:
                 self.ids[str(i)].md_bg_color = flags.app.theme_cls.accent_color
-        my_db, my_cursor = db_connector()
+        # my_db, my_cursor = db_connector()
+        my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         # select branch by officer_branch
         branch = flags.app.officer_branch
         for key, value in flags.branch.items():
@@ -202,7 +203,8 @@ class ManageStudents(Screen):
                     self.branch=k
                     break
             # connecting to database
-            my_db, my_cursor = db_connector()
+            # my_db, my_cursor = db_connector()
+            my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
             query = f"UPDATE students SET stud_name = %s, stud_phone_no = %s, stud_email = %s,pass_year = %s, branch = %s WHERE enrollment_id = {self.student_records[self.id][0]}"
             values = (self.stud_name,self.phone, self.email, self.passyear, self.branch)
             my_cursor.execute(query,values)

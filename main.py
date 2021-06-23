@@ -22,17 +22,20 @@ from offer_letters import OfferLetters
 from finalize_offer import FinalizeOffer
 from analysis import Analysis
 from forgot_pass import ForgotPass
+from individual_level import IndividualLevel
 #################################################
 
 ########## other packages ##################
 from os import listdir
 import flags
+from database import db_connector
 ################################################
 
 class Manager(ScreenManager):
     stack = []
     def __init__(self, *args):
         super(Manager, self).__init__(*args)
+        self.my_db, self.my_cursor = db_connector()
         self.transition = CardTransition()
         # add all screens from here
         self.add_widget(Login(name='login'))
@@ -50,6 +53,7 @@ class Manager(ScreenManager):
         self.add_widget(FinalizeOffer(name='finalize_offer'))
         self.add_widget(Analysis(name='analysis'))
         self.add_widget(ForgotPass(name='forgot_pass'))
+        self.add_widget(IndividualLevel(name='individual_level'))
     
     def callback(self):
         # stack for back button

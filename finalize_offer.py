@@ -1,4 +1,4 @@
-from functools import partialmethod
+# from functools import partialmethod
 from kivy.uix.screenmanager import Screen
 from kivymd.uix.filemanager import MDFileManager
 from database import db_connector,show_alert_dialog
@@ -31,7 +31,8 @@ class FinalizeOffer(Screen):
         self.manager_open = True
 
     def select_path(self, path):
-        my_db, my_cursor = db_connector()
+        # my_db, my_cursor = db_connector()
+        my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         df=pd.read_excel(path)
         enroll=list(df['enrollment id'])
         comp=list(df['company name'])
@@ -52,15 +53,6 @@ class FinalizeOffer(Screen):
             my_cursor.execute(qu,va)
             my_db.commit()
         show_alert_dialog(self,'Database Updated!!!')
-            
-        
-
-
-            
-
-        
-        
-        
 
         self.exit_manager()
         

@@ -1,5 +1,5 @@
 from kivy.uix.screenmanager import Screen
-from database import db_connector, show_alert_dialog
+from database import show_alert_dialog
 from decouple import config
 import random as r
 import smtplib
@@ -11,7 +11,8 @@ class ForgotPass(Screen):
     
     def send_mail(self):
         self.officer_email = self.ids.email.text
-        my_db, my_cursor = db_connector()
+        # my_db, my_cursor = db_connector()
+        my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         my_cursor.execute(f"select id from officer where email ='{self.officer_email}';")
         records = my_cursor.fetchall()
         if records:
@@ -48,7 +49,8 @@ class ForgotPass(Screen):
         if self.ids.new_pass.text == self.ids.confirm_pass.text:
             self.password = self.ids.new_pass.text
             hashed = bcrypt.hashpw(self.password.encode('ascii'),bcrypt.gensalt()).decode('ascii')
-            my_db, my_cursor = db_connector()
+            # my_db, my_cursor = db_connector()
+            my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
             my_cursor.execute(f"update officer set password = '{hashed}' where id = {self.officer_id};")
             my_db.commit()
             show_alert_dialog(self,'Password changed successfully')

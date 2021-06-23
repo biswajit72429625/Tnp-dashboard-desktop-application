@@ -150,7 +150,8 @@
     MDRectangleFlatIconButton:
         id: dialog_offer_link
         icon: "link-variant"
-        on_press: webbrowser.open(self.text)
+        text: "Offer Letter"
+        on_press: webbrowser.open(app.root.get_screen('offer_letters').offer_records[app.root.get_screen('offer_letters').id][7])
     GridLayout:
         cols: 2
         spacing : 20

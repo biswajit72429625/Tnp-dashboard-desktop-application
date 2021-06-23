@@ -1,7 +1,6 @@
 from kivy.uix.screenmanager import Screen
 from kivymd.uix.menu import MDDropdownMenu
-from kivymd.app import MDApp
-from database import db_connector, show_alert_dialog
+from database import show_alert_dialog
 from login import Login
 import flags
 import bcrypt
@@ -100,7 +99,8 @@ class TpoRegister(Screen):
         if (self.ids.dropdown_item.text=="Choose Department"):#check dpartment
             show_alert_dialog(self,"Please Select Department")
             return
-        my_db, my_cursor = db_connector()
+        # my_db, my_cursor = db_connector()
+        my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         qur='select name,email from officer'
         my_cursor.execute(qur)
         for i in my_cursor:
@@ -140,7 +140,8 @@ class TpoRegister(Screen):
     #sending mail to verify
     def send_mail(self):
         self.officer_email = self.ids.email.text
-        my_db, my_cursor = db_connector()
+        # my_db, my_cursor = db_connector()
+        my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         my_cursor.execute(f"select id from officer where email ='{self.officer_email}';")
         records = my_cursor.fetchall()
         if records:

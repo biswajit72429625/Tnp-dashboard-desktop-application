@@ -7,7 +7,7 @@ from kivymd.uix.label import MDLabel
 from kivy.properties import StringProperty
 import flags
 from datetime import date
-from database import db_connector, disable_toggler, show_alert_dialog, get_close_matches_indexes
+from database import disable_toggler, show_alert_dialog, get_close_matches_indexes
 
 class OfferDialog(BoxLayout):
     pass
@@ -64,7 +64,7 @@ class OfferLetters(Screen):
         self.dialog_data.ids.dialog_company_role.text = self.offer_records[self.id][4]
         self.dialog_data.ids.dialog_company_package.text = str(self.offer_records[self.id][5])
         self.dialog_data.ids.dialog_company_platform.text = "On-Campus" if self.offer_records[self.id][6] == '' else "Off-Campus"
-        self.dialog_data.ids.dialog_offer_link.text = self.offer_records[self.id][7]
+        # self.dialog_data.ids.dialog_offer_link.text = self.offer_records[self.id][7]
         self.dialog_data.ids.dialog_date_of_interview.text = str(self.offer_records[self.id][8])
         self.dialog_data.ids.dialog_date_of_offer_letter.text = str(self.offer_records[self.id][9])
         self.dialog_data.ids.dialog_finalised.text = "Confirmed" if self.offer_records[self.id][10] == '' else "Not-Confirmed"
@@ -100,7 +100,8 @@ class OfferLetters(Screen):
                 self.ids[str(year)].md_bg_color = flags.app.theme_cls.primary_color
             else:
                 self.ids[str(i)].md_bg_color = flags.app.theme_cls.accent_color
-        my_db, my_cursor = db_connector()
+        # my_db, my_cursor = db_connector()
+        my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         # select branch by officer_branch
         branch = flags.app.officer_branch
         for key, value in flags.branch.items():
@@ -132,7 +133,8 @@ class OfferLetters(Screen):
     def save_dialog(self,instance):
         if not self.dialog_data.ids.dialog_finalised.disabled:
             finalised = '' if self.dialog_data.ids.dialog_finalised.text == "Confirmed" else None
-            my_db, my_cursor = db_connector()
+            # my_db, my_cursor = db_connector()
+            my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
             query = "update offer_letters set finalised = %s where enrollment_id = %s and company_id = (select company_id from company where name = %s and role = %s);"
             values = (finalised,self.offer_records[self.id][0], self.offer_records[self.id][3], self.offer_records[self.id][4])
             my_cursor.execute(query,values)
@@ -162,7 +164,8 @@ class OfferLetters(Screen):
                 branch = key
                 break
         # lists all records in database
-        my_db, my_cursor = db_connector()
+        # my_db, my_cursor = db_connector()
+        my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         query = '''
             select st.enrollment_id, st.stud_name, st.stud_email, co.name, co.role, co.package, co.platform, ol.link, ol.date_of_interview, ol.date_of_offer, ol.finalised
             from offer_letters as ol
