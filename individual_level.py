@@ -4,9 +4,17 @@ from kivy.uix.boxlayout import BoxLayout
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDRoundFlatButton
 from kivy.properties import StringProperty
+from openpyxl import Workbook
+from openpyxl.worksheet.dimensions import ColumnDimension
+from database import show_alert_dialog
+from datetime import date
 import flags
+from os import getlogin
 
 class IndividualDialog(BoxLayout):
+    pass
+
+class ExportDialog(BoxLayout):
     pass
 
 class IndividualTitle(MDLabel):
@@ -79,4 +87,73 @@ class IndividualLevel(Screen):
         self.dialog.open()
 
     def dismiss_dialog(self,instance):
+        # closes full details dialog
         self.dialog.dismiss()
+
+    def export(self):
+        self.export_data = ExportDialog()
+        self.export_dialog = MDDialog(
+            title="Export Columns",
+            type="custom",
+            content_cls=self.export_data,
+            buttons=[
+                    MDRoundFlatButton(text="CANCEL",on_press=self.dismiss_export_dialog),
+                    MDRoundFlatButton(text="EXPORT",on_press=self.make_excel)
+                ]
+        )
+        self.export_dialog.open()
+
+    def dismiss_export_dialog(self,instance):
+        # closes full details dialog
+        self.export_dialog.dismiss()
+
+    def make_excel(self, instance):
+        my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
+        # select branch by officer_branch
+        branch = flags.app.officer_branch
+        for key, value in flags.branch.items():
+            if branch == value:
+                branch = key
+                break
+        # retrive dynamiv column names
+        columns = ""
+        for i in self.export_data.ids.keys():
+            if self.export_data.ids[i].active:
+                columns+=i+","
+        columns = columns[:-1]
+        # execute query
+        query = "SELECT "+columns+f'''
+            from offer_letters as ol
+            inner join students as st on ol.enrollment_id = st.enrollment_id
+            inner join company as co on ol.company_id = co.company_id
+            where st.pass_year = YEAR(CURDATE()) and st.branch= {branch} and ol.finalised is not NULL;
+            '''
+        my_cursor.execute(query)
+        # retrive data
+        data=my_cursor.fetchall()
+        sheet_title = "Passout "+str(date.today().year)
+        wb = Workbook()
+        wb['Sheet'].title = sheet_title
+        sh1 = wb.active
+        header = columns.split(',')
+        for i in range(len(header)):
+            sh1[chr(ord('A')+i)+'1'].value = header[i][3:]
+        for i in range(len(data)):
+            for ii in range(len(header)):
+                sh1[chr(ord('A')+ii)+str(2+i)].value = data[i][ii]
+        # resiszing colun width
+        for col in sh1.columns:
+            max_length = 0
+            column = col[0].column_letter # Get the column name
+            for cell in col:
+                try: # Necessary to avoid error on empty cells
+                    if len(str(cell.value)) > max_length:
+                        max_length = len(str(cell.value))
+                except Exception:
+                    pass
+            adjusted_width = (max_length + 2) * 1.2
+            sh1.column_dimensions[column].width = adjusted_width
+        wb.save(f"C:\\Users\\{getlogin()}\\Downloads\\test.xlsx")
+        show_alert_dialog(self,"File saved to Downloads folder")
+        self.dismiss_export_dialog(self.export_dialog)
+        

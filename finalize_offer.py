@@ -21,7 +21,7 @@ class FinalizeOffer(Screen):
     
 
     def file_manager_open(self):
-        self.file_manager.show(r'D:\resume')
+        self.file_manager.show(r'D:\\')
         self.manager_open = True
 
     def select_path(self, path):
@@ -39,10 +39,7 @@ class FinalizeOffer(Screen):
             my_cursor.execute(que,val)
             for j in my_cursor:
                 cid.append(j[0])
-            
 
-            
-        
         for i in range(len(enroll)):
             print(i,j)
             qu="update offer_letters set finalised='' where enrollment_id=%s and company_id=%s ;"
@@ -50,15 +47,6 @@ class FinalizeOffer(Screen):
             my_cursor.execute(qu,va)
             my_db.commit()
         show_alert_dialog(self,'Database Updated!!!')
-            
-        
-
-
-            
-
-        
-        
-        
 
         self.exit_manager()
         print(path)

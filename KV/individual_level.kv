@@ -70,12 +70,12 @@
 
     MDRectangleFlatIconButton:
         icon: "file-export-outline"
-        text: "Export CSV"
+        text: "Export Excel"
         font_size: 20
         md_bg_color: app.theme_cls.accent_color
         size_hint:None,None
         pos_hint: {'center_x': .9, 'center_y':.05}
-        on_press: root.export_data()
+        on_press: root.export()
         
 
 <IndividualDialog>:
@@ -153,3 +153,101 @@
     font_size: 20
     size_hint_x: 0.3
     halign: 'center'
+
+<ExportDialog>:
+    orientation: "vertical"
+    spacing: "8dp"
+    size_hint_y: None
+    halign: 'center'
+    height: 370
+    GridLayout:
+        cols: 2
+        spacing : 20
+        GridLayout:
+            cols: 2
+            spacing : 20
+            MDSwitch:
+                id: st.enrollment_id
+            MDLabel:
+                text: "Enrollment ID"
+        GridLayout:
+            cols: 2
+            spacing : 20
+            MDSwitch:
+                id: st.stud_name
+            MDLabel:
+                text: "Student Name"
+        GridLayout:
+            cols: 2
+            spacing : 20
+            MDSwitch:
+                id: st.stud_phone_no
+            MDLabel:
+                text: "Student Phone No"
+        GridLayout:
+            cols: 2
+            spacing : 20
+            MDSwitch:
+                id: st.stud_email
+            MDLabel:
+                text: "Student Email"
+        GridLayout:
+            cols: 2
+            spacing : 20
+            MDSwitch:
+                id: co.name
+            MDLabel:
+                text: "Company name"
+        GridLayout:
+            cols: 2
+            spacing : 20
+            MDSwitch:
+                id: co.role
+            MDLabel:
+                text: "Company role"
+        GridLayout:
+            cols: 2
+            spacing : 20
+            MDSwitch:
+                id: co.package
+            MDLabel:
+                text: "Company package"
+        GridLayout:
+            cols: 2
+            spacing : 20
+            MDSwitch:
+                id: co.platform
+            MDLabel:
+                text: "Company platform"
+        GridLayout:
+            cols: 2
+            spacing : 20
+            MDSwitch:
+                id: co.website
+            MDLabel:
+                text: "Company Website"
+        GridLayout:
+            cols: 2
+            spacing : 20
+            MDSwitch:
+                id: ol.link
+            MDLabel:
+                text: "Offer Letter Link"
+        GridLayout:
+            cols: 2
+            spacing : 20
+            MDSwitch:
+                id: ol.date_of_interview
+            MDLabel:
+                text: "Date of Interview"
+        GridLayout:
+            cols: 2
+            spacing : 20
+            MDSwitch:
+                id: ol.date_of_offer
+            MDLabel:
+                text: "Date of offer letter"
+    
+    
+    
+            
