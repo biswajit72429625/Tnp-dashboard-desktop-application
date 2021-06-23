@@ -5,11 +5,10 @@ from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDRoundFlatButton
 from kivy.properties import StringProperty
 from openpyxl import Workbook
-from openpyxl.worksheet.dimensions import ColumnDimension
 from database import show_alert_dialog
 from datetime import date
 import flags
-from os import getlogin
+import os
 
 class IndividualDialog(BoxLayout):
     pass
@@ -153,7 +152,11 @@ class IndividualLevel(Screen):
                     pass
             adjusted_width = (max_length + 2) * 1.2
             sh1.column_dimensions[column].width = adjusted_width
-        wb.save(f"C:\\Users\\{getlogin()}\\Downloads\\test.xlsx")
+        try:
+            os.makedirs(f"C:\\Users\\{os.getlogin()}\\Downloads\\tnp")
+        except FileExistsError:
+            pass
+        wb.save(f"C:\\Users\\{os.getlogin()}\\Downloads\\tnp\\{sheet_title}.xlsx")
         show_alert_dialog(self,"File saved to Downloads folder")
         self.dismiss_export_dialog(self.export_dialog)
         
