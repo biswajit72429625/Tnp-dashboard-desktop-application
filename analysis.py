@@ -9,5 +9,7 @@ class Analysis(Screen):
         # loads analysis of individual student
         individual_screen = self.manager.get_screen("individual_level")
         individual_screen.load_table()
+    
+    
 
 
