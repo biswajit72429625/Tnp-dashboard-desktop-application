@@ -1,0 +1,50 @@
+<InstituteAnalysis>
+    #MDScreen:
+    Navbar:
+    MDIconButton:
+        icon:"file-export"
+        md_bg_color: app.theme_cls.primary_color
+        pos_hint:{"x":.9,"y":.81}
+
+    MDSwiper:
+        size_hint_y: None
+        height:root.height-dp(120)
+        size_y:root.height-dp(200)
+        MySwiper:
+            orientation: "vertical"
+            spacing : 20
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True
+                size: (self.parent.width,self.parent.height-60)
+                GridLayout:
+                    id: grid
+                    size_hint_y: None
+                    height: self.minimum_height
+                    cols: 3
+                    row_default_height: 60
+                    adaptive_width: True
+                    Button:
+                        id: button1
+                        text: "text"
+                        on_press: root.function_called()
+        MySwiper:
+            FitImage:
+                source:"test.jpg"
+                radius:[20,]
+        MySwiper:
+            FitImage:
+                source:"test.jpg"
+                radius:[20,]
+        MySwiper:
+            FitImage:
+                source:"test.jpg"
+                radius:[20,]
+
+
+
+
+
+<MySwiper@MDSwiperItem>
+
+    
