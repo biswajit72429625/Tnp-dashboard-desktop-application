@@ -133,10 +133,16 @@ class OfferLetters(Screen):
     def save_dialog(self,instance):
         if not self.dialog_data.ids.dialog_finalised.disabled:
             finalised = '' if self.dialog_data.ids.dialog_finalised.text == "Confirmed" else None
+            # select branch by officer_branch
+            branch = flags.app.officer_branch
+            for key, value in flags.branch.items():
+                if branch == value:
+                    branch = key
+                    break
             # my_db, my_cursor = db_connector()
             my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
-            query = "update offer_letters set finalised = %s where enrollment_id = %s and company_id = (select company_id from company where name = %s and role = %s);"
-            values = (finalised,self.offer_records[self.id][0], self.offer_records[self.id][3], self.offer_records[self.id][4])
+            query = "update offer_letters set finalised = %s where enrollment_id = %s and company_id = (select company_id from company where name = %s and role = %s and branch = %s);"
+            values = (finalised,self.offer_records[self.id][0], self.offer_records[self.id][3], self.offer_records[self.id][4], branch)
             my_cursor.execute(query,values)
             my_db.commit()
             # closing dialog
