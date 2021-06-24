@@ -1,9 +1,10 @@
 # from functools import partialmethod
 from kivy.uix.screenmanager import Screen
 from kivymd.uix.filemanager import MDFileManager
-from database import show_alert_dialog
-# from datetime import datetime, date
-# import flags
+from database import db_connector,show_alert_dialog
+from datetime import datetime, date
+import flags
+import os
 import pandas as pd
 
 
@@ -21,7 +22,12 @@ class FinalizeOffer(Screen):
     
 
     def file_manager_open(self):
-        self.file_manager.show(r'D:\\')
+        try:
+            os.makedirs(f"C:\\Users\\{os.getlogin()}\\Downloads\\tnp")
+        except FileExistsError:
+            pass
+        
+        self.file_manager.show(f"C:\\Users\\{os.getlogin()}\\Downloads\\tnp")
         self.manager_open = True
 
     def select_path(self, path):
@@ -31,25 +37,25 @@ class FinalizeOffer(Screen):
         enroll=list(df['enrollment id'])
         comp=list(df['company name'])
         role=list(df['role'])
-    #student
-        cid=[]
-        for i in range(0,len(comp)):
-            que="select company_id from company where company_id in (select company_id from company where name=%s and role=%s);"
-            val=(comp[i],role[i])
-            my_cursor.execute(que,val)
-            for j in my_cursor:
-                cid.append(j[0])
+        br=list(df['branch'])
+        brid=[]
+        for i in br:
+            for k,v in flags.branch.items():
+                if v==i:
+                    brid.append(k)
+                    break        
 
         for i in range(len(enroll)):
-            print(i,j)
-            qu="update offer_letters set finalised='' where enrollment_id=%s and company_id=%s ;"
-            va=(enroll[i],cid[i])
+
+            qu="update offer_letters set finalised='' where enrollment_id=%s and company_id=(select company_id from company where name=%s and role=%s and branch = %s) ;"
+            va=(enroll[i],comp[i],role[i],brid[i])
+            print(enroll[i],comp[i],role[i],brid[i])
             my_cursor.execute(qu,va)
             my_db.commit()
         show_alert_dialog(self,'Database Updated!!!')
 
         self.exit_manager()
-        print(path)
+        
 
 
     def exit_manager(self, *args):
