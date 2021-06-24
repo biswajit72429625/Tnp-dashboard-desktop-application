@@ -1,0 +1,32 @@
+#:kivy 2.0.0
+<InstituteLevel>
+    Background:
+    Navbar:
+    FloatLayout:
+        size:root.width,root.height
+        
+        Button:
+            text:'offer letters vs branch'
+            pos_hint: {'center_x':0.3 , 'center_y':0.5 }
+            size_hint: (0.2,0.2)
+            on_press: root.countplt()
+        Button:
+            text:'students placed per branch'
+            pos_hint:{'center_x':0.5,'center_y':0.5}
+            size_hint: (0.2,0.2)
+            on_release: root.placedstat()
+            # on_press: root.manager.stack.append(root.name)
+        Button:
+            text:'tabled data description'
+            pos_hint: {'center_x':0.5, 'center_y':0.7 }
+            size_hint: (0.2,0.2)
+            # on_press: root.manager.current='institute_level'
+            # on_press: root.manager.stack.append(root.name)
+        Button:
+            text:'average salary distribution branchwise'
+            pos_hint: {'center_x':0.3 , 'center_y':0.7 }
+            size_hint: (0.2,0.2)
+            # on_press: root.manager.current='institute_level'
+            # on_press: root.manager.stack.append(root.name)
+            
+        
