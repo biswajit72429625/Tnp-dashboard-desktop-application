@@ -49,13 +49,13 @@
             user_font_size:"100sp"
             md_bg_color: app.theme_cls.primary_light
             pos_hint:{"x":.075}
-            on_press:root.manager.current="department_level"
+            on_press:root.manager.current="department_analysis"
             on_press: root.manager.stack.append(root.name)
         MDRectangleFlatButton:
             text:"Dept Level"
             font_size:20
             pos_hint:{"x":.07}
-            on_press:root.manager.current="department_level"
+            on_press:root.manager.current="department_analysis"
             on_press: root.manager.stack.append(root.name)
     MDCard:
         size_hint: (0.25,0.4)
@@ -69,12 +69,12 @@
             user_font_size:"100sp"
             md_bg_color: app.theme_cls.primary_light
             pos_hint:{"x":.075}
-            on_press:root.manager.current="placements"
+            on_press:root.manager.current="institute_analysis"
             on_press: root.manager.stack.append(root.name)
         MDRectangleFlatButton:
             text:"Institute Level"
             font_size:20
             pos_hint:{"x":.04}
-            on_press:root.manager.current="placements"
+            on_press:root.manager.current="institute_analysis"
             on_press: root.manager.stack.append(root.name)
     
