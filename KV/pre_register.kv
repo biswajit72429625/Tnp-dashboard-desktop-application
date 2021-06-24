@@ -1,0 +1,108 @@
+#:kivy 2.0.0
+<PreRegister>
+    Background:
+    Navbar:
+    FloatLayout:
+        size: root.width, root.height
+        MDLabel:
+            pos_hint: {'center_x': .5, 'y': .77}
+            halign: 'center'
+            theme_text_color: "Custom"
+            text_color: 0, 150/255, 136/255, 1
+            text: "Pre-Register Student"
+            font_style: 'H6'
+            padding: (10,15)
+            size_hint_y: None
+            height: self.texture_size[1]
+            font_size:30
+        MDCard:
+            size_hint: (0.4,0.7)
+            pos_hint: {'center_x': .27, 'center_y': .4}
+            elevation: 20
+            orientation: 'vertical'
+            spacing: 2
+            MDGridLayout:
+                size: (self.parent.width,60)
+                height: self.minimum_height
+                size_hint_x: None
+                size_hint_y: None
+                cols: 1
+                row_default_height: 60
+                row_force_default: True
+                adaptive_width: True
+                MDLabel:
+                    halign:"center"
+                    font_style:"H6"
+                    theme_text_color: "Custom"
+                    text_color:1,1,1,1
+                    text: "Not Registered Students"
+                    size_hint: (0.1,0.1)
+                    md_bg_color: app.theme_cls.accent_color
+                
+            
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True
+                size: (self.parent.width,self.parent.height-60)
+                GridLayout:
+                    id: grid
+                    size_hint_y: None
+                    height: self.minimum_height
+                    cols: 1
+                    row_default_height: 60
+                    adaptive_width: True
+
+        MDCard:
+            size_hint: (0.4,0.7)
+            pos_hint: {'center_x': .74, 'center_y': .4}
+            elevation: 10
+            orientation: 'vertical'
+            padding: 30
+            spacing: 20
+            MDRoundFlatIconButton:
+                text: "Open manager"
+                icon: "folder"
+                pos_hint: {'center_x': .5, 'center_y': .6}
+                on_release: root.file_manager_open()
+            MDLabel:
+                halign: 'center'
+                theme_text_color: "Custom"
+                text_color: 0, 150/255, 136/255, 1
+                text: "* excel file should have enrollment ids"
+                font_style: 'H6'
+                font_size:16
+                padding: (10,15)
+                size_hint_y: None
+                height: self.texture_size[1]
+            MDLabel:
+                halign: 'center'
+                theme_text_color: "Custom"
+                text_color: 0, 150/255, 136/255, 1
+                text: "If you wish to enter it manually , Enter in the text box given below"
+                font_style: 'H6'
+                font_size:16
+                padding: (10,15)
+                size_hint_y: None
+                height: self.texture_size[1]
+            MDTextField:
+                id:manual_id
+                color_mode: 'accent'
+                icon_right_color:app.theme_cls.accent_color
+                icon_right:'account'
+                size_hint_x: None
+                width: 200
+                pos_hint: {'center_x':0.48}
+                hint_text: "Enrollment Id"
+            MDRectangleFlatButton:
+                text: "Add"
+                pos_hint: {'center_x': .5}
+                font_size: 15
+                on_release: root.manual_entry()
+
+
+
+<PreRegisterLabel>
+    text: "E-Resources"
+    font_size: 20
+    size_hint_x: 0.3
+    halign: 'center'
