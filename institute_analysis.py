@@ -69,7 +69,7 @@ class InstituteAnalysis(Screen):
         for i in my_cursor:
             dat.append([branch[i[0]],i[1]])
         df=pd.DataFrame(dat,columns=['branch','year'])
-        sns.countplot(x=df['branch'],hue=df['year'])
+        sns.countplot(x=df['branch'],hue=df['year'],palette='coolwarm')
         # plt.show()
         plt.savefig("Graphs//inst_1.png")
         plt.close('all')
@@ -120,11 +120,11 @@ class InstituteAnalysis(Screen):
             dat.append([i[0],i[1],branch[i[2]]])
         df=pd.DataFrame(dat,columns=['package','count','branch'])
 
-        sns.lineplot(x='package',y='count',hue = 'branch',data=df)
+        sns.lineplot(x='package',y='count',hue = 'branch',data=df,markers=True,style='branch')
         plt.title("Count of Package")
         plt.yticks(np.arange(max(df['count'])+5,step=5))
         plt.xlabel("Package")
-        plt.ylabel("Count")
+        plt.ylabel("Branch")
         plt.legend()
         # plt.show()
         plt.savefig("Graphs//inst_3.png")
