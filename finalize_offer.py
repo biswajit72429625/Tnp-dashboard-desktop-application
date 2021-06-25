@@ -40,10 +40,6 @@ class FinalizeOffer(Screen):
         # br=list(df['branch'])
         # brid=[]
         # for i in br:
-        #     for k,v in flags.branch.items():
-        #         if v==i:
-        #             brid.append(k)
-        #             break        
         for k,v in flags.branch.items():
             if v==flags.app.officer_branch:
                 branch=k

@@ -130,7 +130,7 @@ class DepartmentAnalysis(Screen):
         for i in data:
             dat.append([i[0],i[1]])
         df=pd.DataFrame(dat,columns=['company','year'])
-        sns.countplot(x=df['company'],hue=df['year'])
+        sns.countplot(x=df['company'],hue=df['year'],palette='coolwarm')
         plt.title("Offer Letters by companies")
         plt.xlabel("Companies")
         plt.ylabel("Number of offer letters")
@@ -151,7 +151,7 @@ class DepartmentAnalysis(Screen):
                 dat.append([i[0],i[1],i[2]])
         df=pd.DataFrame(dat,columns=['package','count','year'])
 
-        sns.lineplot(x='package',y='count',hue = 'year',data=df)
+        sns.lineplot(x='package',y='count',hue = 'year',data=df,markers=True,style='year')
         plt.title("Count of Package")
         plt.yticks(np.arange(max(df['count'])+5,step=5))
         plt.xlabel("Package")
