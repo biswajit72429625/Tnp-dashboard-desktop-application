@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 import flags
-
+import numpy as np
 
 
 class InstituteTableTitleLabel(MDLabel):
@@ -21,9 +21,10 @@ class InstituteAnalysis(Screen):
     def prepare_graphs(self):
         self.countplt()
         self.placedstat()
+        self.lin()
         graphs=self.manager.get_screen('institute_graphs')
         # reload images
-        for i in range(1,3):
+        for i in range(1,4):
             graphs.ids[str(i)].reload()
 
     def load_analysis(self):
@@ -98,49 +99,36 @@ class InstituteAnalysis(Screen):
         plt.savefig("Graphs//inst_2.png")
         plt.close('all')
 
-    # def multiple_bar(self):
+    def lin(self):
     #     for k,v in flags.branch.items():
     #         if v==flags.app.officer_branch:
     #             branch=k
     #             break
-    #     my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
-    #     my_cursor.execute(f"select co.name,st.pass_year from offer_letters inner join company as co on offer_letters.company_id=co.company_id inner join students as st on offer_letters.enrollment_id=st.enrollment_id where st.branch={branch} and st.pass_year between year(curdate())-3 and year(curdate());")
-    #     dat=[]
-    #     data = my_cursor.fetchall()
-    #     for i in data:
-    #         dat.append([i[0],i[1]])
-    #     df=pd.DataFrame(dat,columns=['company','year'])
-    #     sns.countplot(x=df['company'],hue=df['year'])
-    #     plt.title("Offer Letters by companies")
-    #     plt.xlabel("Companies")
-    #     plt.ylabel("Number of offer letters")
-    #     plt.legend()
-    #     # plt.show()
-    #     plt.savefig("Graphs//dept_3.png")
-    #     plt.close('all')
+        branch = {
+            1 : "Civil",
+            2 : "Mech",
+            3 : "CSE",
+            4 : "ENTC",
+            5 : "ELN",
+            6 : "IT"
+            }
+        
+        my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
+        dat=[]
+        my_cursor.execute(f'select co.package, count(co.package), st.branch from offer_letters as ol inner join students as st on ol.enrollment_id=st.enrollment_id inner join company as co on ol.company_id=co.company_id where st.pass_year = year(curdate()) group by st.branch, co.package;')
+        for i in my_cursor:
+            dat.append([i[0],i[1],branch[i[2]]])
+        df=pd.DataFrame(dat,columns=['package','count','branch'])
 
-    # def line_plot(self):
-    #     for k,v in flags.branch.items():
-    #         if v==flags.app.officer_branch:
-    #             branch=k
-    #             break
-    #     my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
-    #     dat=[]
-    #     my_cursor.execute(f'select co.package,count(st.pass_year),st.pass_year from offer_letters inner join company as co on offer_letters.company_id=co.company_id inner join students as st on offer_letters.enrollment_id=st.enrollment_id where st.branch={branch} and st.pass_year between year(curdate())-3 and year(curdate()) group by co.package, st.pass_year;')
-    #     for i in my_cursor:
-    #             dat.append([i[0],i[1],i[2]])
-    #     df=pd.DataFrame(dat,columns=['package','count','year'])
-
-    #     sns.lineplot(x='package',y='count',hue = 'year',data=df)
-    #     plt.title("Count of Package")
-    #     plt.yticks(np.arange(max(df['count'])+5,step=5))
-    #     plt.xlabel("Package")
-    #     plt.ylabel("Count")
-    #     plt.legend()
-    #     # plt.show()
-    #     plt.savefig("Graphs//dept_4.png")
-    #     plt.close('all')
-
+        sns.lineplot(x='package',y='count',hue = 'branch',data=df)
+        plt.title("Count of Package")
+        plt.yticks(np.arange(max(df['count'])+5,step=5))
+        plt.xlabel("Package")
+        plt.ylabel("Count")
+        plt.legend()
+        # plt.show()
+        plt.savefig("Graphs//inst_3.png")
+        plt.close('all')
 
 class InstituteGraphs(Screen):
     def __init__(self, **kw):
