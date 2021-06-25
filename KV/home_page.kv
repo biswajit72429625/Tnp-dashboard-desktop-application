@@ -3,70 +3,94 @@
     Background:
     Navbar:
     MDCard:
-        size_hint: (0.25,0.4)
-        pos_hint: {'center_x': .2, 'center_y': .5}
+        size_hint: (0.22,0.4)
+        pos_hint: {'center_x': .125, 'center_y': .5}
         elevation: 20
         orientation: 'vertical'
-        padding: 25
+        padding: 18
+        spacing: 30
+        MDIconButton:
+            halign:"center"
+            icon:"registered-trademark"
+            user_font_size:"100sp"
+            md_bg_color: app.theme_cls.primary_light
+            pos_hint:{"x":.065}
+            on_press:root.load_pre_register_students()
+            on_press:root.manager.current="pre_register"
+            on_press: root.manager.stack.append(root.name)
+        MDRectangleFlatButton:
+            halign:"center"
+            text:"register student"
+            font_size:16
+            pos_hint:{"x":.01}
+            on_press:root.load_pre_register_students()
+            on_press:root.manager.current="pre_register"
+            on_press: root.manager.stack.append(root.name)
+    MDCard:
+        size_hint: (0.22,0.4)
+        pos_hint: {'center_x': .375, 'center_y': .5}
+        elevation: 20
+        orientation: 'vertical'
+        padding: 18
         spacing: 30
         MDIconButton:
             halign:"center"
             icon:"book-open-page-variant"
             user_font_size:"100sp"
             md_bg_color: app.theme_cls.primary_light
-            pos_hint:{"x":.075}
+            pos_hint:{"x":.065}
             on_press:root.load_eresource()
             on_press:root.manager.current="view_eresources"
             on_press: root.manager.stack.append(root.name)
         MDRectangleFlatButton:
             halign:"center"
             text:"Study material"
-            font_size:20
-            pos_hint:{"x":.06}
+            font_size:16
+            pos_hint:{"x":.08}
             on_press:root.load_eresource()
             on_press:root.manager.current="view_eresources"
             on_press: root.manager.stack.append(root.name)
 
     MDCard:
-        size_hint: (0.25,0.4)
-        pos_hint: {'center_x': .5, 'center_y': .5}
+        size_hint: (0.22,0.4)
+        pos_hint: {'center_x': .625, 'center_y': .5}
         elevation: 20
         orientation: 'vertical'
-        padding: 25
+        padding: 18
         spacing: 30
         MDIconButton:
             icon:"pen"
             user_font_size:"100sp"
             md_bg_color: app.theme_cls.primary_light
-            pos_hint:{"x":.075}
+            pos_hint:{"x":.065}
             on_press:root.load_assessment()
             on_press:root.manager.current="view_assessments"
             on_press: root.manager.stack.append(root.name)
         MDRectangleFlatButton:
             text:"Placement Training"
             font_size:16
-            pos_hint:{"x":.03}
+            pos_hint:{"x":.085}
             on_press:root.load_assessment()
             on_press:root.manager.current="view_assessments"
             on_press: root.manager.stack.append(root.name)
     MDCard:
-        size_hint: (0.25,0.4)
-        pos_hint: {'center_x': .8, 'center_y': .5}
+        size_hint: (0.22,0.4)
+        pos_hint: {'center_x': .875, 'center_y': .5}
         elevation: 20
         orientation: 'vertical'
-        padding: 25
+        padding: 18
         spacing: 30
         MDIconButton:
             icon:"office-building-marker"
             user_font_size:"100sp"
             md_bg_color: app.theme_cls.primary_light
-            pos_hint:{"x":.075}
+            pos_hint:{"x":.065}
             on_press:root.manager.current="placements"
             on_press: root.manager.stack.append(root.name)
         MDRectangleFlatButton:
             text:"Placements"
-            font_size:20
-            pos_hint:{"x":.06}
+            font_size:16
+            pos_hint:{"x":.08}
             on_press:root.manager.current="placements"
             on_press: root.manager.stack.append(root.name)
     

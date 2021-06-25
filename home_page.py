@@ -4,6 +4,10 @@ from kivymd.uix.label import MDLabel
 from kivymd.uix.selectioncontrol import MDCheckbox
 import flags
 
+class PreRegisterLabel(MDLabel):
+    text = StringProperty()
+
+
 class EResourceTitle(MDLabel):
     text = StringProperty()
     id = StringProperty()
@@ -83,3 +87,24 @@ class HomePage(Screen):
             view_assessments_screen.ids.grid.add_widget(AssessmentTitle(id=f'{i}',text=f"[u][ref=world]{self.assessments_records[i][1]}[/ref][/u]"))
             view_assessments_screen.ids.grid.add_widget(AssessmentLabel(id=f'{i}',text=f"{str(self.assessments_records[i][7])}"))
             view_assessments_screen.ids.grid.add_widget(AssessmentLabel(id=f'{i}',text=f"{self.assessments_records[i][2]}"))
+
+    def load_pre_register_students(self):
+        # loads register student screen
+        # my_db, my_cursor = db_connector()
+        my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
+        # select branch by officer_branch
+        branch = flags.app.officer_branch
+        for key, value in flags.branch.items():
+            if branch == value:
+                branch = key
+                break
+        # lists all records in database
+        query = f"select enrollment_id from pre_registered where branch = '{branch}' and verify_status is null"
+        my_cursor.execute(query)
+        self.pre_register_students = my_cursor.fetchall()
+        # creating reference for register_student screen to put dynamic data in table
+        view_register_student = self.manager.get_screen('pre_register')
+        view_register_student.ids.grid.clear_widgets()
+        #print(self.register)
+        for i in range(len(self.pre_register_students)):
+            view_register_student.ids.grid.add_widget(PreRegisterLabel(text=str(self.pre_register_students[i][0])))

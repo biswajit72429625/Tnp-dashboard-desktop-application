@@ -9,6 +9,8 @@ class Analysis(Screen):
         # loads analysis of individual student
         individual_screen = self.manager.get_screen("individual_level")
         individual_screen.load_table()
+    
+    
 
     def load_department(self):
         department_analysis_screen = self.manager.get_screen("department_analysis")
