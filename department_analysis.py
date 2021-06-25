@@ -50,7 +50,7 @@ class DepartmentAnalysis(Screen):
         for role in roles:
             self.ids.grid.add_widget(DepartmentTableTitleLabel(text=role[0]))
         # adding second blank column
-        self.ids.grid.add_widget(DepartmentTableTitleLabel())
+        self.ids.grid.add_widget(DepartmentTableTitleLabel(text="Companies"))
         # adding grid of years to all roles
         for _ in range(len(roles)):
             # creating grid for past 3 years
@@ -110,6 +110,7 @@ class DepartmentAnalysis(Screen):
         plt.bar(x_axis+0.2,placed_students,0.4,label='placed')
         plt.xticks(x_axis,labels)
         plt.yticks(y_ticks)
+        plt.title("Total Placed Students")
         plt.xlabel("Year")
         plt.ylabel("Number of students")
         plt.legend()

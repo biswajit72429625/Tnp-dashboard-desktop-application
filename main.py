@@ -26,7 +26,7 @@ from analysis import Analysis
 from forgot_pass import ForgotPass
 from individual_level import IndividualLevel
 from department_analysis import DepartmentAnalysis, DepartmentGraphs
-from institute_analysis import InstituteAnalysis
+from institute_analysis import InstituteAnalysis, InstituteGraphs
 from pre_register import PreRegister
 #################################################
 
@@ -62,6 +62,7 @@ class Manager(ScreenManager):
         self.add_widget(DepartmentAnalysis(name='department_analysis'))
         self.add_widget(DepartmentGraphs(name='department_graphs'))
         self.add_widget(InstituteAnalysis(name='institute_analysis'))
+        self.add_widget(InstituteGraphs(name='institute_graphs'))
         self.add_widget(PreRegister(name='pre_register'))
     
     def callback(self):
