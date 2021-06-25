@@ -88,7 +88,7 @@ class InstituteAnalysis(Screen):
         my_cursor.execute('select branch from students ;')
         for i in my_cursor:
             brch.append([branch[i[0]],'Total Students'])
-        my_cursor.execute("select branch from students where  enrollment_id  in (select  enrollment_id from offer_letters where finalised='');")
+        my_cursor.execute("select branch from students where  enrollment_id  in (select  enrollment_id from offer_letters where finalised='') and pass_year = year(curdate()) ;")
         for i in my_cursor:    
             brch.append([branch[i[0]],'Placed Students'])
         df=pd.DataFrame(brch,columns=['Branch','Placed Status'])

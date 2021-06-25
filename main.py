@@ -1,6 +1,7 @@
 ########## kivy modules #########################
 from kivy.config import Config
 Config.set('graphics', 'resizable', False)
+Config.set('kivy','window_icon','favicon.ico')
 from kivymd.app import MDApp
 from kivy.lang.builder import Builder
 from kivy.properties import StringProperty
