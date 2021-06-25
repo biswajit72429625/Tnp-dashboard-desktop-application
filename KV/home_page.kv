@@ -20,7 +20,7 @@
             on_press: root.manager.stack.append(root.name)
         MDRectangleFlatButton:
             halign:"center"
-            text:"E-Resources"
+            text:"Study material"
             font_size:20
             pos_hint:{"x":.06}
             on_press:root.load_eresource()
@@ -43,9 +43,9 @@
             on_press:root.manager.current="view_assessments"
             on_press: root.manager.stack.append(root.name)
         MDRectangleFlatButton:
-            text:"Assesments"
-            font_size:20
-            pos_hint:{"x":.06}
+            text:"Placement Training"
+            font_size:16
+            pos_hint:{"x":.03}
             on_press:root.load_assessment()
             on_press:root.manager.current="view_assessments"
             on_press: root.manager.stack.append(root.name)

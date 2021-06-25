@@ -1,54 +1,95 @@
+#:kivy 2.0.0
 <DepartmentAnalysis>
-    #MDScreen:
+    Background:
     Navbar:
+    FloatLayout:
+        size: root.width, root.height
+        MDLabel:
+            pos_hint: {'center_x': .5, 'y': .77}
+            halign: 'center'
+            theme_text_color: "Custom"
+            text_color: 0, 150/255, 136/255, 1
+            text: "Placed Students"
+            font_style: 'H6'
+            padding: (10,15)
+            size_hint_y: None
+            height: self.texture_size[1]
+            font_size:30
+        MDCard:
+            size_hint : (0.9,0.7)
+            pos_hint: {'center_x': .5, 'center_y': .45}
+            elevation: 20
+            orientation: 'vertical'
+            spacing: 2
+            ScrollView:
+                GridLayout:
+                    id: grid
+                    cols: 4
+                    size_hint: None, None
+                    height: self.minimum_height
+                    width: self.minimum_width
+                    row_default_height: 60
+                    col_default_width: 240
+                    spacing: [5,5]
+
     MDIconButton:
         icon:"file-export"
         md_bg_color: app.theme_cls.primary_color
-        pos_hint:{"x":.9,"y":.81}
-
-    MDSwiper:
-        size_hint_y: None
-        height:root.height-dp(120)
-        size_y:root.height-dp(200)
-        MySwiper:
-            orientation: "vertical"
-            spacing : 20
-            ScrollView:
-                do_scroll_x: False
-                do_scroll_y: True
-                size: (self.parent.width,self.parent.height-60)
-                GridLayout:
-                    id: grid
-                    size_hint_y: None
-                    height: self.minimum_height
-                    cols: 3
-                    row_default_height: 60
-                    adaptive_width: True
-                    Button:
-                        id: button1
-                        text: "text"
-                        on_press: root.function_called()
-        MySwiper:
-            FitImage:
-                source:"test.jpg"
-                radius:[20,]
-        MySwiper:
-            FitImage:
-                source:"test.jpg"
-                radius:[20,]
-        MySwiper:
-            FitImage:
-                source:"test.jpg"
-                radius:[20,]
-        MySwiper:
-            FitImage:
-                source:"test.jpg"
-                radius:[20,]
+        pos_hint:{"x":.45,"y":.01}
+        on_press: root.export_data()
+    Button:
+        text:"more"
+        size_hint: (0.15,0.05)
+        pos_hint: {'center_x': .8,'center_y': .05}
+        on_press: root.prepare_graphs()
+        on_press: root.manager.current="department_graphs"
+        on_press: root.manager.stack.append(root.name)
 
 
-
-
+<DepartmentTableTitleLabel>
+    text: ""
+    font_size: 20
+    halign: 'center'
+    theme_text_color: "Custom"
+    md_bg_color: app.theme_cls.accent_color
+    text_color: 1, 1, 1, 1
+<DepartmentTableLabel>
+    text: ""
+    font_size: 20
+    halign: 'center'
+<DepartmentGridYear>
+    cols: 3
+    spacing: [10,10]
 
 <MySwiper@MDSwiperItem>
 
-    
+<DepartmentGraphs>
+    Navbar:
+    # Background:
+    MDSwiper:
+        id: my_swiper
+        size_hint_y: None
+        pos_hint: {'center_x':0.5, 'center_y':0.4}
+        height:root.height-dp(120)
+        # size_y:root.height-dp(200)
+        MySwiper:
+            FitImage:
+                id: 1
+                source:"Graphs\dept_1.png"
+                radius:[20,]
+        MySwiper:
+            FitImage:
+                id: 2
+                source:"Graphs\dept_2.png"
+                radius:[20,]
+        MySwiper:
+            FitImage:
+                id: 3
+                source:"Graphs\dept_3.png"
+                radius:[20,]
+        MySwiper:
+            FitImage:
+                id: 4
+                source:"Graphs\dept_4.png"
+                radius:[20,]
+

@@ -122,10 +122,11 @@ class OfferLetters(Screen):
         # adding dynamic data to screen
         self.ids.grid.clear_widgets()
         for i in range(len(self.offer_records)):
-            # stud_name, company, role
+            # stud_name, company, role, package
             self.ids.grid.add_widget(OfferLetterTitle(id=f'{i}',text=f"[u][ref=world]{self.offer_records[i][1]}[/ref][/u]"))
             self.ids.grid.add_widget(OfferLetterLabel(id=f'{i}',text=f"{str(self.offer_records[i][3])}"))
             self.ids.grid.add_widget(OfferLetterLabel(id=f'{i}',text=f"{self.offer_records[i][4]}"))
+            self.ids.grid.add_widget(OfferLetterLabel(id=f'{i}',text=f"{str(self.offer_records[i][5])}"))
 
     def edit_offer(self):
         disable_toggler(self.dialog_data,['dialog_finalised'],False)
@@ -194,17 +195,19 @@ class OfferLetters(Screen):
         # adding dynamic data to screen
         self.ids.grid.clear_widgets()
         for i in range(len(self.offer_records)):
-            # stud_name, company, role
+            # stud_name, company, role, package
             self.ids.grid.add_widget(OfferLetterTitle(id=f'{i}',text=f"[u][ref=world]{self.offer_records[i][1]}[/ref][/u]"))
             self.ids.grid.add_widget(OfferLetterLabel(id=f'{i}',text=f"{str(self.offer_records[i][3])}"))
             self.ids.grid.add_widget(OfferLetterLabel(id=f'{i}',text=f"{self.offer_records[i][4]}"))
-        
+            self.ids.grid.add_widget(OfferLetterLabel(id=f'{i}',text=f"{str(self.offer_records[i][5])}"))
+
     def sort_by(self,by):
         self.offer_records = sorted(self.offer_records,key=lambda x: x[by])
         # adding dynamic data to screen
         self.ids.grid.clear_widgets()
         for i in range(len(self.offer_records)):
-            # stud_name, company, role
+            # stud_name, company, role, package
             self.ids.grid.add_widget(OfferLetterTitle(id=f'{i}',text=f"[u][ref=world]{self.offer_records[i][1]}[/ref][/u]"))
             self.ids.grid.add_widget(OfferLetterLabel(id=f'{i}',text=f"{str(self.offer_records[i][3])}"))
             self.ids.grid.add_widget(OfferLetterLabel(id=f'{i}',text=f"{self.offer_records[i][4]}"))
+            self.ids.grid.add_widget(OfferLetterLabel(id=f'{i}',text=f"{str(self.offer_records[i][5])}"))
