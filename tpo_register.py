@@ -169,7 +169,9 @@ class TpoRegister(Screen):
     def email_verify(self):
         if self.ids.otp.text == self.otp:
             self.ids.password.disabled = False
+            self.ids.password.line_color_normal = flags.app.theme_cls.primary_color
             self.ids.confirm_password.disabled = False
+            self.ids.confirm_password.line_color_normal = flags.app.theme_cls.primary_color
             self.ids.register.disabled = False
             self.ids.dropdown_item.disabled = False
             show_alert_dialog(self,'Your email has been verified')

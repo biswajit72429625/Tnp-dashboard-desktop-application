@@ -33,6 +33,7 @@ class FinalizeOffer(Screen):
         # my_db, my_cursor = db_connector()
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         df=pd.read_excel(path)
+        # enroll=list(df['enrollment id'])
         enroll=list(df['enrollment id'])
         comp=list(df['company name'])
         role=list(df['role'])
