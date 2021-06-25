@@ -14,18 +14,18 @@
         font_size:30
         pos_hint:{"y":0.75}
     MDCard:
-        size_hint: (0.25,0.4)
+        size_hint: (0.26,0.4)
         pos_hint: {'center_x': .2, 'center_y': .4}
         elevation: 20
         orientation: 'vertical'
-        padding: 22
+        padding: 18
         spacing: 30
         MDIconButton:
             halign:"center"
             icon:"account"
             user_font_size:"100sp"
             md_bg_color: app.theme_cls.primary_light
-            pos_hint:{"x":.075}
+            pos_hint:{"x":.14}
             on_press:root.load_individual()
             on_press:root.manager.current="individual_level"
             on_press: root.manager.stack.append(root.name)
@@ -38,46 +38,46 @@
             on_press: root.manager.stack.append(root.name)
 
     MDCard:
-        size_hint: (0.25,0.4)
+        size_hint: (0.26,0.4)
         pos_hint: {'center_x': .5, 'center_y': .4}
         elevation: 20
         orientation: 'vertical'
-        padding: 25
+        padding: 18
         spacing: 30
         MDIconButton:
             icon:"google-classroom"
             user_font_size:"100sp"
             md_bg_color: app.theme_cls.primary_light
-            pos_hint:{"x":.075}
+            pos_hint:{"x":.14}
             on_press:root.load_department()
             on_press:root.manager.current="department_analysis"
             on_press: root.manager.stack.append(root.name)
         MDRectangleFlatButton:
             text:"Dept Level"
             font_size:20
-            pos_hint:{"x":.07}
+            pos_hint:{"x":.14}
             on_press:root.load_department()
             on_press:root.manager.current="department_analysis"
             on_press: root.manager.stack.append(root.name)
     MDCard:
-        size_hint: (0.25,0.4)
+        size_hint: (0.26,0.4)
         pos_hint: {'center_x': .8, 'center_y': .4}
         elevation: 20
         orientation: 'vertical'
-        padding: 25
+        padding: 18
         spacing: 30
         MDIconButton:
             icon:"office-building-marker"
             user_font_size:"100sp"
             md_bg_color: app.theme_cls.primary_light
-            pos_hint:{"x":.075}
+            pos_hint:{"x":.14}
             on_press:root.load_institute()
             on_press:root.manager.current="institute_analysis"
             on_press: root.manager.stack.append(root.name)
         MDRectangleFlatButton:
             text:"Institute Level"
             font_size:20
-            pos_hint:{"x":.04}
+            pos_hint:{"x":.045}
             on_press:root.load_institute()
             on_press:root.manager.current="institute_analysis"
             on_press: root.manager.stack.append(root.name)

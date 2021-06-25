@@ -17,7 +17,7 @@
             font_size:30
         MDCard:
             size_hint : (0.9,0.7)
-            pos_hint: {'center_x': .5, 'center_y': .45}
+            pos_hint: {'center_x': .5, 'center_y': .42}
             elevation: 20
             orientation: 'vertical'
             spacing: 2
@@ -31,26 +31,36 @@
                 row_force_default: True
                 adaptive_width: True
                 MDLabel:
+                    text_color: 1, 1, 1, 1
+                    theme_text_color: "Custom"
                     text: "Enrollment ID"
                     font_size: 20
                     halign: 'center'
                     md_bg_color: app.theme_cls.primary_color
                 MDLabel:
+                    text_color: 1, 1, 1, 1
+                    theme_text_color: "Custom"
                     text: "Name"
                     font_size: 20
                     halign: 'center'
                     md_bg_color: app.theme_cls.primary_color
                 MDLabel:
+                    text_color: 1, 1, 1, 1
+                    theme_text_color: "Custom"
                     text: "Company"
                     font_size: 20
                     halign: 'center'
                     md_bg_color: app.theme_cls.primary_color
                 MDLabel:
+                    text_color: 1, 1, 1, 1
+                    theme_text_color: "Custom"
                     text: "Role"
                     font_size: 20
                     halign: 'center'
                     md_bg_color: app.theme_cls.primary_color
                 MDLabel:
+                    text_color: 1, 1, 1, 1
+                    theme_text_color: "Custom"
                     text: "Package"
                     font_size: 20
                     halign: 'center'
@@ -68,13 +78,14 @@
                     row_default_height: 60
                     adaptive_width: True
 
-    MDRectangleFlatIconButton:
+    MDFloatingActionButton:
         icon: "file-export-outline"
-        text: "Export Excel"
-        font_size: 20
+        #text: "Export Excel"
+        #font_size: 20
+        elevation:20
         md_bg_color: app.theme_cls.accent_color
         size_hint:None,None
-        pos_hint: {'center_x': .9, 'center_y':.05}
+        pos_hint: {'center_x': .93, 'center_y':.08}
         on_press: root.export()
         
 

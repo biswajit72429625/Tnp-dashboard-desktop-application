@@ -31,7 +31,7 @@
         pos_hint: {'center_x': .375, 'center_y': .5}
         elevation: 20
         orientation: 'vertical'
-        padding: 18
+        padding: 14
         spacing: 30
         MDIconButton:
             halign:"center"
@@ -46,7 +46,7 @@
             halign:"center"
             text:"Study material"
             font_size:16
-            pos_hint:{"x":.08}
+            pos_hint:{"x":.06}
             on_press:root.load_eresource()
             on_press:root.manager.current="view_eresources"
             on_press: root.manager.stack.append(root.name)
@@ -56,7 +56,7 @@
         pos_hint: {'center_x': .625, 'center_y': .5}
         elevation: 20
         orientation: 'vertical'
-        padding: 18
+        padding: 14
         spacing: 30
         MDIconButton:
             icon:"pen"
@@ -69,7 +69,7 @@
         MDRectangleFlatButton:
             text:"Placement Training"
             font_size:15
-            pos_hint_x: 0.5
+            pos_hint_x: 0.4
             pos_hint_y: None
             on_press:root.load_assessment()
             on_press:root.manager.current="view_assessments"
@@ -90,7 +90,7 @@
             on_press: root.manager.stack.append(root.name)
         MDRectangleFlatButton:
             text:"Placements"
-            font_size:16
+            font_size:15
             pos_hint:{"x":.08}
             on_press:root.manager.current="placements"
             on_press: root.manager.stack.append(root.name)
