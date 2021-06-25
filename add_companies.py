@@ -57,6 +57,7 @@ class AddCompanies(Screen):
                 branch=k
                 break
         quer="SELECt company_id from company where name = %s and package = %s and role = %s and platform = %s and branch = %s"
+        my_db.ping(reconnect=True)
         my_cursor.execute(quer,(nam,package,role,type,branch))
         if my_cursor.fetchall():
             show_alert_dialog(self,"company already exists")

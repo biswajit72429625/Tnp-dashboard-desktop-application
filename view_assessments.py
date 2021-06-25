@@ -110,6 +110,7 @@ class ViewAssessments(Screen):
             my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
             query = f"UPDATE assessment SET pass_year = %s, organizer = %s, link = %s,visible = %s, result_link = %s WHERE id = {self.records[0]}"
             values = (self.passyear, self.organizer, self.link, self.visible, self.resultlink)
+            my_db.ping(reconnect=True)
             my_cursor.execute(query,values)
             my_db.commit()
             # closing dialog
@@ -187,6 +188,7 @@ class ViewAssessments(Screen):
         self.dismiss_delete_dialog(self.delete_dialog)
         # my_db, my_cursor = db_connector()
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
+        my_db.ping(reconnect=True)
         for i in checks: 
             if i.active:
                 my_cursor.execute(f'DELETE FROM assessment WHERE id={records[int(i.id)][0]};')

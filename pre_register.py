@@ -31,6 +31,7 @@ class PreRegister(Screen):
                 break   
         #checking if enrollment id is not in database   
         qu="insert into pre_registered (enrollment_id,branch) values (%s,%s);"
+        my_db.ping(reconnect=True)
         for i in range(len(enroll)):
             try:
                 val=(enroll[i],branch)

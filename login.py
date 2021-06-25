@@ -21,6 +21,7 @@ class Login(Screen):
         # connecting to database
         # my_db, my_cursor = db_connector()
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
+        my_db.ping(reconnect=True)
         my_cursor.execute(f"SELECT name,password,branch from officer where email='{self.email}';")
         try:
             # if email found, continue

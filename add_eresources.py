@@ -129,7 +129,7 @@ class AddEresources(Screen):
         
             val=(self.ename,self.year,branch,self.eorganizer,self.elink)
             
-            
+        my_db.ping(reconnect=True)
         my_cursor.execute(qur,val)
         my_db.commit()
         send_mail(self,"New Study Material!",f"By:- {self.eorganizer}\nTopic:- {self.ename}\nLink:- {self.elink}\nPlease read the material throughly to score well",self.year)

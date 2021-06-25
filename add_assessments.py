@@ -110,7 +110,7 @@ class AddAssessments(Screen):
             if v==flags.app.officer_branch:
                 branch=k
                 break
-        print (self.ename,self.eorganizer,self.elink,self.year,branch)
+        # print (self.ename,self.eorganizer,self.elink,self.year,branch)
         
         #checking description and checkbox 
         if self.ids.checkbox_id.active==True:
@@ -121,7 +121,7 @@ class AddAssessments(Screen):
             qur='insert into assessment (title , pass_year , branch ,organizer, link , visible) values (%s,%s,%s,%s,%s,%s)'
         
             val=(self.ename,self.year,branch,self.eorganizer,self.elink,self.date)
-            
+        my_db.ping(reconnect=True)
         my_cursor.execute(qur,val)
         my_db.commit()
         # send_mail(self,"New Assessment!",f"By:- {self.eorganizer}\nTopic:- {self.ename}\nLink:- {self.elink}\nTest Time:- {self.date}\nGood Luck with Test",self.year)

@@ -50,6 +50,7 @@ def send_mail(screen,subject:str,message:str,year:int):
     # getting db info from current app
     my_db, my_cursor = flags.app.root.my_db, flags.app.root.my_cursor
     # retriving all students emails
+    my_db.ping(reconnect=True)
     my_cursor.execute(f"select stud_email from students where pass_year = {year} and branch = {branch};")
     to = my_cursor.fetchall()
     # building mail message

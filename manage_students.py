@@ -126,6 +126,7 @@ class ManageStudents(Screen):
                 branch = key
                 break
         # lists all records in database
+        my_db.ping(reconnect=True)
         query = f"select * from students where branch = '{branch}' and pass_year = {date.today().year+year};"
         my_cursor.execute(query)
         self.student_records = my_cursor.fetchall()
@@ -205,6 +206,7 @@ class ManageStudents(Screen):
             # connecting to database
             # my_db, my_cursor = db_connector()
             my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
+            my_db.ping(reconnect=True)
             query = f"UPDATE students SET stud_name = %s, stud_phone_no = %s, stud_email = %s,pass_year = %s, branch = %s WHERE enrollment_id = {self.student_records[self.id][0]}"
             values = (self.stud_name,self.phone, self.email, self.passyear, self.branch)
             my_cursor.execute(query,values)

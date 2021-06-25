@@ -13,6 +13,7 @@ class ForgotPass(Screen):
         self.officer_email = self.ids.email.text
         # my_db, my_cursor = db_connector()
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
+        my_db.ping(reconnect=True)
         my_cursor.execute(f"select id from officer where email ='{self.officer_email}';")
         records = my_cursor.fetchall()
         if records:
@@ -51,6 +52,7 @@ class ForgotPass(Screen):
             hashed = bcrypt.hashpw(self.password.encode('ascii'),bcrypt.gensalt()).decode('ascii')
             # my_db, my_cursor = db_connector()
             my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
+            my_db.ping(reconnect=True)
             my_cursor.execute(f"update officer set password = '{hashed}' where id = {self.officer_id};")
             my_db.commit()
             show_alert_dialog(self,'Password changed successfully')

@@ -47,6 +47,7 @@ class IndividualLevel(Screen):
             inner join company as co on ol.company_id = co.company_id
             where st.pass_year = YEAR(CURDATE()) and st.branch= {branch} and ol.finalised is not NULL;
         '''
+        my_db.ping(reconnect=True)
         my_cursor.execute(query)
         self.finalised_records = my_cursor.fetchall()
         # adding dynamic data to screen
@@ -127,6 +128,7 @@ class IndividualLevel(Screen):
             inner join company as co on ol.company_id = co.company_id
             where st.pass_year = YEAR(CURDATE()) and st.branch= {branch} and ol.finalised is not NULL;
             '''
+        my_db.ping(reconnect=True)
         my_cursor.execute(query)
         # retrive data
         data=my_cursor.fetchall()

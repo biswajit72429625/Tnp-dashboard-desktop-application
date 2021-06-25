@@ -117,6 +117,7 @@ class OfferLetters(Screen):
             where st.pass_year = %s and st.branch=%s;
         '''
         values = (date.today().year+year,branch)
+        my_db.ping(reconnect=True)
         my_cursor.execute(query,values)
         self.offer_records = my_cursor.fetchall()
         # adding dynamic data to screen
@@ -144,6 +145,7 @@ class OfferLetters(Screen):
             my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
             query = "update offer_letters set finalised = %s where enrollment_id = %s and company_id = (select company_id from company where name = %s and role = %s and branch = %s);"
             values = (finalised,self.offer_records[self.id][0], self.offer_records[self.id][3], self.offer_records[self.id][4], branch)
+            my_db.ping(reconnect=True)
             my_cursor.execute(query,values)
             my_db.commit()
             # closing dialog
@@ -181,6 +183,7 @@ class OfferLetters(Screen):
             where st.pass_year = %s and st.branch=%s;
         '''
         values = (date.today().year+year,branch)
+        my_db.ping(reconnect=True)
         my_cursor.execute(query,values)
         self.offer_records = my_cursor.fetchall()
         if self.ids.dropdown_item.text == 'Student Name':

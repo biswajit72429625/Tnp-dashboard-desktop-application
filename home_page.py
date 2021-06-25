@@ -47,6 +47,7 @@ class HomePage(Screen):
                 break
         # lists all records in database
         query = f"select * from e_resources where branch = '{branch}';"
+        my_db.ping(reconnect=True)
         my_cursor.execute(query)
         self.eresources_records = my_cursor.fetchall()
         # creating reference for view_eresource screen to put dynamic data in table
@@ -73,6 +74,7 @@ class HomePage(Screen):
                 branch =key
                 break
         query = f"select * from assessment where branch = {branch};"
+        my_db.ping(reconnect=True)
         my_cursor.execute(query)
         self.assessments_records = my_cursor.fetchall()
         # creating reference for view_assessments screen to put dynamic data in table
@@ -100,6 +102,7 @@ class HomePage(Screen):
                 break
         # lists all records in database
         query = f"select enrollment_id from pre_registered where branch = '{branch}' and verify_status is null"
+        my_db.ping(reconnect=True)
         my_cursor.execute(query)
         self.pre_register_students = my_cursor.fetchall()
         # creating reference for register_student screen to put dynamic data in table

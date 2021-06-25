@@ -34,7 +34,7 @@ class InstituteAnalysis(Screen):
                 break
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         # retriving list of packages
-        
+        my_db.ping(reconnect=True)
         my_cursor.execute('''select distinct(co.package)
                         from offer_letters as ol
                         inner join company as co on ol.company_id = co.company_id
@@ -65,6 +65,7 @@ class InstituteAnalysis(Screen):
             }
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         dat=[]
+        my_db.ping(reconnect=True)
         my_cursor.execute('select st.branch, st.pass_year from offer_letters as ol inner join students as st on ol.enrollment_id=st.enrollment_id where st.pass_year between year(curdate())-3 and year(curdate());')
         for i in my_cursor:
             dat.append([branch[i[0]],i[1]])
@@ -85,6 +86,7 @@ class InstituteAnalysis(Screen):
             }
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         brch=[]
+        my_db.ping(reconnect=True)
         my_cursor.execute('select branch from students ;')
         for i in my_cursor:
             brch.append([branch[i[0]],'Total Students'])
@@ -115,6 +117,7 @@ class InstituteAnalysis(Screen):
         
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         dat=[]
+        my_db.ping(reconnect=True)
         my_cursor.execute(f'select co.package, count(co.package), st.branch from offer_letters as ol inner join students as st on ol.enrollment_id=st.enrollment_id inner join company as co on ol.company_id=co.company_id where st.pass_year = year(curdate()) group by st.branch, co.package;')
         for i in my_cursor:
             dat.append([i[0],i[1],branch[i[2]]])

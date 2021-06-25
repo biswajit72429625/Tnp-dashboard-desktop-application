@@ -31,6 +31,7 @@ class Placements(Screen):
                 break
         # lists all records in database
         query = f"select * from company where branch = '{branch}';"
+        my_db.ping(reconnect=True)
         my_cursor.execute(query)
         self.company_records = my_cursor.fetchall()
         # creating reference for view_eresource screen to put dynamic data in table

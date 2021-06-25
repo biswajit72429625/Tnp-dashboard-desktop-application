@@ -30,6 +30,7 @@ class ViewCompanies(Screen):
         # my_db, my_cursor = db_connector()
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         query = f"select Distinct(role) from company ;"
+        my_db.ping(reconnect=True)
         my_cursor.execute(query)
         self.menu = my_cursor.fetchall()
         #print(self.menu)
@@ -93,6 +94,7 @@ class ViewCompanies(Screen):
         # my_db, my_cursor = db_connector()
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         query = f"select Distinct(role) from company ;"
+        my_db.ping(reconnect=True)
         my_cursor.execute(query)
         self.menu = my_cursor.fetchall()
         #print(self.menu)
@@ -174,6 +176,7 @@ class ViewCompanies(Screen):
             my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
             query = f"UPDATE company SET package = %s, platform = %s, website = %s, role = %s where company_id = %s"
             values = (self.package, self.platform, self.website, self.role, self.records[0])
+            my_db.ping(reconnect=True)
             my_cursor.execute(query,values)
             my_db.commit()
             # closing dialog
@@ -208,6 +211,7 @@ class ViewCompanies(Screen):
         self.dismiss_delete_dialog(self.delete_dialog)
         # my_db, my_cursor = db_connector()
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
+        my_db.ping(reconnect=True)
         for i in checks: 
             if i.active:
                 my_cursor.execute(f'DELETE FROM company WHERE company_id={records[int(i.id)][0]};')

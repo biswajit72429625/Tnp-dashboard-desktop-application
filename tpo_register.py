@@ -102,6 +102,7 @@ class TpoRegister(Screen):
         # my_db, my_cursor = db_connector()
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         qur='select name,email from officer'
+        my_db.ping(reconnect=True)
         my_cursor.execute(qur)
         for i in my_cursor:
             if email==i[1]:
@@ -142,6 +143,7 @@ class TpoRegister(Screen):
         self.officer_email = self.ids.email.text
         # my_db, my_cursor = db_connector()
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
+        my_db.ping(reconnect=True)
         my_cursor.execute(f"select id from officer where email ='{self.officer_email}';")
         records = my_cursor.fetchall()
         if records:
