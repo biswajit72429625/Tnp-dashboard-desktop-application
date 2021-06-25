@@ -3,7 +3,7 @@ from kivymd.uix.picker import MDDatePicker
 from kivymd.uix.picker import MDTimePicker
 from kivymd.uix.menu import MDDropdownMenu
 from datetime import date
-from database import show_alert_dialog
+from database import show_alert_dialog, send_mail
 import flags
 
 
@@ -124,6 +124,8 @@ class AddAssessments(Screen):
             
         my_cursor.execute(qur,val)
         my_db.commit()
+        # send_mail(self,"New Assessment!",f"By:- {self.eorganizer}\nTopic:- {self.ename}\nLink:- {self.elink}\nTest Time:- {self.date}\nGood Luck with Test",self.year)
+        send_mail(self,"New Assessment!",f"By:- {self.eorganizer}\nTopic:- {self.ename}\nLink:- {self.elink}\nGood Luck with Test",self.year)
         show_alert_dialog(self,"Assessments added  Sucessfully !!!")
         self.manager.callback()
         self.manager.callback()

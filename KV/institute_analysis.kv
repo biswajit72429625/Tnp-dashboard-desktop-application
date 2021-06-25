@@ -87,15 +87,24 @@
                     row_default_height: 60
                     adaptive_width: True
 
-    MDIconButton:
-        icon:"file-export"
-        md_bg_color: app.theme_cls.primary_color
-        pos_hint:{"x":.45,"y":.01}
-        on_press: root.export_data()
-    Button:
-        text:"more"
+    # MDIconButton:
+    #     icon:"file-export"
+    #     md_bg_color: app.theme_cls.primary_color
+    #     pos_hint:{"x":.45,"y":.01}
+    #     on_press: root.export_data()
+    # Button:
+    #     text:"More"
+    #     size_hint: (0.15,0.05)
+    #     pos_hint: {'center_x': .8,'center_y': .05}
+    #     on_press: root.prepare_graphs()
+    #     on_press: root.manager.current="institute_graphs"
+    #     on_press: root.manager.stack.append(root.name)
+
+    MDRaisedButton:
+        text:"More"
         size_hint: (0.15,0.05)
         pos_hint: {'center_x': .8,'center_y': .05}
+        font_size:16
         on_press: root.prepare_graphs()
         on_press: root.manager.current="institute_graphs"
         on_press: root.manager.stack.append(root.name)

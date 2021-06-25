@@ -1,8 +1,7 @@
 # from functools import partialmethod
 from kivy.uix.screenmanager import Screen
 from kivymd.uix.filemanager import MDFileManager
-from database import db_connector,show_alert_dialog
-from datetime import datetime, date
+from database import show_alert_dialog
 import flags
 import os
 import pandas as pd

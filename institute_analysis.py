@@ -1,9 +1,7 @@
 from kivy.uix.screenmanager import Screen
 from kivy.properties import StringProperty
-from kivy.uix.gridlayout import GridLayout
 from kivymd.uix.label import MDLabel
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
 import seaborn as sns
 import flags

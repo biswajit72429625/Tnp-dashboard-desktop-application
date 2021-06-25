@@ -1,7 +1,7 @@
 from kivy.uix.screenmanager import Screen
 from kivymd.uix.picker import MDDatePicker,MDTimePicker 
 from kivymd.uix.menu import MDDropdownMenu
-from database import show_alert_dialog
+from database import show_alert_dialog, send_mail
 from datetime import datetime, date
 import flags
 class AddEresources(Screen):
@@ -132,6 +132,7 @@ class AddEresources(Screen):
             
         my_cursor.execute(qur,val)
         my_db.commit()
+        send_mail(self,"New Study Material!",f"By:- {self.eorganizer}\nTopic:- {self.ename}\nLink:- {self.elink}\nPlease read the material throughly to score well",self.year)
         show_alert_dialog(self,"EResources added  Sucessfully !!!")
         self.manager.callback()
         self.manager.callback()

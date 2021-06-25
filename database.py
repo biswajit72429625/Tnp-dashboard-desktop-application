@@ -8,6 +8,8 @@ import smtplib
 from decouple import config
 from difflib import SequenceMatcher
 from heapq import nlargest as _nlargest
+import flags
+from kivymd.app import MDApp
 
 def db_connector():
     # connects to database
@@ -37,20 +39,42 @@ def disable_toggler(screen,list,value):
     for i in list:
         screen.ids[i].disabled = value
 
-def send_mail(screen,subject:str,message:str,to:list):
+def send_mail(screen,subject:str,message:str,year:int):
+    # wait message
+    # show_alert_dialog(screen,"Please wait informing all students via mail.")
+    # getting branch
+    for k,v in flags.branch.items():
+        if v==flags.app.officer_branch:
+            branch=k
+            break
+    # getting db info from current app
+    my_db, my_cursor = flags.app.root.my_db, flags.app.root.my_cursor
+    # retriving all students emails
+    my_cursor.execute(f"select stud_email from students where pass_year = {year} and branch = {branch};")
+    to = my_cursor.fetchall()
+    # building mail message
     mail = EmailMessage()
     mail['from'] = config('email')
     mail['subject'] = subject
     mail.set_content(message)
+    error_list=[]
+    error_flag = False
     try:
         with smtplib.SMTP_SSL('smtp.gmail.com',465) as server:
             server.login(config('email'),config('email_password'))
             for i in to:
-                mail['to'] = i
-                server.send_message(mail)
+                try:
+                    mail['to'] = i[0]
+                    server.send_message(mail)
+                except Exception:
+                    error_flag = True
+                    error_list.append(i[0])
                 # show_alert_dialog(screen,"Mail sent to all students")
     except Exception:
         show_alert_dialog(screen,"Error sending mail to students")
+    if error_flag:
+        show_alert_dialog(screen,f"Error sending mail to {error_list}")
+    # screen.wait_dialog.dismiss()
     
 def get_close_matches_indexes(word, possibilities, n=3, cutoff=0.6):
     """Use SequenceMatcher to return a list of the indexes of the best 
