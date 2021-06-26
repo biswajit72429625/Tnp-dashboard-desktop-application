@@ -69,7 +69,14 @@
             pos_hint: {'center_x':0.48}
             hint_text: "role"
             disabled: True
-        MDRectangleFlatButton:
-            text: "Save"
-            pos_hint: {'center_x': .5}
-            on_press:root.verify()
+        GridLayout:
+            cols:2
+            spacing:20
+            MDRectangleFlatButton:
+                text: "Clear"
+                pos_hint: {'center_x': .5}
+                on_press:root.clear()
+            MDRectangleFlatButton:
+                text: "Save"
+                pos_hint: {'center_x': .5}
+                on_press:root.verify()

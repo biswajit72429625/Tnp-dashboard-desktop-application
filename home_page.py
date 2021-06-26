@@ -32,6 +32,16 @@ class AssessmentLabel(MDLabel):
 class AssessmentCheckbox(MDCheckbox):
     id = StringProperty()
 
+class AnnouncementCheckbox(MDCheckbox):
+    id = StringProperty()
+
+class AnnouncementTitle(MDLabel):
+    text = StringProperty()
+    id = StringProperty()
+
+class AnnouncementLabel(MDLabel):
+    text = StringProperty()
+    id = StringProperty()
 
 class HomePage(Screen):
     def __init__(self, **kw):
@@ -69,7 +79,33 @@ class HomePage(Screen):
             view_eresources_screen.ids.grid.add_widget(EResourceTitle(id=f'{i}',text=f"[u][ref=world]{self.eresources_records[i][1]}[/ref][/u]"))
             view_eresources_screen.ids.grid.add_widget(EResourceLabel(id=f'{i}',text=f"{str(self.eresources_records[i][6])}"))
             view_eresources_screen.ids.grid.add_widget(EResourceLabel(id=f'{i}',text=f"{self.eresources_records[i][2]}"))
-
+    def load_announcement(self):
+        # loads announcement_resources screen
+        # my_db, my_cursor = db_connector()
+        my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
+        # select branch by officer_branch
+        branch = flags.app.officer_branch
+        for key, value in flags.branch.items():
+            if branch == value:
+                branch = key
+                break
+        # lists all records in database
+        query = f"select * from announcement where branch = '{branch}';"
+        my_db.ping(reconnect=True)
+        my_cursor.execute(query)
+        self.announcement_records = my_cursor.fetchall()
+        # creating reference for view_announcement screen to put dynamic data in table
+        view_announcement_screen = self.manager.get_screen('view_announcement')
+        view_announcement_screen.ids.grid.clear_widgets()
+        self.checkbox_list = []
+        for i in range(len(self.announcement_records)):
+            # checkbox, title, date, branch
+            check = AnnouncementCheckbox(id=f'{i}')
+            self.checkbox_list.append(check)
+            view_announcement_screen.ids.grid.add_widget(check)
+            view_announcement_screen.ids.grid.add_widget(AnnouncementTitle(id=f'{i}',text=f"[u][ref=world]{self.announcement_records[i][1]}[/ref][/u]"))
+            view_announcement_screen.ids.grid.add_widget(AnnouncementLabel(id=f'{i}',text=f"{str(self.announcement_records[i][3])}"))
+            #view_announcement_screen.ids.grid.add_widget(AnnouncementLabel(id=f'{i}',text=f"{self.announcement_records[i][4]}"))
     def load_assessment(self):
         # loads assessments screen
         # my_db, my_cursor = db_connector()

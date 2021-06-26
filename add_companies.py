@@ -8,6 +8,13 @@ class AddCompanies(Screen):
     def __init__(self, **kw):
         super(AddCompanies, self).__init__(**kw)
     
+    def clear(self):#to clear all fields
+        self.ids.name.text=''
+        self.ids.link.text=''
+        self.ids.package.text=''
+        self.ids.dropdown_item.text='Choose Role'
+        self.ids.type.text='Placement Type'
+        self.ids.role.text=''
     # checking all the constraints
     def verify(self):
         nam=self.ids.name.text

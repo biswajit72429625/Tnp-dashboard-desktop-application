@@ -1,0 +1,122 @@
+<ViewAnnouncement>
+    Background:
+    Navbar:
+    FloatLayout:
+        size: root.width, root.height
+        MDLabel:
+            pos_hint: {'center_x': .5, 'y': .77}
+            halign: 'center'
+            theme_text_color: "Custom"
+            text_color: 0, 150/255, 136/255, 1
+            text: "Announcements"
+            font_style: 'H6'
+            padding: (10,15)
+            size_hint_y: None
+            height: self.texture_size[1]
+            font_size:30
+        MDCard:
+            size_hint : (0.9,0.7)
+            pos_hint: {'center_x': .5, 'center_y': .4}
+            elevation: 20
+            orientation: 'vertical'
+            spacing: 2
+            MDGridLayout:
+                size: (self.parent.width,60)
+                height: self.minimum_height
+                size_hint_x: None
+                size_hint_y: None
+                cols: 3
+                row_default_height: 60
+                row_force_default: True
+                adaptive_width: True
+                MDLabel:
+                    text: ""
+                    size_hint: (0.1,0.1)
+                    md_bg_color: app.theme_cls.accent_color
+                MDLabel:
+                    text: "Title"
+                    text_color: 1, 1, 1, 1
+                    theme_text_color: "Custom"
+                    font_size: 25
+                    font_style:"H6"
+                    halign: 'center'
+                    size_hint_x: 0.3
+                    md_bg_color: app.theme_cls.accent_color
+                MDLabel:
+                    text: "Batch"
+                    text_color: 1, 1, 1, 1
+                    font_size: 25
+                    font_style:"H6"
+                    size_hint_x: 0.3
+                    theme_text_color: "Custom"
+                    halign: 'center'
+                    md_bg_color: app.theme_cls.accent_color
+            
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True
+                size: (self.parent.width,self.parent.height-60)
+                GridLayout:
+                    id: grid
+                    size_hint_y: None
+                    height: self.minimum_height
+                    cols: 3
+                    row_default_height: 60
+                    adaptive_width: True
+
+    MDFloatingActionButtonSpeedDial:
+        data: {'add':'notebook-plus-outline', 'delete':'delete'}
+        root_button_anim: True
+        label_text_color: (1,1,1,1)
+        callback: self.parent.add_delete
+
+<AnnouncementDialog>:
+    orientation: "vertical"
+    spacing: "8dp"
+    size_hint_y: None
+    height: 380
+    MDTextField:
+        id: title
+        hint_text: "Title"
+        # line_color_normal: app.theme_cls.primary_color
+    MDLabel:
+        text:"Description"
+    MDTextField:
+        id:description
+        mode:"rectangle"
+        fill_color:0,0,0,.4
+        multiline:True
+        size_hint_y:15
+    MDGridLayout:
+        cols: 2
+        width: self.parent.width
+        spacing: 20
+        MDLabel:
+            text: "Passing Year"
+        MDRectangleFlatButton:
+            id: dialog_passyear
+            on_release: root.menu.open()
+    Widget:
+    MDRoundFlatButton:
+        id: dialog_edit
+        text: "Edit"
+        on_press: app.root.get_screen('view_announcement').edit_announcement()
+
+<AnnouncementTitle>
+    text: "[u][ref=world]7[/ref][/u]"
+    markup : True
+    theme_text_color: 'Custom'
+    text_color: app.theme_cls.primary_color
+    font_size: 20
+    halign: 'center'
+    size_hint_x: 0.3
+    on_ref_press: app.root.get_screen('view_announcement').full_details(self.id)
+
+<AnnouncementCheckbox>
+    size_hint: (0.1,0.1)
+
+<AnnouncementLabel>
+    text: "Announcement"
+    font_size: 20
+    size_hint_x: 0.3
+    halign: 'center'
