@@ -33,6 +33,7 @@ class InstituteAnalysis(Screen):
                 branch=k
                 break
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
+        self.ids.grid.clear_widgets()
         # retriving list of packages
         my_db.ping(reconnect=True)
         my_cursor.execute('''select distinct(co.package)
@@ -72,6 +73,7 @@ class InstituteAnalysis(Screen):
         df=pd.DataFrame(dat,columns=['branch','year'])
         sns.countplot(x=df['branch'],hue=df['year'],palette='coolwarm')
         # plt.show()
+        plt.title('Offer Letters per branch')
         plt.savefig("Graphs//inst_1.png")
         plt.close('all')
     
@@ -87,7 +89,7 @@ class InstituteAnalysis(Screen):
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         brch=[]
         my_db.ping(reconnect=True)
-        my_cursor.execute('select branch from students ;')
+        my_cursor.execute('select branch from students where pass_year = year(curdate());')
         for i in my_cursor:
             brch.append([branch[i[0]],'Total Students'])
         my_cursor.execute("select branch from students where  enrollment_id  in (select  enrollment_id from offer_letters where finalised='') and pass_year = year(curdate()) ;")
@@ -127,7 +129,7 @@ class InstituteAnalysis(Screen):
         plt.title("Count of Package")
         plt.yticks(np.arange(max(df['count'])+5,step=5))
         plt.xlabel("Package")
-        plt.ylabel("Branch")
+        plt.ylabel("No. of packages")
         plt.legend()
         # plt.show()
         plt.savefig("Graphs//inst_3.png")

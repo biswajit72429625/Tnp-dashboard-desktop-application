@@ -26,7 +26,7 @@ from finalize_offer import FinalizeOffer
 from analysis import Analysis
 from forgot_pass import ForgotPass
 from individual_level import IndividualLevel
-from department_analysis import DepartmentAnalysis, DepartmentGraphs
+from department_analysis import DepartmentAnalysis, DepartmentGraphs, DepartmentBasicDetails
 from institute_analysis import InstituteAnalysis, InstituteGraphs
 from pre_register import PreRegister
 #################################################
@@ -60,6 +60,7 @@ class Manager(ScreenManager):
         self.add_widget(Analysis(name='analysis'))
         self.add_widget(ForgotPass(name='forgot_pass'))
         self.add_widget(IndividualLevel(name='individual_level'))
+        self.add_widget(DepartmentBasicDetails(name='department_basic_details'))
         self.add_widget(DepartmentAnalysis(name='department_analysis'))
         self.add_widget(DepartmentGraphs(name='department_graphs'))
         self.add_widget(InstituteAnalysis(name='institute_analysis'))

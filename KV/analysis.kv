@@ -50,14 +50,14 @@
             md_bg_color: app.theme_cls.primary_light
             pos_hint:{"x":.14}
             on_press:root.load_department()
-            on_press:root.manager.current="department_analysis"
+            on_press:root.manager.current="department_basic_details"
             on_press: root.manager.stack.append(root.name)
         MDRectangleFlatButton:
             text:"Dept Level"
             font_size:20
             pos_hint:{"x":.14}
             on_press:root.load_department()
-            on_press:root.manager.current="department_analysis"
+            on_press:root.manager.current="department_basic_details"
             on_press: root.manager.stack.append(root.name)
     MDCard:
         size_hint: (0.26,0.4)

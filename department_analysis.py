@@ -19,19 +19,15 @@ class DepartmentTableLabel(MDLabel):
 class DepartmentGridYear(GridLayout):
     def __init__(self,**kw):
         super(DepartmentGridYear, self).__init__(**kw)
+
+class DepartmentGraphs(Screen):
+    # graphs screen
+    def __init__(self, **kw):
+        super(DepartmentGraphs, self).__init__(**kw)
+
 class DepartmentAnalysis(Screen):
     def __init__(self, **kw):
         super(DepartmentAnalysis,self).__init__(**kw)
-
-    def prepare_graphs(self):
-        self.pie_chart()
-        self.double_bar()
-        self.multiple_bar()
-        self.line_plot()
-        graphs=self.manager.get_screen('department_graphs')
-        # reload images
-        for i in range(1,5):
-            graphs.ids[str(i)].reload()
 
     def load_analysis(self):
         for k,v in flags.branch.items():
@@ -77,7 +73,57 @@ class DepartmentAnalysis(Screen):
                 # adding all 3 column grid to main gird
                 self.ids.grid.add_widget(temp)
 
+    
+class DepartmentBasicDetails(Screen):
+    def __init__(self, **kw):
+        super(DepartmentBasicDetails,self).__init__(**kw)
+
+    def load_basic_details(self):
+        # loads basic details
+        for k,v in flags.branch.items():
+            if v==flags.app.officer_branch:
+                branch=k
+                break
+        my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
+        self.ids.grid.clear_widgets()
+        # retriving list of companies
+        my_db.ping(reconnect=True)
+        my_cursor.execute(f'''select distinct(co.name)
+                             from offer_letters as ol 
+                             inner join company as co on ol.company_id=co.company_id 
+                             inner join students as st on ol.enrollment_id=st.enrollment_id 
+                             where st.branch = {branch};''')
+        companies = my_cursor.fetchall()
+        for company in companies:
+            # add company
+            self.ids.grid.add_widget(DepartmentTableTitleLabel(text=str(company[0])))
+            for i in range(0,3):
+                # count of students placed for given for package and branch
+                my_cursor.execute(f'''select count(ol.enrollment_id) 
+                                from offer_letters as ol 
+                                inner join students as st on ol.enrollment_id=st.enrollment_id 
+                                inner join company as co on ol.company_id=co.company_id 
+                                where st.branch = {branch} and ol.finalised = '' and co.name = '{company[0]}' and st.pass_year=year(curdate())-{i};''')
+                self.ids.grid.add_widget(DepartmentTableLabel(text=str(my_cursor.fetchall()[0][0])))
+
+    def load_department(self):
+        # switch to full details screen
+        department_analysis_screen = self.manager.get_screen("department_analysis")
+        department_analysis_screen.load_analysis()
+
+    def prepare_graphs(self):
+        # prepares all graphs and reloads it from grphs directory
+        self.pie_chart()
+        self.double_bar()
+        self.multiple_bar()
+        self.line_plot()
+        graphs=self.manager.get_screen('department_graphs')
+        # reload images
+        for i in range(1,5):
+            graphs.ids[str(i)].reload()
+
     def pie_chart(self):
+        # pie chart for offer letters per company
         for k,v in flags.branch.items():
             if v==flags.app.officer_branch:
                 branch=k
@@ -96,6 +142,7 @@ class DepartmentAnalysis(Screen):
         plt.close('all')
     
     def double_bar(self):
+        # double bar graph for total students vs placed students for past 3 years
         for k,v in flags.branch.items():
             if v==flags.app.officer_branch:
                 branch=k
@@ -122,6 +169,7 @@ class DepartmentAnalysis(Screen):
         plt.close('all')
 
     def multiple_bar(self):
+        # multiple bar graph for offer letters provided by each company for past 3 years
         for k,v in flags.branch.items():
             if v==flags.app.officer_branch:
                 branch=k
@@ -144,6 +192,7 @@ class DepartmentAnalysis(Screen):
         plt.close('all')
 
     def line_plot(self):
+        # line plot for number of packages got for past 3 years
         for k,v in flags.branch.items():
             if v==flags.app.officer_branch:
                 branch=k
@@ -160,13 +209,9 @@ class DepartmentAnalysis(Screen):
         plt.title("Count of Package")
         plt.yticks(np.arange(max(df['count'])+5,step=5))
         plt.xlabel("Package")
-        plt.ylabel("Count")
+        plt.ylabel("Offer Count")
         plt.legend()
         # plt.show()
         plt.savefig("Graphs//dept_4.png")
         plt.close('all')
 
-
-class DepartmentGraphs(Screen):
-    def __init__(self, **kw):
-        super(DepartmentGraphs, self).__init__(**kw)
