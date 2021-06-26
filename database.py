@@ -5,11 +5,9 @@ from kivymd.uix.button import MDFlatButton
 from functools import partial
 from email.message import EmailMessage
 import smtplib
-from decouple import config
 from difflib import SequenceMatcher
 from heapq import nlargest as _nlargest
 import flags
-from kivymd.app import MDApp
 
 def db_connector():
     # connects to database

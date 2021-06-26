@@ -122,7 +122,7 @@
         cols: 2
         MDRaisedButton:
             id: 0
-            text: str(date.today().year)
+            text: str(date.today().year-1)+"-"+str(date.today().year)
             font_size: 20
             md_bg_color: app.theme_cls.accent_color
             size_hint:None,None
@@ -130,7 +130,7 @@
             on_press: root.load_offer(0)
         MDRaisedButton:
             id: 1
-            text: str(date.today().year+1)
+            text: str(date.today().year)+"-"+str(date.today().year+1)
             font_size: 20
             md_bg_color: app.theme_cls.accent_color
             size_hint:None,None
