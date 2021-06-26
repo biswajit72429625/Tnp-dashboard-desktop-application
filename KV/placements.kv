@@ -19,13 +19,13 @@
         elevation: 20
         orientation: 'vertical'
         padding: 10
-        spacing: 15
+        spacing: 22
         MDIconButton:
             halign:"center"
             icon:"office-building-marker"
-            user_font_size:"70sp"
+            user_font_size:"80sp"
             md_bg_color: app.theme_cls.primary_light
-            pos_hint:{"x":.2}
+            pos_hint:{"x":.15}
             on_press:root.load_companies()
             on_press:root.manager.current="view_companies"
             on_press: root.manager.stack.append(root.name)
@@ -44,13 +44,13 @@
         elevation: 20
         orientation: 'vertical'
         padding: 10
-        spacing: 15
+        spacing: 22
         MDIconButton:
             halign:"center"
             icon:"account-group"
-            user_font_size:"70sp"
+            user_font_size:"80sp"
             md_bg_color: app.theme_cls.primary_light
-            pos_hint:{"x":.2}
+            pos_hint:{"x":.15}
             on_press:root.load_students()
             on_press:root.manager.current="manage_students"
             on_press: root.manager.stack.append(root.name)
@@ -68,13 +68,13 @@
         elevation: 20
         orientation: 'vertical'
         padding: 10
-        spacing: 15
+        spacing: 22
         MDIconButton:
             halign:"center"
             icon:"newspaper-variant-outline"
-            user_font_size:"70sp"
+            user_font_size:"80sp"
             md_bg_color: app.theme_cls.primary_light
-            pos_hint:{"x":.2}
+            pos_hint:{"x":.15}
             on_press:root.load_offer()
             on_press:root.manager.current="offer_letters"
             on_press: root.manager.stack.append(root.name)
@@ -92,13 +92,13 @@
         elevation: 20
         orientation: 'vertical'
         padding: 10
-        spacing: 15
+        spacing: 22
         MDIconButton:
             halign:"center"
             icon:"newspaper-variant"
-            user_font_size:"70sp"
+            user_font_size:"80sp"
             md_bg_color: app.theme_cls.primary_light
-            pos_hint:{"x":.2}
+            pos_hint:{"x":.15}
             on_press:root.manager.current="finalize_offer"
             on_press: root.manager.stack.append(root.name)
         MDRectangleFlatButton:
@@ -114,13 +114,13 @@
         elevation: 20
         orientation: 'vertical'
         padding: 10
-        spacing: 15
+        spacing: 22
         MDIconButton:
             halign:"center"
             icon:"database"
-            user_font_size:"70sp"
+            user_font_size:"80sp"
             md_bg_color: app.theme_cls.primary_light
-            pos_hint:{"x":.2}
+            pos_hint:{"x":.15}
             on_press:root.manager.current="analysis"
             on_press: root.manager.stack.append(root.name)
         MDRectangleFlatButton:

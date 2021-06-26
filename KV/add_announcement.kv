@@ -1,0 +1,60 @@
+<AddAnnouncement>
+    Background:
+    Navbar:
+    MDLabel:
+        pos_hint: {'center_x': .5, 'y': .8}
+        halign: 'center'
+        theme_text_color: "Custom"
+        text_color: 0, 150/255, 136/255, 1
+        text: "Add Announcement"
+        font_style: 'H6'
+        padding: (10,15)
+        size_hint_y: None
+        height: self.texture_size[1]
+        font_size:30
+    MDCard:
+        size_hint: (0.5,0.73)
+        pos_hint: {'center_x': .5, 'center_y': .42}
+        elevation: 30
+        orientation: 'vertical'
+        padding: 25
+        spacing: 22
+        MDTextField:
+            id:title
+            size_hint_x: None
+            width: 300
+            pos_hint: {'center_x':0.5}
+            icon_right: "pen"
+            hint_text: "Title"
+            color_mode: 'accent'
+            icon_right_color:app.theme_cls.accent_color
+            on_text_validate: root.change_field('description')
+        MDLabel:
+            text:"Description:"
+        MDTextField:
+            id:description
+            mode:"rectangle"
+            fill_color:0,0,0,.4
+            multiline:True
+            size_hint_y:4
+        GridLayout:
+            cols:2
+            MDLabel:
+                text: "Passing Year:"
+            MDRectangleFlatButton:
+                text:"Passing Year"
+                id: dialog_passyear
+                on_release: root.menu.open()
+        GridLayout:
+            cols:2
+            spacing:20
+            MDRectangleFlatButton:
+                text: "Clear"
+                pos_hint: {'center_x': .5}
+                font_size: 15
+                on_release: root.clear()
+            MDRectangleFlatButton:
+                text: "Save"
+                pos_hint: {'center_x': .5}
+                font_size: 15
+                on_release: root.submit()

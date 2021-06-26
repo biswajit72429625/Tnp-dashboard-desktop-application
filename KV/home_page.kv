@@ -3,95 +3,123 @@
     Background:
     Navbar:
     MDCard:
-        size_hint: (0.22,0.4)
-        pos_hint: {'center_x': .125, 'center_y': .5}
+        size_hint: (0.22,0.32)
+        pos_hint: {'center_x': .35, 'center_y': .65}
         elevation: 20
         orientation: 'vertical'
-        padding: 18
-        spacing: 30
+        padding: 10
+        spacing: 22
         MDIconButton:
             halign:"center"
             icon:"registered-trademark"
-            user_font_size:"100sp"
+            user_font_size:"80sp"
             md_bg_color: app.theme_cls.primary_light
-            pos_hint:{"x":.065}
+            pos_hint:{"x":.15}
             on_press:root.load_pre_register_students()
             on_press:root.manager.current="pre_register"
             on_press: root.manager.stack.append(root.name)
         MDRectangleFlatButton:
             halign:"center"
-            text:"register student"
-            font_size:16
-            pos_hint:{"x":.01}
+            text:"Register Student"
+            font_size:15
+            pos_hint:{"x":.08}
+            #width: self.parent.width-30
             on_press:root.load_pre_register_students()
             on_press:root.manager.current="pre_register"
             on_press: root.manager.stack.append(root.name)
     MDCard:
-        size_hint: (0.22,0.4)
-        pos_hint: {'center_x': .375, 'center_y': .5}
+        size_hint: (0.22,0.32)
+        pos_hint: {'center_x': .65, 'center_y': .65}
         elevation: 20
         orientation: 'vertical'
-        padding: 14
-        spacing: 30
+        padding: 10
+        spacing: 22
+        MDIconButton:
+            halign:"center"
+            icon:"speaker-wireless"
+            user_font_size:"80sp"
+            md_bg_color: app.theme_cls.primary_light
+            pos_hint:{"x":.15}
+            on_press:root.load_announcement()
+            on_press:root.manager.current="view_announcement"
+            on_press: root.manager.stack.append(root.name)
+        MDRectangleFlatButton:
+            halign:"center"
+            text:"Announcements"
+            font_size:15
+            pos_hint:{"x":.08}
+            on_press:root.load_announcement()
+            on_press:root.manager.current="view_announcement"
+            on_press: root.manager.stack.append(root.name)
+    MDCard:
+        size_hint: (0.22,0.32)
+        pos_hint: {'center_x': .2, 'center_y': .25}
+        elevation: 20
+        orientation: 'vertical'
+        padding: 10
+        spacing: 22
         MDIconButton:
             halign:"center"
             icon:"book-open-page-variant"
-            user_font_size:"100sp"
+            user_font_size:"80sp"
             md_bg_color: app.theme_cls.primary_light
-            pos_hint:{"x":.065}
+            pos_hint:{"x":.15}
             on_press:root.load_eresource()
             on_press:root.manager.current="view_eresources"
             on_press: root.manager.stack.append(root.name)
         MDRectangleFlatButton:
             halign:"center"
             text:"Study material"
-            font_size:16
-            pos_hint:{"x":.06}
+            font_size:15
+            pos_hint:{"x":.1}
             on_press:root.load_eresource()
             on_press:root.manager.current="view_eresources"
             on_press: root.manager.stack.append(root.name)
-
     MDCard:
-        size_hint: (0.22,0.4)
-        pos_hint: {'center_x': .625, 'center_y': .5}
+        size_hint: (0.22,0.32)
+        pos_hint: {'center_x': .5, 'center_y': .25}
         elevation: 20
         orientation: 'vertical'
-        padding: 14
-        spacing: 30
+        padding: 10
+        spacing: 22
         MDIconButton:
+            halign:"center"
             icon:"pen"
-            user_font_size:"100sp"
+            user_font_size:"80sp"
             md_bg_color: app.theme_cls.primary_light
-            pos_hint:{"x":.065}
+            pos_hint:{"x":.15}
             on_press:root.load_assessment()
             on_press:root.manager.current="view_assessments"
             on_press: root.manager.stack.append(root.name)
         MDRectangleFlatButton:
+            halign:"center"
             text:"Placement Training"
             font_size:15
-            pos_hint_x: 0.4
-            pos_hint_y: None
+            #pos_hint:{"x":.14}
             on_press:root.load_assessment()
             on_press:root.manager.current="view_assessments"
             on_press: root.manager.stack.append(root.name)
     MDCard:
-        size_hint: (0.22,0.4)
-        pos_hint: {'center_x': .875, 'center_y': .5}
+        size_hint: (0.22,0.32)
+        pos_hint: {'center_x': .8, 'center_y': .25}
         elevation: 20
         orientation: 'vertical'
-        padding: 18
-        spacing: 30
+        padding: 10
+        spacing: 22
         MDIconButton:
+            halign:"center"
             icon:"office-building-marker"
-            user_font_size:"100sp"
+            user_font_size:"80sp"
             md_bg_color: app.theme_cls.primary_light
-            pos_hint:{"x":.065}
+            pos_hint:{"x":.15}
             on_press:root.manager.current="placements"
             on_press: root.manager.stack.append(root.name)
         MDRectangleFlatButton:
+            halign:"center"
             text:"Placements"
             font_size:15
-            pos_hint:{"x":.08}
+            pos_hint:{"x":.16}
             on_press:root.manager.current="placements"
             on_press: root.manager.stack.append(root.name)
+
     

@@ -1,4 +1,5 @@
 ########## kivy modules #########################
+from view_announcement import ViewAnnouncement
 from kivy.config import Config
 Config.set('graphics', 'resizable', False)
 Config.set('kivy','window_icon','favicon.ico')
@@ -29,6 +30,8 @@ from individual_level import IndividualLevel
 from department_analysis import DepartmentAnalysis, DepartmentGraphs
 from institute_analysis import InstituteAnalysis, InstituteGraphs
 from pre_register import PreRegister
+from view_announcement import ViewAnnouncement
+from add_announcement import AddAnnouncement
 #################################################
 
 ########## other packages ##################
@@ -65,6 +68,8 @@ class Manager(ScreenManager):
         self.add_widget(InstituteAnalysis(name='institute_analysis'))
         self.add_widget(InstituteGraphs(name='institute_graphs'))
         self.add_widget(PreRegister(name='pre_register'))
+        self.add_widget(ViewAnnouncement(name='view_announcement'))
+        self.add_widget(AddAnnouncement(name='add_announcement'))
     
     def callback(self):
         # stack for back button
