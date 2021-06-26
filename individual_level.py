@@ -132,6 +132,7 @@ class IndividualLevel(Screen):
         my_cursor.execute(query)
         # retrive data
         data=my_cursor.fetchall()
+        platform_check = 0
         sheet_title = "Passout "+str(date.today().year)
         wb = Workbook()
         wb['Sheet'].title = sheet_title
@@ -139,9 +140,17 @@ class IndividualLevel(Screen):
         header = columns.split(',')
         for i in range(len(header)):
             sh1[chr(ord('A')+i)+'1'].value = header[i][3:]
+            if header[i][3:]=='platform':
+                platform_check = i
         for i in range(len(data)):
             for ii in range(len(header)):
-                sh1[chr(ord('A')+ii)+str(2+i)].value = data[i][ii]
+                if platform_check and ii==platform_check:
+                    if data[i][ii] == '':
+                        sh1[chr(ord('A')+ii)+str(2+i)].value = 'On-Campus'
+                    else:
+                        sh1[chr(ord('A')+ii)+str(2+i)].value = 'Off-Campus'
+                else:
+                    sh1[chr(ord('A')+ii)+str(2+i)].value = data[i][ii]
         # resiszing colun width
         for col in sh1.columns:
             max_length = 0
