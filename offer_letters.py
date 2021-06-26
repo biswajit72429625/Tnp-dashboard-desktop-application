@@ -186,14 +186,35 @@ class OfferLetters(Screen):
         my_db.ping(reconnect=True)
         my_cursor.execute(query,values)
         self.offer_records = my_cursor.fetchall()
-        if self.ids.dropdown_item.text == 'Student Name':
-            best_search = get_close_matches_indexes(self.ids.search_text.text,[i[1] for i in self.offer_records],n=200,cutoff=0.6)
+        # if self.ids.dropdown_item.text == 'Student Name':   
+        #     best_search = get_close_matches_indexes(self.ids.search_text.text,[i[1] for i in self.offer_records],n=200,cutoff=0.6)
+        # elif self.ids.dropdown_item.text == 'Company Name':
+        #     best_search = get_close_matches_indexes(self.ids.search_text.text,[i[3] for i in self.offer_records],n=200,cutoff=0.6)
+        # elif self.ids.dropdown_item.text == 'Role':
+        #     best_search = get_close_matches_indexes(self.ids.search_text.text,[i[4] for i in self.offer_records],n=200,cutoff=0.6)
+        # else:
+        #     best_search = get_close_matches_indexes(self.ids.search_text.text,[str(i[5]) for i in self.offer_records],n=200,cutoff=0.6)
+        best_search = []
+        if self.ids.dropdown_item.text == 'Student Name':   
+            # search by student name
+            for i in range(len(self.offer_records)):
+                if self.offer_records[i][1].startswith(self.ids.search_text.text):
+                    best_search.append(i)
         elif self.ids.dropdown_item.text == 'Company Name':
-            best_search = get_close_matches_indexes(self.ids.search_text.text,[i[3] for i in self.offer_records],n=200,cutoff=0.6)
+            # search by company name
+            for i in range(len(self.offer_records)):
+                if self.offer_records[i][3].startswith(self.ids.search_text.text):
+                    best_search.append(i)
         elif self.ids.dropdown_item.text == 'Role':
-            best_search = get_close_matches_indexes(self.ids.search_text.text,[i[4] for i in self.offer_records],n=200,cutoff=0.6)
+            # search by company role
+            for i in range(len(self.offer_records)):
+                if self.offer_records[i][4].startswith(self.ids.search_text.text):
+                    best_search.append(i)
         else:
-            best_search = get_close_matches_indexes(self.ids.search_text.text,[str(i[5]) for i in self.offer_records],n=200,cutoff=0.6)
+            # search by company package
+            for i in range(len(self.offer_records)):
+                if str(self.offer_records[i][5]).startswith(self.ids.search_text.text):
+                    best_search.append(i)
         self.offer_records = [self.offer_records[i] for i in best_search]
         # adding dynamic data to screen
         self.ids.grid.clear_widgets()
