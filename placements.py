@@ -2,6 +2,8 @@ from kivy.uix.screenmanager import Screen
 from kivy.properties import StringProperty
 from kivymd.uix.label import MDLabel
 from kivymd.uix.selectioncontrol import MDCheckbox
+from mysql.connector.errors import InterfaceError
+from database import show_alert_dialog
 import flags
 
 class CompanyTitle(MDLabel):
@@ -31,7 +33,11 @@ class Placements(Screen):
                 break
         # lists all records in database
         query = f"select * from company where branch = '{branch}';"
-        my_db.ping(reconnect=True)
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         my_cursor.execute(query)
         self.company_records = my_cursor.fetchall()
         # creating reference for view_eresource screen to put dynamic data in table

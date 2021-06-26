@@ -5,6 +5,7 @@ from database import show_alert_dialog
 import flags
 import os
 import pandas as pd
+from mysql.connector.errors import InterfaceError
 
 
 class FinalizeOffer(Screen):
@@ -45,12 +46,16 @@ class FinalizeOffer(Screen):
                 branch=k
                 break        
 
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         for i in range(len(enroll)):
 
             qu="update offer_letters set finalised='' where enrollment_id=%s and company_id=(select company_id from company where name=%s and role=%s and branch = %s) ;"
             va=(enroll[i],comp[i],role[i],branch)
             # print(enroll[i],comp[i],role[i],branch)
-            my_db.ping(reconnect=True)
             my_cursor.execute(qu,va)
             my_db.commit()
         show_alert_dialog(self,'Database Updated!!!')

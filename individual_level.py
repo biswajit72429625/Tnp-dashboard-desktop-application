@@ -6,6 +6,7 @@ from kivymd.uix.button import MDRoundFlatButton
 from kivy.properties import StringProperty
 from openpyxl import Workbook
 from database import show_alert_dialog
+from mysql.connector.errors import InterfaceError
 from datetime import date
 import flags
 import os
@@ -47,7 +48,11 @@ class IndividualLevel(Screen):
             inner join company as co on ol.company_id = co.company_id
             where st.pass_year = YEAR(CURDATE()) and st.branch= {branch} and ol.finalised is not NULL;
         '''
-        my_db.ping(reconnect=True)
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         my_cursor.execute(query)
         self.finalised_records = my_cursor.fetchall()
         # adding dynamic data to screen
@@ -128,7 +133,11 @@ class IndividualLevel(Screen):
             inner join company as co on ol.company_id = co.company_id
             where st.pass_year = YEAR(CURDATE()) and st.branch= {branch} and ol.finalised is not NULL;
             '''
-        my_db.ping(reconnect=True)
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         my_cursor.execute(query)
         # retrive data
         data=my_cursor.fetchall()

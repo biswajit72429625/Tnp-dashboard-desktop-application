@@ -2,6 +2,7 @@ from kivy.uix.screenmanager import Screen
 from kivymd.app import MDApp
 from kivy.properties import ObjectProperty
 from database import show_alert_dialog
+from mysql.connector.errors import InterfaceError
 import flags
 import bcrypt
 class Login(Screen):
@@ -21,7 +22,11 @@ class Login(Screen):
         # connecting to database
         # my_db, my_cursor = db_connector()
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
-        my_db.ping(reconnect=True)
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         my_cursor.execute(f"SELECT name,password,branch from officer where email='{self.email}';")
         try:
             # if email found, continue

@@ -6,7 +6,8 @@ import pandas as pd
 import seaborn as sns
 import flags
 import numpy as np
-
+from mysql.connector.errors import InterfaceError
+from database import show_alert_dialog
 
 class InstituteTableTitleLabel(MDLabel):
     text = StringProperty()
@@ -35,7 +36,11 @@ class InstituteAnalysis(Screen):
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         self.ids.grid.clear_widgets()
         # retriving list of packages
-        my_db.ping(reconnect=True)
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         my_cursor.execute('''select distinct(co.package)
                         from offer_letters as ol
                         inner join company as co on ol.company_id = co.company_id
@@ -66,7 +71,11 @@ class InstituteAnalysis(Screen):
             }
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         dat=[]
-        my_db.ping(reconnect=True)
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         my_cursor.execute('select st.branch, st.pass_year from offer_letters as ol inner join students as st on ol.enrollment_id=st.enrollment_id where st.pass_year between year(curdate())-3 and year(curdate());')
         for i in my_cursor:
             dat.append([branch[i[0]],i[1]])
@@ -88,7 +97,11 @@ class InstituteAnalysis(Screen):
             }
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         brch=[]
-        my_db.ping(reconnect=True)
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         my_cursor.execute('select branch from students where pass_year = year(curdate());')
         for i in my_cursor:
             brch.append([branch[i[0]],'Total Students'])
@@ -119,7 +132,11 @@ class InstituteAnalysis(Screen):
         
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         dat=[]
-        my_db.ping(reconnect=True)
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         my_cursor.execute(f'select co.package, count(co.package), st.branch from offer_letters as ol inner join students as st on ol.enrollment_id=st.enrollment_id inner join company as co on ol.company_id=co.company_id where st.pass_year = year(curdate()) group by st.branch, co.package;')
         for i in my_cursor:
             dat.append([i[0],i[1],branch[i[2]]])

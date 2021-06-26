@@ -1,5 +1,6 @@
 from kivy.uix.screenmanager import Screen
 from database import show_alert_dialog
+from mysql.connector.errors import InterfaceError
 import re
 import flags
 
@@ -57,7 +58,11 @@ class AddCompanies(Screen):
                 branch=k
                 break
         quer="SELECt company_id from company where name = %s and package = %s and role = %s and platform = %s and branch = %s"
-        my_db.ping(reconnect=True)
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         my_cursor.execute(quer,(nam,package,role,type,branch))
         if my_cursor.fetchall():
             show_alert_dialog(self,"company already exists")

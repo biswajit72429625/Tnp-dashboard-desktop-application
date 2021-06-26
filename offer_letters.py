@@ -5,6 +5,7 @@ from kivymd.uix.dialog import MDDialog
 from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.label import MDLabel
 from kivy.properties import StringProperty
+from mysql.connector.errors import InterfaceError
 import flags
 from datetime import date
 from database import disable_toggler, show_alert_dialog, get_close_matches_indexes
@@ -117,7 +118,11 @@ class OfferLetters(Screen):
             where st.pass_year = %s and st.branch=%s;
         '''
         values = (date.today().year+year,branch)
-        my_db.ping(reconnect=True)
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         my_cursor.execute(query,values)
         self.offer_records = my_cursor.fetchall()
         # adding dynamic data to screen
@@ -145,7 +150,11 @@ class OfferLetters(Screen):
             my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
             query = "update offer_letters set finalised = %s where enrollment_id = %s and company_id = (select company_id from company where name = %s and role = %s and branch = %s);"
             values = (finalised,self.offer_records[self.id][0], self.offer_records[self.id][3], self.offer_records[self.id][4], branch)
-            my_db.ping(reconnect=True)
+            try:
+                my_db.ping(reconnect=True,attempts=1)
+            except InterfaceError:
+                show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+                return
             my_cursor.execute(query,values)
             my_db.commit()
             # closing dialog
@@ -183,7 +192,11 @@ class OfferLetters(Screen):
             where st.pass_year = %s and st.branch=%s;
         '''
         values = (date.today().year+year,branch)
-        my_db.ping(reconnect=True)
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         my_cursor.execute(query,values)
         self.offer_records = my_cursor.fetchall()
         # if self.ids.dropdown_item.text == 'Student Name':   

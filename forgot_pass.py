@@ -6,6 +6,7 @@ import flags
 import smtplib
 import bcrypt
 from email.message import EmailMessage
+from mysql.connector.errors import InterfaceError
 class ForgotPass(Screen):
     def __init__(self, **kw):
         super(ForgotPass, self).__init__(**kw)
@@ -14,7 +15,11 @@ class ForgotPass(Screen):
         self.officer_email = self.ids.email.text
         # my_db, my_cursor = db_connector()
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
-        my_db.ping(reconnect=True)
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         my_cursor.execute(f"select id from officer where email ='{self.officer_email}';")
         records = my_cursor.fetchall()
         if records:
@@ -55,7 +60,11 @@ class ForgotPass(Screen):
             hashed = bcrypt.hashpw(self.password.encode('ascii'),bcrypt.gensalt()).decode('ascii')
             # my_db, my_cursor = db_connector()
             my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
-            my_db.ping(reconnect=True)
+            try:
+                my_db.ping(reconnect=True,attempts=1)
+            except InterfaceError:
+                show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+                return
             my_cursor.execute(f"update officer set password = '{hashed}' where id = {self.officer_id};")
             my_db.commit()
             show_alert_dialog(self,'Password changed successfully')

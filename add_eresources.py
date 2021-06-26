@@ -3,6 +3,7 @@ from kivymd.uix.picker import MDDatePicker,MDTimePicker
 from kivymd.uix.menu import MDDropdownMenu
 from database import show_alert_dialog, send_mail
 from datetime import datetime, date
+from mysql.connector.errors import InterfaceError
 import flags
 class AddEresources(Screen):
     def __init__(self, **kw):
@@ -129,11 +130,16 @@ class AddEresources(Screen):
         
             val=(self.ename,self.year,branch,self.eorganizer,self.elink)
             
-        my_db.ping(reconnect=True)
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         my_cursor.execute(qur,val)
         my_db.commit()
         send_mail(self,"New Study Material!",f"By:- {self.eorganizer}\nTopic:- {self.ename}\nLink:- {self.elink}\nPlease read the material throughly to score well",self.year)
         show_alert_dialog(self,"EResources added  Sucessfully !!!")
+        self.clear()
         self.manager.callback()
         self.manager.callback()
         

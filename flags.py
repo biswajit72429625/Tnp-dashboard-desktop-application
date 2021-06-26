@@ -7,4 +7,3 @@ branch = {
     5 : "ELN",
     6 : "IT"
 }
-add_company_role_menu_item = []

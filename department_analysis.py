@@ -8,7 +8,8 @@ import pandas as pd
 import seaborn as sns
 import flags
 from datetime import date
-
+from mysql.connector.errors import InterfaceError
+from database import show_alert_dialog
 
 
 class DepartmentTableTitleLabel(MDLabel):
@@ -36,7 +37,11 @@ class DepartmentAnalysis(Screen):
                 break
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         # retriving roles
-        my_db.ping(reconnect=True)
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         my_cursor.execute(f"select distinct(co.role) from offer_letters as ol inner join company as co on ol.company_id=co.company_id inner join students as st on ol.enrollment_id=st.enrollment_id where st.branch = {branch};")
         roles = my_cursor.fetchall()
         self.ids.grid.clear_widgets()
@@ -87,7 +92,11 @@ class DepartmentBasicDetails(Screen):
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         self.ids.grid.clear_widgets()
         # retriving list of companies
-        my_db.ping(reconnect=True)
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         my_cursor.execute(f'''select distinct(co.name)
                              from offer_letters as ol 
                              inner join company as co on ol.company_id=co.company_id 
@@ -129,7 +138,11 @@ class DepartmentBasicDetails(Screen):
                 branch=k
                 break
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
-        my_db.ping(reconnect=True)
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         my_cursor.execute(f"select co.name,count(co.name) from offer_letters as ol inner join company as co on ol.company_id = co.company_id inner join students as st on ol.enrollment_id = st.enrollment_id where co.branch = {branch} and st.pass_year = year(curdate()) group by co.name;")
         records = my_cursor.fetchall()
         labels,values = [i[0] for i in records],[i[1] for i in records]
@@ -148,7 +161,11 @@ class DepartmentBasicDetails(Screen):
                 branch=k
                 break
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
-        my_db.ping(reconnect=True)
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         my_cursor.execute(f"select st.pass_year, count(st.enrollment_id) as total, (select count(offer_letters.enrollment_id) from offer_letters inner join students on offer_letters.enrollment_id=students.enrollment_id where offer_letters.finalised='' and students.pass_year = st.pass_year and students.branch={branch}) as placed from students as st where st.branch = {branch} and st.pass_year between year(curdate())-3 and year(curdate()) group by pass_year order by st.pass_year desc limit 3;")
         records = my_cursor.fetchall()
         labels = [i[0] for i in records]
@@ -175,7 +192,11 @@ class DepartmentBasicDetails(Screen):
                 branch=k
                 break
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
-        my_db.ping(reconnect=True)
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         my_cursor.execute(f"select co.name,st.pass_year from offer_letters inner join company as co on offer_letters.company_id=co.company_id inner join students as st on offer_letters.enrollment_id=st.enrollment_id where st.branch={branch} and st.pass_year between year(curdate())-3 and year(curdate());")
         dat=[]
         data = my_cursor.fetchall()
@@ -199,7 +220,11 @@ class DepartmentBasicDetails(Screen):
                 break
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         dat=[]
-        my_db.ping(reconnect=True)
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         my_cursor.execute(f'select co.package,count(st.pass_year),st.pass_year from offer_letters inner join company as co on offer_letters.company_id=co.company_id inner join students as st on offer_letters.enrollment_id=st.enrollment_id where st.branch={branch} and st.pass_year between year(curdate())-3 and year(curdate()) group by co.package, st.pass_year;')
         for i in my_cursor:
                 dat.append([i[0],i[1],i[2]])

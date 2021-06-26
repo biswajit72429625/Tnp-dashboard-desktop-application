@@ -1,10 +1,10 @@
 from kivy.uix.screenmanager import Screen
-from database import show_alert_dialog,db_connector
+from database import show_alert_dialog
 import flags
 from kivymd.uix.filemanager import MDFileManager
 import os
 import pandas as pd
-from mysql.connector.errors import IntegrityError
+from mysql.connector.errors import IntegrityError, InterfaceError
 
 class PreRegister(Screen):
     def __init__(self, **kw):
@@ -31,7 +31,11 @@ class PreRegister(Screen):
                 break   
         #checking if enrollment id is not in database   
         qu="insert into pre_registered (enrollment_id,branch) values (%s,%s);"
-        my_db.ping(reconnect=True)
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         for i in range(len(enroll)):
             try:
                 val=(enroll[i],branch)
