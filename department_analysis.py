@@ -231,7 +231,7 @@ class DepartmentBasicDetails(Screen):
         df=pd.DataFrame(dat,columns=['package','count','year'])
 
         sns.lineplot(x='package',y='count',hue = 'year',data=df,markers=True,style='year')
-        plt.title("Count of Package")
+        plt.title(f"Package Analysis\nmin:-{min(df['package'])}, max:-{max(df['package'])}, avg:- {np.mean(df['package'])}")
         plt.yticks(np.arange(max(df['count'])+5,step=5))
         plt.xlabel("Package")
         plt.ylabel("Offer Count")
