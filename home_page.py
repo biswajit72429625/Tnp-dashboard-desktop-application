@@ -7,43 +7,54 @@ from database import show_alert_dialog
 import flags
 
 class PreRegisterLabel(MDLabel):
+    # pre register label
     text = StringProperty()
 
 
 class EResourceTitle(MDLabel):
+    # Eresources title label
     text = StringProperty()
     id = StringProperty()
 
 class EResourceLabel(MDLabel):
+    # Eresources label
     text = StringProperty()
     id = StringProperty()
 
 class EResourceCheckbox(MDCheckbox):
+    # Eresources checkbox
     id = StringProperty()
 
 class AssessmentTitle(MDLabel):
+    # Assessment title label
     text = StringProperty()
     id = StringProperty()
 
 class AssessmentLabel(MDLabel):
+    # Assessment label
     text = StringProperty()
     id = StringProperty()
 
 class AssessmentCheckbox(MDCheckbox):
+    # Assessment checkbox
     id = StringProperty()
 
 class AnnouncementCheckbox(MDCheckbox):
+    # Announcement checkbox
     id = StringProperty()
 
 class AnnouncementTitle(MDLabel):
+    # Announcement title label
     text = StringProperty()
     id = StringProperty()
 
 class AnnouncementLabel(MDLabel):
+    # Announcement label
     text = StringProperty()
     id = StringProperty()
 
 class HomePage(Screen):
+    # Home screen page
     def __init__(self, **kw):
         super(HomePage, self).__init__(**kw)
 
@@ -79,6 +90,7 @@ class HomePage(Screen):
             view_eresources_screen.ids.grid.add_widget(EResourceTitle(id=f'{i}',text=f"[u][ref=world]{self.eresources_records[i][1]}[/ref][/u]"))
             view_eresources_screen.ids.grid.add_widget(EResourceLabel(id=f'{i}',text=f"{str(self.eresources_records[i][6])}"))
             view_eresources_screen.ids.grid.add_widget(EResourceLabel(id=f'{i}',text=f"{self.eresources_records[i][2]}"))
+    
     def load_announcement(self):
         # loads announcement_resources screen
         # my_db, my_cursor = db_connector()
@@ -106,6 +118,7 @@ class HomePage(Screen):
             view_announcement_screen.ids.grid.add_widget(AnnouncementTitle(id=f'{i}',text=f"[u][ref=world]{self.announcement_records[i][1]}[/ref][/u]"))
             view_announcement_screen.ids.grid.add_widget(AnnouncementLabel(id=f'{i}',text=f"{str(self.announcement_records[i][3])}"))
             #view_announcement_screen.ids.grid.add_widget(AnnouncementLabel(id=f'{i}',text=f"{self.announcement_records[i][4]}"))
+    
     def load_assessment(self):
         # loads assessments screen
         # my_db, my_cursor = db_connector()
@@ -116,6 +129,7 @@ class HomePage(Screen):
                 branch =key
                 break
         query = f"select * from assessment where branch = {branch};"
+        # pinging database to check for network connection
         try:
             my_db.ping(reconnect=True,attempts=1)
         except InterfaceError:
@@ -148,6 +162,7 @@ class HomePage(Screen):
                 break
         # lists all records in database
         query = f"select enrollment_id from pre_registered where branch = '{branch}' and verify_status is null"
+        # pinging database to check for network connection
         try:
             my_db.ping(reconnect=True,attempts=1)
         except InterfaceError:

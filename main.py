@@ -79,10 +79,12 @@ class Manager(ScreenManager):
 
 
 class TnpApp(MDApp):
+    # bulding app
     officer_name = StringProperty()
     officer_branch = StringProperty()
     def build(self):
         flags.app=self
+        # set theme
         self.theme_cls.primary_palette = 'Blue'
         self.theme_cls.primary_hue = '600'
         self.theme_cls.accent_palette = 'DeepPurple'
@@ -94,4 +96,5 @@ class TnpApp(MDApp):
         return Manager()
 
 if __name__ == '__main__':
+    # begin app
     TnpApp().run()

@@ -9,6 +9,7 @@ class AddEresources(Screen):
     def __init__(self, **kw):
         super(AddEresources,self).__init__(**kw)
         today = date.today()
+        # dropdown menu for pass year
         self.menu_items = [
             {   
                 "text": str(today.year),
@@ -44,7 +45,7 @@ class AddEresources(Screen):
         self.menu.dismiss()
 
     def checkbox(self,instance,value):
-        
+        # checking checkbox value
         if value == True: 
             self.ids.date_label.disabled = True
             self.ids.time_label.disabled = True
@@ -77,6 +78,7 @@ class AddEresources(Screen):
         self.ids.time_label.text = str(value)
 
     def submit(self):
+        # fetching data from screen
         self.ename=self.ids.e_name.text
         self.year=self.ids.dropdown_item.text
         self.eorganizer=self.ids.e_organiser.text
@@ -84,7 +86,7 @@ class AddEresources(Screen):
         date=self.ids.date_label.text
         time=self.ids.time_label.text
         date_time = date+' '+time                                
-#to check the constraints
+        #to check the constraints
         if len(self.ename) > 20 or len(self.ename)==0:
             show_alert_dialog(self,"Title should be in range 0-20!!")
         elif len(self.eorganizer) > 60 or len(self.eorganizer)==0:
@@ -97,7 +99,7 @@ class AddEresources(Screen):
             show_alert_dialog(self,"Please Select the date and time!!!")
         if date_time!='Select Date Select Time':
             self.date= datetime.strptime(date_time,"%Y-%m-%d %H:%M:%S")
-       #connecting to database
+        #connecting to database
         # my_db, my_cursor = db_connector()
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         for k,v in flags.branch.items():
@@ -129,7 +131,7 @@ class AddEresources(Screen):
             qur='insert into e_resources (title , pass_year , branch ,organizer, link  ) values (%s,%s,%s,%s,%s)'
         
             val=(self.ename,self.year,branch,self.eorganizer,self.elink)
-            
+        # pinging database checking for network
         try:
             my_db.ping(reconnect=True,attempts=1)
         except InterfaceError:
@@ -139,12 +141,15 @@ class AddEresources(Screen):
         my_db.commit()
         send_mail(self,"New Study Material!",f"By:- {self.eorganizer}\nTopic:- {self.ename}\nLink:- {self.elink}\nPlease read the material throughly to score well",self.year)
         show_alert_dialog(self,"EResources added  Sucessfully !!!")
+        # clearing screen
         self.clear()
+        # changing screen
         self.manager.callback()
         self.manager.callback()
         
                 
-    def clear(self):#to clear all fields
+    def clear(self):
+        #to clear all fields
         self.ids.e_name.text=''
         self.ids.e_organiser.text=''
         self.ids.e_link.text=''

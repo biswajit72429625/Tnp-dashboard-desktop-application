@@ -18,7 +18,7 @@ class TpoRegister(Screen):
         self.ids.confirm_password.disabled = True
         self.ids.dropdown_item.disabled = True
         self.ids.register.disabled = True
-        # menu_items 
+        # menu_items for dropdown menu of branch
         menu_items = [
             {
                 "text": "CSE",
@@ -143,11 +143,12 @@ class TpoRegister(Screen):
         # changes focus to next text on pressing enter
         self.ids[kivy_id].focus=True
  
-    #sending mail to verify
     def send_mail(self):
+        #sending mail to verify
         self.officer_email = self.ids.email.text
         # my_db, my_cursor = db_connector()
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
+        # pinging database to check for network connection
         try:
             my_db.ping(reconnect=True,attempts=1)
         except InterfaceError:
@@ -159,14 +160,17 @@ class TpoRegister(Screen):
             show_alert_dialog(self,'Already registered with this email')
 
         else:
+            # preparing mail message
             msg = EmailMessage()
             msg['from'] = config("email")
             msg['to'] = self.officer_email
             msg['subject'] = "WIT TNP"
             self.otp=""
+            # generating OTP
             for _ in range(6):
                 self.otp+=str(r.randint(1,9))
             msg.set_content(f"Your OTP to register is {self.otp}. Please use it before switching to another page")
+            # logging to mail and sending mail
             try:
                 with smtplib.SMTP_SSL('smtp.gmail.com',465) as server:
                     server.login(config("email"),config("email_password"))
@@ -176,6 +180,7 @@ class TpoRegister(Screen):
                 show_alert_dialog(self,'Couldnt send OTP due to an error')
 
     def email_verify(self):
+        # verify email and OTP
         if self.ids.otp.text == self.otp:
             self.ids.password.disabled = False
             self.ids.password.line_color_normal = flags.app.theme_cls.primary_color

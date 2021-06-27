@@ -3,10 +3,12 @@ from kivymd.uix.menu import MDDropdownMenu
 from database import show_alert_dialog, send_mail
 from datetime import  date
 import flags
+from mysql.connector.errors import InterfaceError
 class AddAnnouncement(Screen):
     def __init__(self, **kw):
         super(AddAnnouncement, self).__init__(**kw)
         today = date.today()
+        # dropdown menu for year
         self.menu_items = [
             {   
                 "text": str(today.year),
@@ -44,12 +46,14 @@ class AddAnnouncement(Screen):
         # changes focus to next text on pressing enter
         self.ids[kivy_id].focus=True
 
-    def clear(self):#to clear all fields
+    def clear(self):
+        #to clear all fields
         self.ids.title.text=''
         self.ids.description.text=''
         self.ids.dialog_passyear.text='Passing Year'
 
     def submit(self):
+        # check all constraints and add to database
         self.passs = self.ids.dialog_passyear.text
         self.titlee = self.ids.title.text
         self.descriptionn = self.ids.description.text
@@ -72,11 +76,17 @@ class AddAnnouncement(Screen):
                 break
         qur='insert into announcement (title , description ,pass_year, branch ) values (%s,%s,%s,%s)'
         val = (self.titlee,self.descriptionn,self.passs,branch)
-        my_db.ping(reconnect=True)
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         my_cursor.execute(qur,val)
         my_db.commit()
         send_mail(self,"New Announcement!",f"Title:- {self.titlee}\nDescription:- {self.descriptionn}\nCheck portal for more details",self.passs)
         show_alert_dialog(self,"Announcement added  Sucessfully !!!")
+        # clear form
         self.clear()
+        # change screen
         self.manager.callback()
         self.manager.callback()

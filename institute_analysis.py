@@ -10,8 +10,10 @@ from mysql.connector.errors import InterfaceError
 from database import show_alert_dialog
 
 class InstituteTableTitleLabel(MDLabel):
+    # institute table title label
     text = StringProperty()
 class InstituteTableLabel(MDLabel):
+    # institute table label
     text = StringProperty()
 
 
@@ -20,6 +22,7 @@ class InstituteAnalysis(Screen):
         super(InstituteAnalysis,self).__init__(**kw)
 
     def prepare_graphs(self):
+        # loads all graphs
         self.countplt()
         self.placedstat()
         self.lin()
@@ -29,18 +32,21 @@ class InstituteAnalysis(Screen):
             graphs.ids[str(i)].reload()
 
     def load_analysis(self):
+        # load table for institute data
         for k,v in flags.branch.items():
             if v==flags.app.officer_branch:
                 branch=k
                 break
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
+        # cleas table
         self.ids.grid.clear_widgets()
-        # retriving list of packages
+        # pinging database to check for network connection
         try:
             my_db.ping(reconnect=True,attempts=1)
         except InterfaceError:
             show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
             return
+        # retriving list of packages
         my_cursor.execute('''select distinct(co.package)
                         from offer_letters as ol
                         inner join company as co on ol.company_id = co.company_id
@@ -61,6 +67,7 @@ class InstituteAnalysis(Screen):
                 self.ids.grid.add_widget(InstituteTableLabel(text=str(my_cursor.fetchall()[0][0])))
 
     def countplt(self):
+        # count plot for offer letters
         branch = {
             1 : "Civil",
             2 : "Mech",
@@ -87,6 +94,7 @@ class InstituteAnalysis(Screen):
         plt.close('all')
     
     def placedstat(self):
+        # placed student details
         branch = {
             1 : "Civil",
             2 : "Mech",
@@ -117,10 +125,7 @@ class InstituteAnalysis(Screen):
         plt.close('all')
 
     def lin(self):
-    #     for k,v in flags.branch.items():
-    #         if v==flags.app.officer_branch:
-    #             branch=k
-    #             break
+        # lineplot for min, max, avg packages
         branch = {
             1 : "Civil",
             2 : "Mech",
@@ -153,5 +158,6 @@ class InstituteAnalysis(Screen):
         plt.close('all')
 
 class InstituteGraphs(Screen):
+    # graph screen
     def __init__(self, **kw):
         super(InstituteGraphs, self).__init__(**kw)

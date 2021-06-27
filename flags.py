@@ -1,3 +1,4 @@
+# this file is to store global data which can be accessed through out project
 app = None
 branch = {
     1 : "Civil",

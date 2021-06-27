@@ -59,8 +59,10 @@ def send_mail(screen,subject:str,message:str,year:int):
     error_list=[]
     error_flag = False
     try:
+        # logining to mail
         with smtplib.SMTP_SSL('smtp.gmail.com',465) as server:
             server.login(config('email'),config('email_password'))
+            # list all mail address where mail couldnt be sent
             for i in to:
                 try:
                     mail['to'] = i[0]
@@ -69,6 +71,7 @@ def send_mail(screen,subject:str,message:str,year:int):
                     error_flag = True
                     error_list.append(i[0])
                 # show_alert_dialog(screen,"Mail sent to all students")
+    # shows error messages
     except Exception:
         show_alert_dialog(screen,"Error sending mail to students")
     if error_flag:
@@ -76,22 +79,14 @@ def send_mail(screen,subject:str,message:str,year:int):
     # screen.wait_dialog.dismiss()
     
 def get_close_matches_indexes(word, possibilities, n=3, cutoff=0.6):
-    """Use SequenceMatcher to return a list of the indexes of the best 
-    "good enough" matches. word is a sequence for which close matches 
-    are desired (typically a string).
-    possibilities is a list of sequences against which to match word
-    (typically a list of strings).
-    Optional arg n (default 3) is the maximum number of close matches to
-    return.  n must be > 0.
-    Optional arg cutoff (default 0.6) is a float in [0, 1].  Possibilities
-    that don't score at least that similar to word are ignored.
-    """
-
+    # get index of closest match of word from list of words
+    # checking length
     if not n >  0:
         raise ValueError("n must be > 0: %r" % (n,))
     if not 0.0 <= cutoff <= 1.0:
         raise ValueError("cutoff must be in [0.0, 1.0]: %r" % (cutoff,))
     result = []
+    # using closest match value
     s = SequenceMatcher()
     s.set_seq2(word)
     for idx, x in enumerate(possibilities):

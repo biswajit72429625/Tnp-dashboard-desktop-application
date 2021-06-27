@@ -12,16 +12,20 @@ import flags
 import os
 
 class IndividualDialog(BoxLayout):
+    # full details for individual details
     pass
 
 class ExportDialog(BoxLayout):
+    # exporting data to excel
     pass
 
 class IndividualTitle(MDLabel):
+    # individual title label
     text = StringProperty()
     id = StringProperty()
 
 class IndividualLabel(MDLabel):
+    # individual label
     text = StringProperty()
     id = StringProperty()
 
@@ -48,6 +52,7 @@ class IndividualLevel(Screen):
             inner join company as co on ol.company_id = co.company_id
             where st.pass_year = YEAR(CURDATE()) and st.branch= {branch} and ol.finalised is not NULL;
         '''
+        # pinging database to check for network connection
         try:
             my_db.ping(reconnect=True,attempts=1)
         except InterfaceError:
@@ -96,6 +101,7 @@ class IndividualLevel(Screen):
         self.dialog.dismiss()
 
     def export(self):
+        # confirm export dialog
         self.export_data = ExportDialog()
         self.export_dialog = MDDialog(
             title="Export Columns",
@@ -113,6 +119,7 @@ class IndividualLevel(Screen):
         self.export_dialog.dismiss()
 
     def make_excel(self, instance):
+        # exporting to excel file
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         # select branch by officer_branch
         branch = flags.app.officer_branch
@@ -120,7 +127,7 @@ class IndividualLevel(Screen):
             if branch == value:
                 branch = key
                 break
-        # retrive dynamiv column names
+        # retrive dynamic column names
         columns = ""
         for i in self.export_data.ids.keys():
             if self.export_data.ids[i].active:
@@ -133,6 +140,7 @@ class IndividualLevel(Screen):
             inner join company as co on ol.company_id = co.company_id
             where st.pass_year = YEAR(CURDATE()) and st.branch= {branch} and ol.finalised is not NULL;
             '''
+        # pinging database to check for network connection
         try:
             my_db.ping(reconnect=True,attempts=1)
         except InterfaceError:
@@ -142,18 +150,24 @@ class IndividualLevel(Screen):
         # retrive data
         data=my_cursor.fetchall()
         platform_check = 0
+        # excel sheet name
         sheet_title = "Passout "+str(date.today().year)
+        # preparing excel sheet
         wb = Workbook()
         wb['Sheet'].title = sheet_title
         sh1 = wb.active
+        # setting column name
         header = columns.split(',')
         for i in range(len(header)):
             sh1[chr(ord('A')+i)+'1'].value = header[i][3:]
+            # checking if company platorm is to be exported
             if header[i][3:]=='platform':
                 platform_check = i
+        # entering all rows
         for i in range(len(data)):
             for ii in range(len(header)):
                 if platform_check and ii==platform_check:
+                    # if platform '' entering on-campus, else off-campus
                     if data[i][ii] == '':
                         sh1[chr(ord('A')+ii)+str(2+i)].value = 'On-Campus'
                     else:
@@ -172,10 +186,12 @@ class IndividualLevel(Screen):
                     pass
             adjusted_width = (max_length + 2) * 1.2
             sh1.column_dimensions[column].width = adjusted_width
+        # making directory if dosent exist
         try:
             os.makedirs(f"C:\\Users\\{os.getlogin()}\\Downloads\\tnp")
         except FileExistsError:
             pass
+        # saving excel sheet
         wb.save(f"C:\\Users\\{os.getlogin()}\\Downloads\\tnp\\{sheet_title}.xlsx")
         show_alert_dialog(self,"File saved to Downloads folder")
         self.dismiss_export_dialog(self.export_dialog)

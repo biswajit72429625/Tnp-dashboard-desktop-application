@@ -8,15 +8,17 @@ class AddCompanies(Screen):
     def __init__(self, **kw):
         super(AddCompanies, self).__init__(**kw)
     
-    def clear(self):#to clear all fields
+    def clear(self):
+        #to clear all fields
         self.ids.name.text=''
         self.ids.link.text=''
         self.ids.package.text=''
         self.ids.dropdown_item.text='Choose Role'
         self.ids.type.text='Placement Type'
         self.ids.role.text=''
-    # checking all the constraints
+    
     def verify(self):
+        # checking all the constraints
         nam=self.ids.name.text
         website=self.ids.link.text
         package=self.ids.package.text
@@ -58,6 +60,7 @@ class AddCompanies(Screen):
             type = ''
         else:
             type = None
+        # connecting to database
         # my_db, my_cursor = db_connector()
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         for k,v in flags.branch.items():
@@ -65,6 +68,7 @@ class AddCompanies(Screen):
                 branch=k
                 break
         quer="SELECt company_id from company where name = %s and package = %s and role = %s and platform = %s and branch = %s"
+        # pinging database to check connection
         try:
             my_db.ping(reconnect=True,attempts=1)
         except InterfaceError:
@@ -79,6 +83,7 @@ class AddCompanies(Screen):
             my_cursor.execute(query,values)
             my_db.commit()
             show_alert_dialog(self,"Data Sucessfully Saved!!!")
+            # changing screen
             self.manager.callback()
             self.manager.callback()
 

@@ -14,6 +14,7 @@ from functools import partial
 class AssessmentDialog(BoxLayout):
     def __init__(self,**kw):
         super(AssessmentDialog, self).__init__(**kw)
+        # dropdown menu for pass year
         today = date.today()
         self.menu_items = [
             {   
@@ -111,6 +112,7 @@ class ViewAssessments(Screen):
             my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
             query = f"UPDATE assessment SET pass_year = %s, organizer = %s, link = %s,visible = %s, result_link = %s WHERE id = {self.records[0]}"
             values = (self.passyear, self.organizer, self.link, self.visible, self.resultlink)
+            # pinging database to check for network connection
             try:
                 my_db.ping(reconnect=True,attempts=1)
             except InterfaceError:
@@ -129,9 +131,11 @@ class ViewAssessments(Screen):
             self.dismiss_dialog(self.dialog)
 
     def dismiss_dialog(self,instance):
+        # dismiss dialog box
         self.dialog.dismiss()
 
     def add_delete(self,instance):
+        # add or delete assessment
         if instance.icon == 'notebook-plus-outline':
             self.manager.current = 'add_assessments'
             self.manager.stack.append(self.name)
@@ -193,6 +197,7 @@ class ViewAssessments(Screen):
         self.dismiss_delete_dialog(self.delete_dialog)
         # my_db, my_cursor = db_connector()
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
+        # pinging database to check for network connection
         try:
             my_db.ping(reconnect=True,attempts=1)
         except InterfaceError:
@@ -203,4 +208,5 @@ class ViewAssessments(Screen):
                 my_cursor.execute(f'DELETE FROM assessment WHERE id={records[int(i.id)][0]};')
         my_db.commit()
         show_alert_dialog(self,"Assessment deleted")
+        # changing screen
         self.manager.callback()

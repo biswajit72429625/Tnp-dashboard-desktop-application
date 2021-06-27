@@ -22,6 +22,7 @@ class Login(Screen):
         # connecting to database
         # my_db, my_cursor = db_connector()
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
+        # pinging database to check for network connection
         try:
             my_db.ping(reconnect=True,attempts=1)
         except InterfaceError:
@@ -48,9 +49,6 @@ class Login(Screen):
             # else show message
             show_alert_dialog(self,"Invalid password")
 
-        # query = "insert into e_resources (title,pass_year,branch,organizer,link,description) values (%s,%s,%s,%s,%s,%s);"
-        # values = ("apti","2022",6,"apttech","https://www.google.co.in/","very useful")
-        # my_cursor.execute(query,values)
     def change_field(self,kivy_id):
         # changes focus to next text on pressing enter
         self.ids[kivy_id].focus=True

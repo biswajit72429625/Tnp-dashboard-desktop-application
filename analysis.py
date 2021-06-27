@@ -11,10 +11,12 @@ class Analysis(Screen):
         individual_screen.load_table()
     
     def load_department(self):
+        # loads analysis of department student
         department_basic_analysis_screen = self.manager.get_screen("department_basic_details")
         department_basic_analysis_screen.load_basic_details()
 
     def load_institute(self):
+        # loads analysis of institute student
         department_analysis_screen = self.manager.get_screen("institute_analysis")
         department_analysis_screen.load_analysis()
 

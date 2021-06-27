@@ -98,10 +98,12 @@ class StudentDialog(BoxLayout):
 
 
 class StudentTitle(MDLabel):
+    # student title label
     text = StringProperty()
     id = StringProperty()
 
 class StudentLabel(MDLabel):
+    # student label
     text = StringProperty()
     id = StringProperty()
 
@@ -126,12 +128,13 @@ class ManageStudents(Screen):
             if branch == value:
                 branch = key
                 break
-        # lists all records in database
+        # pinging database to check for network connection
         try:
             my_db.ping(reconnect=True,attempts=1)
         except InterfaceError:
             show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
             return
+        # lists all records in database
         query = f"select * from students where branch = '{branch}' and pass_year = {date.today().year+year};"
         my_cursor.execute(query)
         self.student_records = my_cursor.fetchall()
@@ -156,7 +159,7 @@ class ManageStudents(Screen):
         self.all_id = ['dialog_name','dialog_phone','dialog_email','dialog_passyear','dialog_branch']
         # disabling data
         disable_toggler(self.dialog_data,self.all_id,True)
-        # shows all details of e_resource in a dialog box
+        # shows all details of student in a dialog box
         self.detail_dialog = MDDialog(
             title=str(self.student_records[self.id][0]),
             type="custom",
@@ -169,6 +172,7 @@ class ManageStudents(Screen):
         self.detail_dialog.open()
 
     def dismiss_dialog(self,instance):
+        # dismiss dialog
         self.detail_dialog.dismiss()
 
     def edit_student(self):
@@ -211,6 +215,7 @@ class ManageStudents(Screen):
             # connecting to database
             # my_db, my_cursor = db_connector()
             my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
+            # pinging database to check for network connection
             try:
                 my_db.ping(reconnect=True,attempts=1)
             except InterfaceError:

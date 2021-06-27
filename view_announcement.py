@@ -91,6 +91,7 @@ class  ViewAnnouncement(Screen):
             my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
             query = f"UPDATE announcement SET pass_year = %s, title = %s, description = %s WHERE id = {self.records[0]}"
             values = (self.passyear, self.titlee, self.descriptionn)
+            # pinging database to check for network connection
             try:
                 my_db.ping(reconnect=True,attempts=1)
             except InterfaceError:
@@ -149,6 +150,7 @@ class  ViewAnnouncement(Screen):
         self.dismiss_delete_dialog(self.delete_dialog)
         # my_db, my_cursor = db_connector()
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
+        # pinging database to check for network connection
         try:
             my_db.ping(reconnect=True,attempts=1)
         except InterfaceError:
@@ -159,4 +161,5 @@ class  ViewAnnouncement(Screen):
                 my_cursor.execute(f'DELETE FROM announcement WHERE id={records[int(i.id)][0]};')
         my_db.commit()
         show_alert_dialog(self,"announcement deleted")
+        # changing screen
         self.manager.callback()

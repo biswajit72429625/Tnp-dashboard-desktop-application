@@ -7,14 +7,17 @@ from database import show_alert_dialog
 import flags
 
 class CompanyTitle(MDLabel):
+    # company title label
     text = StringProperty()
     id = StringProperty()
 
 class CompanyLabel(MDLabel):
+    # company label
     text = StringProperty()
     id = StringProperty()
 
 class CompanyCheckbox(MDCheckbox):
+    # company checkbox
     id = StringProperty()
 
 class Placements(Screen):
