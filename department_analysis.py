@@ -150,6 +150,7 @@ class DepartmentAnalysis(Screen):
         for i in my_cursor:
                 dat.append([i[0],i[1],i[2]])
         df=pd.DataFrame(dat,columns=['package','count','year'])
+        
 
         sns.lineplot(x='package',y='count',hue = 'year',data=df,markers=True,style='year')
         plt.title("Count of Package")
@@ -157,7 +158,7 @@ class DepartmentAnalysis(Screen):
         plt.xlabel("Package")
         plt.ylabel("Count")
         plt.legend()
-        # plt.show()
+        #plt.show()
         plt.savefig("Graphs//dept_4.png")
         plt.close('all')
 

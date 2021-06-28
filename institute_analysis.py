@@ -120,7 +120,9 @@ class InstituteAnalysis(Screen):
             dat.append([i[0],i[1],branch[i[2]]])
         df=pd.DataFrame(dat,columns=['package','count','branch'])
 
+        
         sns.lineplot(x='package',y='count',hue = 'branch',data=df,markers=True,style='branch')
+        # plt.title(f"min package:- {min(df['package'])}, avg package:- {max(df['package'])}, max package:- {df['package'].mean()} (in LPA)")
         plt.title("Count of Package")
         plt.yticks(np.arange(max(df['count'])+5,step=5))
         plt.xlabel("Package")
