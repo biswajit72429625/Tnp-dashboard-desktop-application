@@ -1,3 +1,4 @@
+# this file is to store global data which can be accessed through out project
 app = None
 branch = {
     1 : "Civil",
@@ -7,4 +8,3 @@ branch = {
     5 : "ELN",
     6 : "IT"
 }
-add_company_role_menu_item = []

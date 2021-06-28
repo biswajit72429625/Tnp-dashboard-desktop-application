@@ -5,24 +5,29 @@ from kivymd.uix.dialog import MDDialog
 from kivymd.uix.menu import MDDropdownMenu
 from kivymd.uix.label import MDLabel
 from kivy.properties import StringProperty
+from mysql.connector.errors import InterfaceError
 import flags
 from datetime import date
 from database import disable_toggler, show_alert_dialog, get_close_matches_indexes
 
 class OfferDialog(BoxLayout):
+    # full details of offer letter
     pass
 
 class OfferLetterTitle(MDLabel):
+    # offer letter title
     text = StringProperty()
     id = StringProperty()
 
 class OfferLetterLabel(MDLabel):
+    # offer letter label
     text = StringProperty()
     id = StringProperty()
 
 class OfferLetters(Screen):
     dialog = None
     def __init__(self, **kw):
+        # dropdown menu for search
         super(OfferLetters, self).__init__(**kw)
         menu_items = [
             {
@@ -117,6 +122,12 @@ class OfferLetters(Screen):
             where st.pass_year = %s and st.branch=%s;
         '''
         values = (date.today().year+year,branch)
+        # pinging database to check for network connection
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         my_cursor.execute(query,values)
         self.offer_records = my_cursor.fetchall()
         # adding dynamic data to screen
@@ -129,9 +140,11 @@ class OfferLetters(Screen):
             self.ids.grid.add_widget(OfferLetterLabel(id=f'{i}',text=f"{str(self.offer_records[i][5])}"))
 
     def edit_offer(self):
+        # edit offer letter status
         disable_toggler(self.dialog_data,['dialog_finalised'],False)
 
     def save_dialog(self,instance):
+        # save changes made to offer letter status
         if not self.dialog_data.ids.dialog_finalised.disabled:
             finalised = '' if self.dialog_data.ids.dialog_finalised.text == "Confirmed" else None
             # select branch by officer_branch
@@ -144,6 +157,12 @@ class OfferLetters(Screen):
             my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
             query = "update offer_letters set finalised = %s where enrollment_id = %s and company_id = (select company_id from company where name = %s and role = %s and branch = %s);"
             values = (finalised,self.offer_records[self.id][0], self.offer_records[self.id][3], self.offer_records[self.id][4], branch)
+            # pinging database to check for network connection
+            try:
+                my_db.ping(reconnect=True,attempts=1)
+            except InterfaceError:
+                show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+                return
             my_cursor.execute(query,values)
             my_db.commit()
             # closing dialog
@@ -157,6 +176,7 @@ class OfferLetters(Screen):
             self.dismiss_dialog(self.dialog)
 
     def search_data(self):
+        # search records based on the input value
         if self.ids.dropdown_item.text == "Search by":
             show_alert_dialog(self,"Please select a search type")
             return
@@ -181,16 +201,43 @@ class OfferLetters(Screen):
             where st.pass_year = %s and st.branch=%s;
         '''
         values = (date.today().year+year,branch)
+        # pinging database to check for network connection
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         my_cursor.execute(query,values)
         self.offer_records = my_cursor.fetchall()
-        if self.ids.dropdown_item.text == 'Student Name':
-            best_search = get_close_matches_indexes(self.ids.search_text.text,[i[1] for i in self.offer_records],n=200,cutoff=0.6)
+        # if self.ids.dropdown_item.text == 'Student Name':   
+        #     best_search = get_close_matches_indexes(self.ids.search_text.text,[i[1] for i in self.offer_records],n=200,cutoff=0.6)
+        # elif self.ids.dropdown_item.text == 'Company Name':
+        #     best_search = get_close_matches_indexes(self.ids.search_text.text,[i[3] for i in self.offer_records],n=200,cutoff=0.6)
+        # elif self.ids.dropdown_item.text == 'Role':
+        #     best_search = get_close_matches_indexes(self.ids.search_text.text,[i[4] for i in self.offer_records],n=200,cutoff=0.6)
+        # else:
+        #     best_search = get_close_matches_indexes(self.ids.search_text.text,[str(i[5]) for i in self.offer_records],n=200,cutoff=0.6)
+        best_search = []
+        if self.ids.dropdown_item.text == 'Student Name':   
+            # search by student name
+            for i in range(len(self.offer_records)):
+                if self.offer_records[i][1].startswith(self.ids.search_text.text):
+                    best_search.append(i)
         elif self.ids.dropdown_item.text == 'Company Name':
-            best_search = get_close_matches_indexes(self.ids.search_text.text,[i[3] for i in self.offer_records],n=200,cutoff=0.6)
+            # search by company name
+            for i in range(len(self.offer_records)):
+                if self.offer_records[i][3].startswith(self.ids.search_text.text):
+                    best_search.append(i)
         elif self.ids.dropdown_item.text == 'Role':
-            best_search = get_close_matches_indexes(self.ids.search_text.text,[i[4] for i in self.offer_records],n=200,cutoff=0.6)
+            # search by company role
+            for i in range(len(self.offer_records)):
+                if self.offer_records[i][4].startswith(self.ids.search_text.text):
+                    best_search.append(i)
         else:
-            best_search = get_close_matches_indexes(self.ids.search_text.text,[str(i[5]) for i in self.offer_records],n=200,cutoff=0.6)
+            # search by company package
+            for i in range(len(self.offer_records)):
+                if str(self.offer_records[i][5]).startswith(self.ids.search_text.text):
+                    best_search.append(i)
         self.offer_records = [self.offer_records[i] for i in best_search]
         # adding dynamic data to screen
         self.ids.grid.clear_widgets()
@@ -202,6 +249,7 @@ class OfferLetters(Screen):
             self.ids.grid.add_widget(OfferLetterLabel(id=f'{i}',text=f"{str(self.offer_records[i][5])}"))
 
     def sort_by(self,by):
+        # sort records
         self.offer_records = sorted(self.offer_records,key=lambda x: x[by])
         # adding dynamic data to screen
         self.ids.grid.clear_widgets()

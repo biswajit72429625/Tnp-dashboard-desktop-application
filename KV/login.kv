@@ -1,13 +1,20 @@
 #:kivy 2.0.0
 <Login>
     Background:
+    Image:
+        source:'wit.png'
+        background_color:(1,1,1,1)
+        size_hint:(0.3,.12)
+        font_size: '19px'
+        pos_hint:{"x":.35,"y":0.87}
     MDCard:
         size_hint: (0.5,0.8)
-        pos_hint: {'center_x': .5, 'center_y': .5}
+        pos_hint: {'center_x': .5, 'center_y': .45}
         elevation: 30
         orientation: 'vertical'
         padding: 25
         spacing: 30
+        
         MDLabel:
             halign: 'center'
             theme_text_color: "Custom"

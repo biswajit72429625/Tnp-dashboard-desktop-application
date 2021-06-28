@@ -17,7 +17,7 @@
             font_size:30
         MDCard:
             size_hint : (0.9,0.7)
-            pos_hint: {'center_x': .5, 'center_y': .45}
+            pos_hint: {'center_x': .5, 'center_y': .42}
             elevation: 20
             orientation: 'vertical'
             spacing: 2
@@ -31,26 +31,36 @@
                 row_force_default: True
                 adaptive_width: True
                 MDLabel:
+                    text_color: 1, 1, 1, 1
+                    theme_text_color: "Custom"
                     text: "Enrollment ID"
                     font_size: 20
                     halign: 'center'
                     md_bg_color: app.theme_cls.primary_color
                 MDLabel:
+                    text_color: 1, 1, 1, 1
+                    theme_text_color: "Custom"
                     text: "Name"
                     font_size: 20
                     halign: 'center'
                     md_bg_color: app.theme_cls.primary_color
                 MDLabel:
+                    text_color: 1, 1, 1, 1
+                    theme_text_color: "Custom"
                     text: "Company"
                     font_size: 20
                     halign: 'center'
                     md_bg_color: app.theme_cls.primary_color
                 MDLabel:
+                    text_color: 1, 1, 1, 1
+                    theme_text_color: "Custom"
                     text: "Role"
                     font_size: 20
                     halign: 'center'
                     md_bg_color: app.theme_cls.primary_color
                 MDLabel:
+                    text_color: 1, 1, 1, 1
+                    theme_text_color: "Custom"
                     text: "Package"
                     font_size: 20
                     halign: 'center'
@@ -68,13 +78,14 @@
                     row_default_height: 60
                     adaptive_width: True
 
-    MDRectangleFlatIconButton:
+    MDFloatingActionButton:
         icon: "file-export-outline"
-        text: "Export Excel"
-        font_size: 20
+        #text: "Export Excel"
+        #font_size: 20
+        elevation:20
         md_bg_color: app.theme_cls.accent_color
         size_hint:None,None
-        pos_hint: {'center_x': .9, 'center_y':.05}
+        pos_hint: {'center_x': .93, 'center_y':.08}
         on_press: root.export()
         
 
@@ -168,6 +179,7 @@
             spacing : 20
             MDSwitch:
                 id: st.enrollment_id
+                active: True
             MDLabel:
                 text: "Enrollment ID"
         GridLayout:
@@ -175,6 +187,7 @@
             spacing : 20
             MDSwitch:
                 id: st.stud_name
+                active: True
             MDLabel:
                 text: "Student Name"
         GridLayout:
@@ -182,6 +195,7 @@
             spacing : 20
             MDSwitch:
                 id: st.stud_phone_no
+                active: True
             MDLabel:
                 text: "Student Phone No"
         GridLayout:
@@ -189,6 +203,7 @@
             spacing : 20
             MDSwitch:
                 id: st.stud_email
+                active: True
             MDLabel:
                 text: "Student Email"
         GridLayout:
@@ -196,6 +211,7 @@
             spacing : 20
             MDSwitch:
                 id: co.name
+                active: True
             MDLabel:
                 text: "Company name"
         GridLayout:
@@ -203,6 +219,7 @@
             spacing : 20
             MDSwitch:
                 id: co.role
+                active: True
             MDLabel:
                 text: "Company role"
         GridLayout:
@@ -210,6 +227,7 @@
             spacing : 20
             MDSwitch:
                 id: co.package
+                active: True
             MDLabel:
                 text: "Company package"
         GridLayout:
@@ -217,6 +235,7 @@
             spacing : 20
             MDSwitch:
                 id: co.platform
+                active: True
             MDLabel:
                 text: "Company platform"
         GridLayout:
@@ -224,6 +243,7 @@
             spacing : 20
             MDSwitch:
                 id: co.website
+                active: True
             MDLabel:
                 text: "Company Website"
         GridLayout:
@@ -231,6 +251,7 @@
             spacing : 20
             MDSwitch:
                 id: ol.link
+                active: True
             MDLabel:
                 text: "Offer Letter Link"
         GridLayout:
@@ -238,6 +259,7 @@
             spacing : 20
             MDSwitch:
                 id: ol.date_of_interview
+                active: True
             MDLabel:
                 text: "Date of Interview"
         GridLayout:
@@ -245,6 +267,7 @@
             spacing : 20
             MDSwitch:
                 id: ol.date_of_offer
+                active: True
             MDLabel:
                 text: "Date of offer letter"
     

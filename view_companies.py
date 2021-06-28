@@ -5,11 +5,13 @@ from kivymd.uix.dialog import MDDialog
 from kivymd.uix.menu import MDDropdownMenu
 from database import show_alert_dialog, disable_toggler
 from functools import partial
+from mysql.connector.errors import InterfaceError
 import flags
 
 class CompanyDialog(BoxLayout):
     def __init__(self,role_list,**kw):
         super(CompanyDialog, self).__init__(**kw)
+        # dropdown menu for roles
         self.menu = MDDropdownMenu(
             caller = self.ids.dialog_role_spinner,
             items=role_list,
@@ -30,6 +32,12 @@ class ViewCompanies(Screen):
         # my_db, my_cursor = db_connector()
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         query = f"select Distinct(role) from company ;"
+        # pinging database to check for network connection
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         my_cursor.execute(query)
         self.menu = my_cursor.fetchall()
         #print(self.menu)
@@ -93,6 +101,12 @@ class ViewCompanies(Screen):
         # my_db, my_cursor = db_connector()
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         query = f"select Distinct(role) from company ;"
+        # pinging database to check for network connection
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         my_cursor.execute(query)
         self.menu = my_cursor.fetchall()
         #print(self.menu)
@@ -112,9 +126,6 @@ class ViewCompanies(Screen):
                 "on_release": lambda x="other": self.menu_callback(x),
             }
         self.menu_items.append(temp)
-        #print(self.menu_items)
-        # flags.add_company_role_menu_item = self.menu_items
-        #print(flags.add_company_role_menu_item)this is printing correct , flags tak sab theek jara hai
         self.menu = MDDropdownMenu(
             caller = self.manager.get_screen('add_companies').ids.dropdown_item,
             items=self.menu_items,
@@ -174,6 +185,12 @@ class ViewCompanies(Screen):
             my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
             query = f"UPDATE company SET package = %s, platform = %s, website = %s, role = %s where company_id = %s"
             values = (self.package, self.platform, self.website, self.role, self.records[0])
+            # pinging database to check for network connection
+            try:
+                my_db.ping(reconnect=True,attempts=1)
+            except InterfaceError:
+                show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+                return
             my_cursor.execute(query,values)
             my_db.commit()
             # closing dialog
@@ -208,6 +225,11 @@ class ViewCompanies(Screen):
         self.dismiss_delete_dialog(self.delete_dialog)
         # my_db, my_cursor = db_connector()
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         for i in checks: 
             if i.active:
                 my_cursor.execute(f'DELETE FROM company WHERE company_id={records[int(i.id)][0]};')

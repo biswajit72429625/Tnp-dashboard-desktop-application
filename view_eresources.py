@@ -8,11 +8,13 @@ from kivymd.uix.menu import MDDropdownMenu
 from functools import partial
 from datetime import datetime, date
 from database import disable_toggler, show_alert_dialog
+from mysql.connector.errors import InterfaceError
 import flags
 
 class EResourceDialog(BoxLayout):
     def __init__(self,**kw):
         super(EResourceDialog, self).__init__(**kw)
+        # dropdown menu for pass year
         today = date.today()
         self.menu_items = [
             {   
@@ -108,6 +110,12 @@ class ViewEresources(Screen):
             my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
             query = f"UPDATE e_resources SET pass_year = %s, organizer = %s, link = %s,visible = %s, description = %s WHERE id = {self.records[0]}"
             values = (self.passyear, self.organizer, self.link, self.visible, self.description)
+            # pinging database to check for network connection
+            try:
+                my_db.ping(reconnect=True,attempts=1)
+            except InterfaceError:
+                show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+                return
             my_cursor.execute(query,values)
             my_db.commit()
             # closing dialog
@@ -190,9 +198,16 @@ class ViewEresources(Screen):
         self.dismiss_delete_dialog(self.delete_dialog)
         # my_db, my_cursor = db_connector()
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
+        # pinging database to check for network connection
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         for i in checks: 
             if i.active:
                 my_cursor.execute(f'DELETE FROM e_resources WHERE id={records[int(i.id)][0]};')
         my_db.commit()
         show_alert_dialog(self,"Resources deleted")
+        # changing screen
         self.manager.callback()

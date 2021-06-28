@@ -1,5 +1,6 @@
 from kivy.uix.screenmanager import Screen
 from database import show_alert_dialog
+from mysql.connector.errors import InterfaceError
 import re
 import flags
 
@@ -7,8 +8,17 @@ class AddCompanies(Screen):
     def __init__(self, **kw):
         super(AddCompanies, self).__init__(**kw)
     
-    # checking all the constraints
+    def clear(self):
+        #to clear all fields
+        self.ids.name.text=''
+        self.ids.link.text=''
+        self.ids.package.text=''
+        self.ids.dropdown_item.text='Choose Role'
+        self.ids.type.text='Placement Type'
+        self.ids.role.text=''
+    
     def verify(self):
+        # checking all the constraints
         nam=self.ids.name.text
         website=self.ids.link.text
         package=self.ids.package.text
@@ -50,6 +60,7 @@ class AddCompanies(Screen):
             type = ''
         else:
             type = None
+        # connecting to database
         # my_db, my_cursor = db_connector()
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         for k,v in flags.branch.items():
@@ -57,6 +68,12 @@ class AddCompanies(Screen):
                 branch=k
                 break
         quer="SELECt company_id from company where name = %s and package = %s and role = %s and platform = %s and branch = %s"
+        # pinging database to check connection
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         my_cursor.execute(quer,(nam,package,role,type,branch))
         if my_cursor.fetchall():
             show_alert_dialog(self,"company already exists")
@@ -66,6 +83,7 @@ class AddCompanies(Screen):
             my_cursor.execute(query,values)
             my_db.commit()
             show_alert_dialog(self,"Data Sucessfully Saved!!!")
+            # changing screen
             self.manager.callback()
             self.manager.callback()
 

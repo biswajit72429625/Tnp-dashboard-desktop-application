@@ -1,5 +1,4 @@
-#:kivy 2.0.0
-<ViewEresources>
+<ViewAnnouncement>
     Background:
     Navbar:
     FloatLayout:
@@ -9,7 +8,7 @@
             halign: 'center'
             theme_text_color: "Custom"
             text_color: 0, 150/255, 136/255, 1
-            text: "Study material"
+            text: "Announcements"
             font_style: 'H6'
             padding: (10,15)
             size_hint_y: None
@@ -26,7 +25,7 @@
                 height: self.minimum_height
                 size_hint_x: None
                 size_hint_y: None
-                cols: 4
+                cols: 3
                 row_default_height: 60
                 row_force_default: True
                 adaptive_width: True
@@ -42,15 +41,6 @@
                     font_style:"H6"
                     halign: 'center'
                     size_hint_x: 0.3
-                    md_bg_color: app.theme_cls.accent_color
-                MDLabel:
-                    text: "Visible DateTime"
-                    text_color: 1, 1, 1, 1
-                    font_size: 25
-                    font_style:"H6"
-                    size_hint_x: 0.3
-                    halign: 'center'
-                    theme_text_color: "Custom"
                     md_bg_color: app.theme_cls.accent_color
                 MDLabel:
                     text: "Batch"
@@ -70,7 +60,7 @@
                     id: grid
                     size_hint_y: None
                     height: self.minimum_height
-                    cols: 4
+                    cols: 3
                     row_default_height: 60
                     adaptive_width: True
 
@@ -80,12 +70,23 @@
         label_text_color: (1,1,1,1)
         callback: self.parent.add_delete
 
-
-<EResourceDialog>:
+<AnnouncementDialog>:
     orientation: "vertical"
     spacing: "8dp"
     size_hint_y: None
     height: 380
+    MDTextField:
+        id: title
+        hint_text: "Title"
+        # line_color_normal: app.theme_cls.primary_color
+    MDLabel:
+        text:"Description"
+    MDTextField:
+        id:description
+        mode:"rectangle"
+        fill_color:0,0,0,.4
+        multiline:True
+        size_hint_y:15
     MDGridLayout:
         cols: 2
         width: self.parent.width
@@ -95,40 +96,13 @@
         MDRectangleFlatButton:
             id: dialog_passyear
             on_release: root.menu.open()
-    MDTextField:
-        id: dialog_branch
-        hint_text: "Branch"
-        # line_color_normal: app.theme_cls.primary_color
-    MDTextField:
-        id: dialog_organizer
-        hint_text: "Organizer"
-        # line_color_normal: app.theme_cls.primary_color
-    MDTextField:
-        id: dialog_link
-        hint_text: "Link"
-        # line_color_normal: app.theme_cls.primary_color
-    MDGridLayout:
-        cols: 3
-        width: self.parent.width
-        spacing: 20
-        MDLabel:
-            text: "Visible datetime"
-        MDRaisedButton:
-            id: dialog_visible_date
-            on_release: app.root.get_screen('view_eresources').show_date_picker()
-        MDRaisedButton:
-            id: dialog_visible_time
-            on_release: app.root.get_screen('view_eresources').show_time_picker()
-    MDTextField:
-        id: dialog_description
-        hint_text: "Description"
-        # line_color_normal: app.theme_cls.primary_color
+    Widget:
     MDRoundFlatButton:
         id: dialog_edit
         text: "Edit"
-        on_press: app.root.get_screen('view_eresources').edit_eresource()
-        
-<EResourceTitle>
+        on_press: app.root.get_screen('view_announcement').edit_announcement()
+
+<AnnouncementTitle>
     text: "[u][ref=world]7[/ref][/u]"
     markup : True
     theme_text_color: 'Custom'
@@ -136,13 +110,13 @@
     font_size: 20
     halign: 'center'
     size_hint_x: 0.3
-    on_ref_press: app.root.get_screen('view_eresources').full_details(self.id)
+    on_ref_press: app.root.get_screen('view_announcement').full_details(self.id)
 
-<EResourceLabel>
-    text: "E-Resources"
+<AnnouncementCheckbox>
+    size_hint: (0.1,0.1)
+
+<AnnouncementLabel>
+    text: "Announcement"
     font_size: 20
     size_hint_x: 0.3
     halign: 'center'
-
-<EResourceCheckbox>
-    size_hint: (0.1,0.1)

@@ -7,10 +7,13 @@
     FloatLayout:
         size: root.width, root.height
         MDLabel:
+            theme_text_color: "Custom"
+            text_color: 0, 150/255, 136/255, 1
             text: "Offer Letters"
             pos_hint: {'center_x':0.5,'center_y':0.85}
-            font_style: 'H4'
+            font_style: 'H6'
             halign: 'center'
+            font_size:30
         MDCard:
             size_hint : (0.65,0.7)
             pos_hint: {'center_x': .35, 'center_y': .45}
@@ -27,6 +30,8 @@
                 row_force_default: True
                 adaptive_width: True
                 Button:
+                    text_color: 1, 1, 1, 1
+                    theme_text_color: "Custom"
                     text: "Name"
                     font_size: 20
                     # halign: 'center'
@@ -35,6 +40,8 @@
                     background_color: app.theme_cls.primary_color
                     on_press: root.sort_by(1)
                 Button:
+                    text_color: 1, 1, 1, 1
+                    theme_text_color: "Custom"
                     text: "Company"
                     font_size: 20
                     # halign: 'center'
@@ -44,6 +51,8 @@
                     on_press: root.sort_by(3)
                     
                 Button:
+                    text_color: 1, 1, 1, 1
+                    theme_text_color: "Custom"
                     text: "Role"
                     font_size: 20
                     # halign: 'center'
@@ -52,6 +61,8 @@
                     background_color: app.theme_cls.primary_color
                     on_press: root.sort_by(4)
                 Button:
+                    text_color: 1, 1, 1, 1
+                    theme_text_color: "Custom"
                     text: "Package"
                     font_size: 20
                     # halign: 'center'
@@ -111,7 +122,7 @@
         cols: 2
         MDRaisedButton:
             id: 0
-            text: str(date.today().year)
+            text: str(date.today().year-1)+"-"+str(date.today().year)
             font_size: 20
             md_bg_color: app.theme_cls.accent_color
             size_hint:None,None
@@ -119,7 +130,7 @@
             on_press: root.load_offer(0)
         MDRaisedButton:
             id: 1
-            text: str(date.today().year+1)
+            text: str(date.today().year)+"-"+str(date.today().year+1)
             font_size: 20
             md_bg_color: app.theme_cls.accent_color
             size_hint:None,None

@@ -1,11 +1,12 @@
 #:kivy 2.0.0
+#:import date datetime.date
 <DepartmentAnalysis>
     Background:
     Navbar:
     FloatLayout:
         size: root.width, root.height
         MDLabel:
-            pos_hint: {'center_x': .5, 'y': .77}
+            pos_hint: {'center_x': .5, 'y': .79}
             halign: 'center'
             theme_text_color: "Custom"
             text_color: 0, 150/255, 136/255, 1
@@ -45,14 +46,14 @@
     #     on_press: root.manager.current="department_graphs"
     #     on_press: root.manager.stack.append(root.name)
 
-    MDRaisedButton:
-        text:"More"
-        size_hint: (0.15,0.05)
-        pos_hint: {'center_x': .8,'center_y': .05}
-        font_size:16
-        on_press: root.prepare_graphs()
-        on_press: root.manager.current="department_graphs"
-        on_press: root.manager.stack.append(root.name)
+    # MDRaisedButton:
+    #     text:"More"
+    #     size_hint: (0.15,0.05)
+    #     pos_hint: {'center_x': .8,'center_y': .05}
+    #     font_size:16
+    #     on_press: root.prepare_graphs()
+    #     on_press: root.manager.current="department_graphs"
+    #     on_press: root.manager.stack.append(root.name)
 
 
 <DepartmentTableTitleLabel>
@@ -103,3 +104,90 @@
                 source:"Graphs\dept_4.png"
                 radius:[20,]
 
+<DepartmentBasicDetails>
+    Background:
+    Navbar:
+    FloatLayout:
+        size: root.width, root.height
+        MDLabel:
+            pos_hint: {'center_x': .5, 'y': .79}
+            halign: 'center'
+            theme_text_color: "Custom"
+            text_color: 0, 150/255, 136/255, 1
+            text: "Placed Students"
+            font_style: 'H6'
+            padding: (10,15)
+            size_hint_y: None
+            height: self.texture_size[1]
+            font_size:30
+        MDCard:
+            size_hint : (0.9,0.7)
+            pos_hint: {'center_x': .5, 'center_y': .45}
+            elevation: 20
+            orientation: 'vertical'
+            spacing: 2
+            MDGridLayout:
+                size: (self.parent.width,60)
+                height: self.minimum_height
+                size_hint_x: None
+                size_hint_y: None
+                cols: 4
+                row_default_height: 60
+                row_force_default: True
+                adaptive_width: True
+                MDLabel:
+                    text: "Companies"
+                    font_size: 20
+                    halign: 'center'
+                    md_bg_color: app.theme_cls.primary_color
+                MDLabel:
+                    text: str(date.today().year)
+                    font_size: 20
+                    halign: 'center'
+                    md_bg_color: app.theme_cls.primary_color
+                MDLabel:
+                    text: str(date.today().year-1)
+                    font_size: 20
+                    halign: 'center'
+                    md_bg_color: app.theme_cls.primary_color
+                MDLabel:
+                    text: str(date.today().year-2)
+                    font_size: 20
+                    halign: 'center'
+                    md_bg_color: app.theme_cls.primary_color
+
+            ScrollView:
+                do_scroll_x: False
+                do_scroll_y: True
+                size: (self.parent.width,self.parent.height-60)
+                GridLayout:
+                    id: grid
+                    size_hint_y: None
+                    height: self.minimum_height
+                    cols: 4
+                    row_default_height: 60
+                    adaptive_width: True
+
+    # MDIconButton:
+    #     icon:"file-export"
+    #     md_bg_color: app.theme_cls.primary_color
+    #     pos_hint:{"x":.45,"y":.01}
+    #     on_press: root.export_data()
+
+    MDRaisedButton:
+        text:"Statistics"
+        size_hint: (0.15,0.05)
+        pos_hint: {'center_x': .8,'center_y': .05}
+        font_size:16
+        on_press: root.prepare_graphs()
+        on_press: root.manager.current="department_graphs"
+        on_press: root.manager.stack.append(root.name)
+    
+    MDRaisedButton:
+        text:"Show Detail Data"
+        size_hint: (0.2,0.05)
+        pos_hint: {'center_x': .2,'center_y': .05}
+        font_size:16
+        on_press: root.load_department()
+        on_press: root.manager.current="department_analysis"
+        on_press: root.manager.stack.append(root.name)

@@ -1,6 +1,7 @@
 ########## kivy modules #########################
 from kivy.config import Config
 Config.set('graphics', 'resizable', False)
+Config.set('kivy','window_icon','favicon.ico')
 from kivymd.app import MDApp
 from kivy.lang.builder import Builder
 from kivy.properties import StringProperty
@@ -25,9 +26,11 @@ from finalize_offer import FinalizeOffer
 from analysis import Analysis
 from forgot_pass import ForgotPass
 from individual_level import IndividualLevel
-from department_analysis import DepartmentAnalysis, DepartmentGraphs
+from department_analysis import DepartmentAnalysis, DepartmentGraphs, DepartmentBasicDetails
 from institute_analysis import InstituteAnalysis, InstituteGraphs
 from pre_register import PreRegister
+from view_announcement import ViewAnnouncement
+from add_announcement import AddAnnouncement
 #################################################
 
 ########## other packages ##################
@@ -59,11 +62,14 @@ class Manager(ScreenManager):
         self.add_widget(Analysis(name='analysis'))
         self.add_widget(ForgotPass(name='forgot_pass'))
         self.add_widget(IndividualLevel(name='individual_level'))
+        self.add_widget(DepartmentBasicDetails(name='department_basic_details'))
         self.add_widget(DepartmentAnalysis(name='department_analysis'))
         self.add_widget(DepartmentGraphs(name='department_graphs'))
         self.add_widget(InstituteAnalysis(name='institute_analysis'))
         self.add_widget(InstituteGraphs(name='institute_graphs'))
         self.add_widget(PreRegister(name='pre_register'))
+        self.add_widget(ViewAnnouncement(name='view_announcement'))
+        self.add_widget(AddAnnouncement(name='add_announcement'))
     
     def callback(self):
         # stack for back button
@@ -73,10 +79,12 @@ class Manager(ScreenManager):
 
 
 class TnpApp(MDApp):
+    # bulding app
     officer_name = StringProperty()
     officer_branch = StringProperty()
     def build(self):
         flags.app=self
+        # set theme
         self.theme_cls.primary_palette = 'Blue'
         self.theme_cls.primary_hue = '600'
         self.theme_cls.accent_palette = 'DeepPurple'
@@ -88,4 +96,5 @@ class TnpApp(MDApp):
         return Manager()
 
 if __name__ == '__main__':
+    # begin app
     TnpApp().run()

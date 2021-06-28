@@ -1,14 +1,15 @@
 from kivy.uix.screenmanager import Screen
-from database import show_alert_dialog,db_connector
+from database import show_alert_dialog
 import flags
 from kivymd.uix.filemanager import MDFileManager
 import os
 import pandas as pd
-from mysql.connector.errors import IntegrityError
+from mysql.connector.errors import IntegrityError, InterfaceError
 
 class PreRegister(Screen):
     def __init__(self, **kw):
         super(PreRegister, self).__init__(**kw)
+        # loading file manager
         self.manager_open = False
         self.file_manager = MDFileManager(
             exit_manager = self.exit_manager,
@@ -17,6 +18,7 @@ class PreRegister(Screen):
            ext=[".xlsx",".csv",".txt",".xls"]
         )
     def select_path(self, path):
+        # select path of execl sheet
         # my_db, my_cursor = db_connector()
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         #reading external file
@@ -31,6 +33,12 @@ class PreRegister(Screen):
                 break   
         #checking if enrollment id is not in database   
         qu="insert into pre_registered (enrollment_id,branch) values (%s,%s);"
+        # pinging database to check for network connection
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         for i in range(len(enroll)):
             try:
                 val=(enroll[i],branch)
@@ -45,17 +53,20 @@ class PreRegister(Screen):
         self.exit_manager()
 
     def file_manager_open(self):
+        # creating folder if it dosent exist
         try:
             os.makedirs(f"C:\\Users\\{os.getlogin()}\\Downloads\\tnp")
         except FileExistsError:
             pass
-    
+        # opening file
         self.file_manager.show(f"C:\\Users\\{os.getlogin()}\\Downloads\\tnp")
         self.manager_open = True
 
     def manual_entry(self):
+        # enter data manually for one enrollment id
         id = self.ids.manual_id.text
         branch = flags.app.officer_branch
+        # select branch
         for key, value in flags.branch.items():
             if branch == value:
                 branch = key
@@ -63,6 +74,7 @@ class PreRegister(Screen):
         my_db, my_cursor = self.manager.my_db, self.manager.my_cursor
         qur='insert into pre_registered(enrollment_id ,branch) values (%s,%s)'
         val=(id,branch)
+        # pinging database to check for network connection
         try:
             my_cursor.execute(qur,val)
             show_alert_dialog(self,"student added successfully !!!")
@@ -75,7 +87,6 @@ class PreRegister(Screen):
 
 
     def exit_manager(self, *args):
-        '''Called when the user reaches the root of the directory tree.'''
-        
+        # exits file manager
         self.manager_open = False
         self.file_manager.close()

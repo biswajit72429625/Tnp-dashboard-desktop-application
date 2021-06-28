@@ -4,6 +4,7 @@ from kivymd.uix.picker import MDTimePicker
 from kivymd.uix.menu import MDDropdownMenu
 from datetime import date
 from database import show_alert_dialog, send_mail
+from mysql.connector.errors import InterfaceError
 import flags
 
 
@@ -110,7 +111,7 @@ class AddAssessments(Screen):
             if v==flags.app.officer_branch:
                 branch=k
                 break
-        print (self.ename,self.eorganizer,self.elink,self.year,branch)
+        # print (self.ename,self.eorganizer,self.elink,self.year,branch)
         
         #checking description and checkbox 
         if self.ids.checkbox_id.active==True:
@@ -121,12 +122,17 @@ class AddAssessments(Screen):
             qur='insert into assessment (title , pass_year , branch ,organizer, link , visible) values (%s,%s,%s,%s,%s,%s)'
         
             val=(self.ename,self.year,branch,self.eorganizer,self.elink,self.date)
-            
+        try:
+            my_db.ping(reconnect=True,attempts=1)
+        except InterfaceError:
+            show_alert_dialog(self,"Unable to connect to remote database, due to weak network. Try reconnect after sometime")
+            return
         my_cursor.execute(qur,val)
         my_db.commit()
         # send_mail(self,"New Assessment!",f"By:- {self.eorganizer}\nTopic:- {self.ename}\nLink:- {self.elink}\nTest Time:- {self.date}\nGood Luck with Test",self.year)
         send_mail(self,"New Assessment!",f"By:- {self.eorganizer}\nTopic:- {self.ename}\nLink:- {self.elink}\nGood Luck with Test",self.year)
         show_alert_dialog(self,"Assessments added  Sucessfully !!!")
+        self.clear()
         self.manager.callback()
         self.manager.callback()
         
